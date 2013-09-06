@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="datatheke.pager.configuration.class">Datatheke\Bundle\PagerBundle\Pager\Configuration</parameter>
+        <parameter key="datatheke.pager.factory.class">Datatheke\Bundle\PagerBundle\Pager\Factory</parameter>
+        <parameter key="datatheke.pager.adapter.guesser_chain.class">Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser\GuesserChain</parameter>
+        <parameter key="datatheke.pager.adapter.guesser.array.class">Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser\ArrayGuesser</parameter>
+        <parameter key="datatheke.pager.adapter.guesser.orm_query_builder.class">Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser\ORMQueryBuilderGuesser</parameter>
+        <parameter key="datatheke.pager.adapter.guesser.orm_entity.class">Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser\ORMEntityGuesser</parameter>
+    </parameters>
+
+    <services>
+        <service id="datatheke.pager.configuration" class="%datatheke.pager.configuration.class%" public="false">
+            <argument>%datatheke.pager.item_count_per_page%</argument>
+            <argument>%datatheke.pager.item_count_per_page_choices%</argument>
+            <argument>%datatheke.pager.page_range%</argument>
+        </service>
+
+        <service id="datatheke.pager" alias="datatheke.pager.factory">
+        </service>
+
+        <service id="datatheke.pager.factory" class="%datatheke.pager.factory.class%">
+            <argument type="service" id="datatheke.pager.configuration"/>
+            <argument type="service" id="datatheke.pager.adapter.guesser_chain"/>
+        </service>
+
+        <service id="datatheke.pager.adapter.guesser_chain" class="%datatheke.pager.adapter.guesser_chain.class%">
+        </service>
+
+        <service id="datatheke.pager.adapter.guesser.array" class="%datatheke.pager.adapter.guesser.array.class%">
+            <tag name="datatheke_pager.adapter_guesser" priority="1000"/>
+        </service>
+
+        <service id="datatheke.pager.adapter.guesser.orm_query_builder" class="%datatheke.pager.adapter.guesser.orm_query_builder.class%">
+            <tag name="datatheke_pager.adapter_guesser" priority="200"/>
+        </service>
+
+        <service id="datatheke.pager.adapter.guesser.orm_entity" class="%datatheke.pager.adapter.guesser.orm_entity.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <tag name="datatheke_pager.adapter_guesser" priority="800"/>
+        </service>
+    </services>
+</container>

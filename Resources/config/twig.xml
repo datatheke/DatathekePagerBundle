@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="datatheke.twig_extension.pager.class">Datatheke\Bundle\PagerBundle\Twig\PagerExtension</parameter>
+        <parameter key="datatheke.twig_extension.datagrid.class">Datatheke\Bundle\PagerBundle\Twig\DataGridExtension</parameter>
+    </parameters>
+
+    <services>
+        <service id="datatheke.twig_extension.pager" class="%datatheke.twig_extension.pager.class%" public="false">
+            <argument type="service" id="router"/>
+            <argument type="service" id="datatheke.pager.configuration"/>
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="datatheke.twig_extension.datagrid" class="%datatheke.twig_extension.datagrid.class%" public="false">
+            <argument type="service" id="router"/>
+            <argument type="service" id="datatheke.datagrid.configuration"/>
+            <tag name="twig.extension"/>
+        </service>
+    </services>
+</container>

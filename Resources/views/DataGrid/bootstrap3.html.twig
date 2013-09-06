@@ -1,0 +1,123 @@
+
+{% extends 'DatathekePagerBundle:DataGrid:base.html.twig' %}
+
+
+{% block datagrid_stylesheets %}
+    {{ parent() }}
+
+    {% import 'DatathekePagerBundle:Pager:bootstrap3.html.twig' as helper %}
+    {{ helper.stylesheets() }}
+{% endblock %}
+
+
+{% block datagrid_javascripts %}
+    {{ parent() }}
+
+    {% import 'DatathekePagerBundle:Pager:bootstrap3.html.twig' as helper %}
+    {{ helper.javascripts() }}
+{% endblock %}
+
+
+{% block datagrid_content %}
+    <form action="{{ pager_form_path(datagrid.pager) }}" method="post">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {{ datagrid_header(datagrid) }}
+            </div>
+
+            {{ datagrid_body(datagrid) }}
+        </div>
+
+        {{ datagrid_footer(datagrid) }}
+    </form>
+{% endblock %}
+
+
+{% block datagrid_header %}
+    {% import 'DatathekePagerBundle:Pager:bootstrap3.html.twig' as helper %}
+
+    {#% if datagrid.hasActions() %}
+        <div class="btn-group">
+            {% for alias, action in datagrid.getActions() %}
+                {{ datagrid_action(datagrid, action, alias) }}
+            {% endfor %}
+        </div>
+    {% endif %#}
+
+    <div class="pull-right">
+        {{ datagrid_items_per_page(datagrid) }}
+        {{ helper.refresh(datagrid.pager) }}
+
+        {# Allows submitting filters with 'Enter' #}
+        <button type="submit" style="position: absolute; left: -1000px"></button>
+    </div>
+
+    <div class="clearfix"></div>
+{% endblock %}
+
+
+{% block datagrid_body %}
+    <table class="table table-striped table-bordered table-hover">
+       <thead>
+           {{ datagrid_row_order_by(datagrid) }}
+           {{ datagrid_row_filters(datagrid) }}
+        </thead>
+        <tbody>
+            {% for item in datagrid.pager.items %}
+               {{ datagrid_row_items(datagrid, item) }}
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+
+{% block datagrid_paginate %}
+    {% import 'DatathekePagerBundle:Pager:bootstrap3.html.twig' as helper %}
+    {{ helper.paginate(datagrid.pager) }}
+{% endblock %}
+
+
+{% block datagrid_items_per_page %}
+    {% import 'DatathekePagerBundle:Pager:bootstrap3.html.twig' as helper %}
+    {{ helper.itemCountPerPage(datagrid.pager) }}
+{% endblock %}
+
+
+{% block datagrid_column_order_by %}
+    {% import 'DatathekePagerBundle:Pager:bootstrap3.html.twig' as helper %}
+    <th>
+        {% if column.sortable %}
+            {{ helper.orderBy(datagrid.pager, alias, column.label) }}
+        {% else %}
+            {{ column.label }}
+        {% endif %}
+    </th>
+{% endblock %}
+
+
+{% block datagrid_column_filter %}
+    {% import 'DatathekePagerBundle:Pager:bootstrap3.html.twig' as helper %}
+    <th>
+        {% if column.sortable %}
+            {{ helper.filter(datagrid.pager, alias) }}
+        {% endif %}
+    </th>
+{% endblock %}
+
+
+{% block datagrid_action %}
+    <a class="btn btn-default btn-small" href="{{ path(action.route, action.getParameters(datagrid, item)) }}"
+        {% if action.getOption('ask_confirmation') %}
+            onclick="return confirm('{{ action.getOption('confirmation_message')|default('Continue ?'|trans([], 'datagrid'))|e('js') }}');"
+        {% endif %}
+        >
+        {%  if action.getOption('icon') %}
+            {% if action.getOption('icon')|slice(0, 11) == '.glyphicon-'  %}
+                <span class="glyphicon {{ action.getOption('icon')|slice(1) }}"></span>
+            {% else %}
+                <img src="{{ asset(action.getOption('icon')) }}" title="{{ action.label }}"/>
+            {% endif %}
+        {%  endif %}
+        {{ action.label }}
+    </a>
+{% endblock %}

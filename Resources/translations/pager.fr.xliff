@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>Operator</source>
+                <target>Opérateur</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>Contains</source>
+                <target>Contient</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>Not Contains</source>
+                <target>Ne contient pas</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>Equals</source>
+                <target>Est égal à</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>Not Equals</source>
+                <target>N'est pas égal à</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>Greater</source>
+                <target>Est supérieur à</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>Greater or Equals</source>
+                <target>Est supérieur ou égal à</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>Less</source>
+                <target>Est inférieur à</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>Less or Equals</source>
+                <target>Est inférieur ou égal à</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>Null</source>
+                <target>Est vide</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>Not Null</source>
+                <target>Est non vide</target>
+            </trans-unit>
+
+            <trans-unit id="12">
+                <source>%first% to %last% on %total%</source>
+                <target>%first% à %last% sur %total%</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>No data to display</source>
+                <target>Aucune donnée à afficher</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>Refresh</source>
+                <target>Rafraichir</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>Filter...</source>
+                <target>Filtrer...</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

@@ -1,0 +1,188 @@
+
+{% block datagrid %}
+    {{ datagrid_stylesheets(datagrid) }}
+    {{ datagrid_javascripts(datagrid) }}
+    {{ datagrid_content(datagrid) }}
+{% endblock %}
+
+
+{% block datagrid_stylesheets %}
+    <style>
+        .masked {
+            position: absolute;
+            left: -1000px;
+        }
+
+        .column_localized_datetime {
+            text-align: center;
+        }
+
+        .column_localized_number {
+            text-align: right;
+        }
+    </style>
+{% endblock %}
+
+
+{% block datagrid_javascripts %}
+{% endblock %}
+
+
+{% block datagrid_content %}
+    <form action="{{ pager_form_path(datagrid.pager) }}" method="post">
+        {{ datagrid_header(datagrid) }}
+        {{ datagrid_body(datagrid) }}
+        {{ datagrid_footer(datagrid) }}
+    </form>
+{% endblock %}
+
+
+{% block datagrid_header %}
+    <div>
+        {{ datagrid_items_per_page(datagrid) }}
+        {# Allows submitting filters with 'Enter' #}
+        <button type="submit" class="masked"></button>
+    </div>
+
+    <div class="clearfix"></div>
+{% endblock %}
+
+
+{% block datagrid_items_per_page %}
+    {% import 'DatathekePagerBundle:Pager:bootstrap3.html.twig' as helper %}
+    {{ helper.itemCountPerPage(datagrid.pager) }}
+{% endblock %}
+
+
+{% block datagrid_body %}
+    <table>
+       <thead>
+           {{ datagrid_row_order_by(datagrid) }}
+           {{ datagrid_row_filters(datagrid) }}
+        </thead>
+        <tbody>
+            {% for item in datagrid.pager.items %}
+               {{ datagrid_row_items(datagrid, item) }}
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+
+{% block datagrid_footer %}
+    {{ datagrid_paginate(datagrid) }}
+{% endblock %}
+
+
+{% block datagrid_paginate %}
+    {% import 'DatathekePagerBundle:Pager:bootstrap3.html.twig' as helper %}
+    {{ helper.paginate(datagrid.pager) }}
+{% endblock %}
+
+
+{% block datagrid_row_order_by %}
+    <tr>
+        {% for alias, column in datagrid.columns %}
+           {{ datagrid_column_order_by(datagrid, column, alias) }}
+        {% endfor %}
+    </tr>
+{% endblock %}
+
+
+{% block datagrid_row_filters %}
+    <tr>
+        {% for alias, column in datagrid.columns %}
+            {{ datagrid_column_filter(datagrid, column, alias) }}
+        {% endfor %}
+    </tr>
+{% endblock %}
+
+
+{% block datagrid_row_items %}
+    <tr>
+        {% for alias, column in datagrid.columns %}
+           {{ datagrid_column_item(datagrid, column, item, alias) }}
+        {% endfor %}
+    </tr>
+{% endblock %}
+
+
+{% block datagrid_column_order_by %}
+    {% import 'DatathekePagerBundle:Pager:bootstrap3.html.twig' as helper %}
+    <th>
+        {% if column.sortable %}
+            {{ helper.orderBy(datagrid.pager, alias, column.label) }}
+        {% else %}
+            {{ column.label }}
+        {% endif %}
+    </th>
+{% endblock %}
+
+
+{% block datagrid_column_filter %}
+    {% import 'DatathekePagerBundle:Pager:bootstrap3.html.twig' as helper %}
+    <th>
+        {% if column.sortable %}
+            {{ helper.filter(datagrid.pager, alias) }}
+        {% endif %}
+    </th>
+{% endblock %}
+
+
+{% block datagrid_column_item %}
+    <td>
+        {{ datagrid_item(datagrid, column, item) }}
+        {% for alias, action in column.actions %}
+            {{ datagrid_action(datagrid, action, alias, item) }}
+        {% endfor %}
+    </td>
+{% endblock %}
+
+
+{% block datagrid_column_item_localized_number %}
+    <td class="column_localized_number">
+        {{ datagrid_item(datagrid, column, item) }}
+        {% for alias, action in column.actions %}
+            {{ datagrid_action(datagrid, action, alias, item) }}
+        {% endfor %}
+    </td>
+{% endblock %}
+
+
+{% block datagrid_column_item_localized_datetime %}
+    <td class="column_localized_datetime">
+        {{ datagrid_item(datagrid, column, item) }}
+        {% for alias, action in column.actions %}
+            {{ datagrid_action(datagrid, action, alias, item) }}
+        {% endfor %}
+    </td>
+{% endblock %}
+
+
+{% block datagrid_column_item_selection %}
+    <td>
+        <input type="checkbox" name="{{ column.name }}" value="{{ datagrid_item(datagrid, column, item) }}" />
+
+        {% for alias, action in column.actions %}
+            {{ datagrid_action(datagrid, action, alias, item) }}
+        {% endfor %}
+    </td>
+{% endblock %}
+
+
+{% block datagrid_action %}
+    <a href="{{ path(action.route, action.getParameters(datagrid, item)) }}"
+        {% if action.getOption('ask_confirmation') %}
+            onclick="return confirm('{{ action.getOption('confirmation_message')|default('Continue ?'|trans([], 'datagrid'))|e('js') }}');"
+        {% endif %}
+        >
+        {%  if action.getOption('icon') %}
+            {% if action.getOption('icon')|slice(0, 11) == '.glyphicon-'  %}
+                <span class="glyphicon {{ action.getOption('icon')|slice(1) }}"></span>
+            {% else %}
+                <img src="{{ asset(action.getOption('icon')) }}" title="{{ action.label }}"/>
+            {% endif %}
+        {%  endif %}
+        {{ action.label }}
+    </a>
+{% endblock %}

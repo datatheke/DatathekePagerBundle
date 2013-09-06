@@ -1,0 +1,234 @@
+{# STYLESHEETS #}
+
+{% macro stylesheets() %}
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .pager-filter-container {
+            display: none;
+            padding-top: 5px;
+            margin-left: -15px;
+        }
+
+        .pager-filter:hover>.pager-filter-container {
+            display: block;
+            z-index: 1000;
+            position: absolute;
+            padding-bottom: 160px; /* Large padding-bottom to block mouseout */
+        }
+
+        .pager-filter-container-body {
+            position: relative;
+            background-color: white;
+            border: 1px solid #DDDDDD;
+            padding: 20px 40px;
+            -webkit-border-radius: 0px 0px 5px 5px;
+               -moz-border-radius: 0px 0px 5px 5px;
+                    border-radius: 0px 0px 5px 5px;
+        }
+
+        .pager-filter-container-body:after, .pager-filter-container-body:before {
+            bottom: 100%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .pager-filter-container-body:after {
+            border-color: rgba(255, 255, 255, 0);
+            border-bottom-color: #ffffff;
+            border-width: 10px;
+            left: 15%;
+            margin-left: -10px;
+        }
+
+        .pager-filter-container-body:before {
+            border-color: rgba(221, 221, 221, 0);
+            border-bottom-color: #DDDDDD;
+            border-width: 11px;
+            left: 15%;
+            margin-left: -11px;
+        }
+    </style>
+{% endmacro %}
+
+
+{# JAVASCRIPTS #}
+
+{% macro javascripts() %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+{% endmacro %}
+
+
+{# HEADER #}
+
+{% macro toolbar(pager) %}
+    {% import _self as base %}
+
+    <div class="pull-right">
+        {{ base.itemCountPerPage(pager) }}
+        {{ base.refresh(pager) }}
+
+        {# Allows submitting filters with 'Enter' #}
+        <button type="submit" class="masked"></button>
+    </div>
+
+    <div class="clearfix"></div>
+{% endmacro %}
+
+
+{# PAGINATION #}
+
+{% macro paginate(pager) %}
+    {% set range = pager_page_range(pager) %}
+
+    <ul class="pagination pull-right">
+        {% if 1 not in range %}
+            <li>
+                <a href="{{ pager_path(pager, 1) }}">1</a>
+            </li>
+        {% endif %}
+
+        {% if pager.previousPageNumber is defined %}
+            <li>
+                <a href="{{ pager_path(pager, pager.previousPageNumber) }}">&laquo;</a>
+            </li>
+        {% endif %}
+
+        {% if pager.pageCount == 0 %}
+            <li class="active">
+                <a href="{{ pager_path(pager, pager.pageCount) }}">{{ pager.pageCount }}</a>
+            </li>
+        {% else %}
+            {% for page in range %}
+                <li {% if page == pager.currentPageNumber %}class="active"{% endif %}>
+                    <a href="{{ pager_path(pager, page) }}">{{ page }}</a>
+                </li>
+            {% endfor %}
+        {% endif %}
+
+        {% if pager.nextPageNumber is defined %}
+            <li>
+                <a href="{{ pager_path(pager, pager.nextPageNumber) }}">&raquo;</a>
+            </li>
+        {% endif %}
+
+        <li class="disabled">
+            <span>/</span>
+        </li>
+
+        <li>
+            <a href="{{ pager_path(pager, pager.pageCount) }}">{{ pager.pageCount }}</a>
+        </li>
+    </ul>
+
+    <div class="clearfix"></div>
+{% endmacro %}
+
+
+{# ORDER BY #}
+
+{% macro orderBy(pager, alias, label) %}
+    {% if pager.orderBy[alias] is defined %}
+        {% if pager.orderBy[alias] == 'desc' %}
+            <a href="{{ pager_order_path(pager, alias, 'asc') }}">
+                {{ label }}
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
+        {% else %}
+            <a href="{{ pager_order_path(pager, alias, 'desc') }}">
+                {{ label }}
+                <span class="glyphicon glyphicon-chevron-up"></span>
+            </a>
+        {% endif %}
+    {% else %}
+            <a href="{{ pager_order_path(pager, alias, 'asc') }}">
+                {{ label }}
+            </a>
+    {% endif %}
+{% endmacro %}
+
+
+{# ITEMS COUNT PER PAGE #}
+
+{% macro itemCountPerPage(pager) %}
+    {% import _self as base %}
+
+    <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            {{ base.resultsRange(pager) }}
+            <span class="caret"></span>
+        </button>
+
+        <ul class="dropdown-menu" role="menu">
+            {% for nb in pager.getOption('item_count_per_page_choices') %}
+                <li>
+                    <a href="{{ pager_per_page_Path(pager, nb) }}">
+                        {% if pager.itemCountPerPage == nb %}
+                            <strong>{{ nb }}</strong>
+                        {% else %}
+                            {{ nb }}
+                        {% endif %}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endmacro %}
+
+
+{# RESULTS RANGE #}
+
+{% macro resultsRange(pager) %}
+    {% if pager.totalItemCount %}
+        {{ '%first% to %last% on %total%'|trans({'%first%': pager.firstItemNumber, '%last%': pager.lastItemNumber, '%total%': pager.totalItemCount}, 'pager') }}
+    {% else %}
+        {{ 'No data to display'|trans({}, 'pager') }}
+    {% endif %}
+{% endmacro %}
+
+
+{# REFRESH #}
+
+{% macro refresh(pager) %}
+    <div class="btn-group">
+        <a class="btn btn-default" href="{{ pager_path(pager) }}">
+            <span class="glyphicon glyphicon-refresh"></span>
+            {{ 'Refresh'|trans({}, 'pager') }}
+        </a>
+    </div>
+{% endmacro %}
+
+
+{# FILTERS #}
+
+{% macro filter(pager, alias, type) %}
+    <div class="pager-filter">
+        <input type="hidden" name="{{ pager.getOption('filter_param') }}[f][{{ alias }}]" value="{{ alias }}"/>
+        <input type="text"   name="{{ pager.getOption('filter_param') }}[v][{{ alias }}]" value="{{ pager.filter.getValue(alias)|default('') }}" class="form-control input-sm" placeholder="{{ 'Filter...'|trans({}, 'pager') }}"/>
+
+        <div class="pager-filter-container bottom">
+            <div class="pager-filter-container-body">
+                {% set operator = pager.filter.getOperator(alias)|default('') %}
+
+                <select name="{{ pager.getOption('filter_param') }}[o][{{ alias }}]" onchange="$(this).closest('.pager-filter').find('input[type=text]:first').focus()">
+                    <option value="~" {% if operator == '~' %}selected="selected"{% endif %}>{{ 'Contains'|trans([], 'pager') }}</options>
+                    <option value="!~" {% if operator == '!~' %}selected="selected"{% endif %}>{{ 'Not Contains'|trans([], 'pager') }}</options>
+                    <option value="=" {% if operator == '=' %}selected="selected"{% endif %}>{{ 'Equals'|trans([], 'pager') }}</options>
+                    <option value="!=" {% if operator == '!=' %}selected="selected"{% endif %}>{{ 'Not Equals'|trans([], 'pager') }}</options>
+                    <option value=">" {% if operator == '>' %}selected="selected"{% endif %}>{{ 'Greater'|trans([], 'pager') }}</options>
+                    <option value=">=" {% if operator == '>=' %}selected="selected"{% endif %}>{{ 'Greater or Equals'|trans([], 'pager') }}</options>
+                    <option value="<" {% if operator == '<' %}selected="selected"{% endif %}>{{ 'Less'|trans([], 'pager') }}</options>
+                    <option value="<=" {% if operator == '<=' %}selected="selected"{% endif %}>{{ 'Less or Equals'|trans([], 'pager') }}</options>
+                    <option value="X" {% if operator == 'X' %}selected="selected"{% endif %}>{{ 'Null'|trans([], 'pager') }}</options>
+                    <option value="!X" {% if operator == '!X' %}selected="selected"{% endif %}>{{ 'Not Null'|trans([], 'pager') }}</options>
+                </select>
+
+            </div>
+        </div>
+    </div>
+{% endmacro %}

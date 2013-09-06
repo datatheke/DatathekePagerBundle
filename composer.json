@@ -1,0 +1,24 @@
+{
+    "name": "datatheke/pager-bundle",
+    "description": "Pager & DataGrid bundle for Symfony2",
+    "type": "symfony-bundle",
+    "keywords": ["pager", "paginator", "datagrid"],
+    "homepage": "https://github.com/datatheke/DatathekePagerBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "iamluc",
+            "email": "luc@vieillescazes.net"
+        }
+    ],
+    "require": {
+        "symfony/framework-bundle": "2.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Datatheke\\PagerBundle": ""
+        }
+    },
+    "target-dir": "Datatheke/PagerBundle",
+    "minimum-stability": "dev"
+}

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="datatheke.datagrid.configuration.class">Datatheke\Bundle\PagerBundle\DataGrid\Configuration</parameter>
+        <parameter key="datatheke.datagrid.factory.class">Datatheke\Bundle\PagerBundle\DataGrid\Factory</parameter>
+        <parameter key="datatheke.datagrid.column.guesser_chain.class">Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser\GuesserChain</parameter>
+        <parameter key="datatheke.datagrid.column.guesser.string.class">Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser\StringGuesser</parameter>
+        <parameter key="datatheke.datagrid.column.guesser.localized_number.class">Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser\LocalizedNumberGuesser</parameter>
+        <parameter key="datatheke.datagrid.column.guesser.localized_datetime.class">Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser\LocalizedDateTimeGuesser</parameter>
+
+    </parameters>
+
+    <services>
+        <service id="datatheke.datagrid.configuration" class="%datatheke.datagrid.configuration.class%" public="false">
+            <argument>%datatheke.datagrid.theme%</argument>
+        </service>
+
+        <service id="datatheke.datagrid" alias="datatheke.datagrid.factory">
+        </service>
+
+        <service id="datatheke.datagrid.factory" class="%datatheke.datagrid.factory.class%">
+            <argument type="service" id="datatheke.datagrid.configuration"/>
+            <argument type="service" id="datatheke.pager.factory"/>
+            <argument type="service" id="datatheke.datagrid.column.guesser_chain"/>
+        </service>
+
+        <service id="datatheke.datagrid.column.guesser_chain" class="%datatheke.datagrid.column.guesser_chain.class%">
+        </service>
+
+        <service id="datatheke.datagrid.column.guesser.string" class="%datatheke.datagrid.column.guesser.string.class%">
+            <tag name="datatheke_pager.column_guesser" priority="1000"/>
+        </service>
+
+        <service id="datatheke.datagrid.column.guesser.localized_number" class="%datatheke.datagrid.column.guesser.localized_number.class%">
+            <tag name="datatheke_pager.column_guesser" priority="200"/>
+        </service>
+
+        <service id="datatheke.datagrid.column.guesser.localized_datetime" class="%datatheke.datagrid.column.guesser.localized_datetime.class%">
+            <tag name="datatheke_pager.column_guesser" priority="100"/>
+        </service>
+    </services>
+</container>
