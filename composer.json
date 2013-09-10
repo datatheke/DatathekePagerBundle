@@ -19,6 +19,6 @@
             "Datatheke\\PagerBundle": ""
         }
     },
-    "target-dir": "Datatheke/PagerBundle",
+    "target-dir": "Datatheke/Bundle/PagerBundle",
     "minimum-stability": "dev"
 }

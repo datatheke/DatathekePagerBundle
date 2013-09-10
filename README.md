@@ -11,8 +11,8 @@ LICENSE
 
 MIT
 
-EXEMPLES
---------
+USAGE
+-----
 
 More exemples in the [documentation](https://github.com/datatheke/DatathekePagerBundle/tree/master/Resources/doc)
 
@@ -132,7 +132,20 @@ TWIG
     {% endblock %}
 ```
 
-INSTALLATION
-------------
+INSTALL
+-------
 
-Will be available soon on packagist (composer)
+### Install with composer
+
+    composer.phar require "datatheke/pager-bundle" "dev-master"
+
+### Modify your app/AppKernel.php
+
+``` php
+<?php
+    //...
+    $bundles = array(
+        //...
+        new Datatheke\Bundle\PagerBundle\DatathekePagerBundle(),
+    );
+```
