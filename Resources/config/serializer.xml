@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="datatheke.serializer.pager_handler.class">Datatheke\Bundle\PagerBundle\Serializer\Handler\PagerHandler</parameter>
+        <parameter key="datatheke.serializer.datagrid_handler.class">Datatheke\Bundle\PagerBundle\Serializer\Handler\DataGridHandler</parameter>
+    </parameters>
+
+    <services>
+        <service id="datatheke.serializer.pager_handler" class="%datatheke.serializer.pager_handler.class%">
+            <tag name="jms_serializer.subscribing_handler" />
+        </service>
+
+        <service id="datatheke.serializer.datagrid_handler" class="%datatheke.serializer.datagrid_handler.class%">
+            <tag name="jms_serializer.subscribing_handler" />
+        </service>
+    </services>
+</container>

@@ -111,6 +111,11 @@ class Pager
         return $this->getPaginator()->getNextPageNumber();
     }
 
+    public function getCurrentItemCount()
+    {
+        return $this->getPaginator()->getCurrentItemCount();
+    }
+
     protected function getPaginator()
     {
         // Count items only when we really need the paginator

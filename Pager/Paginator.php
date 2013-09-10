@@ -182,4 +182,13 @@ class Paginator
 
         return $this->nextPageNumber;
     }
+
+    public function getCurrentItemCount()
+    {
+        if (!$this->initialized) {
+            $this->initialize();
+        }
+
+        return $this->currentItemCount;
+    }
 }

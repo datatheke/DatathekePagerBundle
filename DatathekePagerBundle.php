@@ -7,6 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 use Datatheke\Bundle\PagerBundle\DependencyInjection\Compiler\AdapterGuesserCompilerPass;
 use Datatheke\Bundle\PagerBundle\DependencyInjection\Compiler\ColumnGuesserCompilerPass;
+use Datatheke\Bundle\PagerBundle\DependencyInjection\Compiler\SerializerCompilerPass;
 
 class DatathekePagerBundle extends Bundle
 {
@@ -15,5 +16,6 @@ class DatathekePagerBundle extends Bundle
         parent::build($container);
         $container->addCompilerPass(new AdapterGuesserCompilerPass());
         $container->addCompilerPass(new ColumnGuesserCompilerPass());
+        $container->addCompilerPass(new SerializerCompilerPass());
     }
 }
