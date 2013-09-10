@@ -43,9 +43,16 @@ class ORMQueryBuilderAdapter implements AdapterInterface
         foreach ($entities as $alias => $entity) {
             $metas = $em->getClassMetadata($entity);
             foreach ($metas->fieldMappings as $property => $infos) {
+                switch ($infos['type']) {
+                    case 'datetime':
+                        $type = Field::TYPE_DATETIME;
+                        break;
 
-                // TODO: manage $infos['type']
-                $this->fields[$property] = new Field($property, Field::TYPE_STRING, $alias.'.'.$property);
+                    default:
+                        $type = Field::TYPE_STRING;
+                        break;
+                }
+                $this->fields[$property] = new Field($property, $type, $alias.'.'.$property);
             }
         }
     }
