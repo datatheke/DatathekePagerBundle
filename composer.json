@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Datatheke\\PagerBundle": ""
+            "Datatheke\\Bundle\\PagerBundle": ""
         }
     },
     "target-dir": "Datatheke/Bundle/PagerBundle",

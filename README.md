@@ -139,7 +139,7 @@ INSTALL
 
     composer.phar require "datatheke/pager-bundle" "dev-master"
 
-### Modify your app/AppKernel.php
+### Update your app/AppKernel.php
 
 ``` php
 <?php
