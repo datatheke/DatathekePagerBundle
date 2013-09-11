@@ -1,3 +1,4 @@
+```
 datatheke_pager:
 
     # Default item count per page
@@ -16,3 +17,4 @@ datatheke_pager:
     # Default page range
     page_range:           5
     datagrid_theme:       DatathekePagerBundle:DataGrid:bootstrap3.html.twig
+```
