@@ -30,6 +30,16 @@ class ORMQueryBuilderAdapter implements AdapterInterface
         }
     }
 
+    public function addField(Field $field, $alias = null)
+    {
+        if (null !== $alias) {
+            $this->fields[$alias] = $field;
+        }
+        else {
+            $this->fields[] = $field;
+        }
+    }
+
     protected function guessFields()
     {
         $em = $this->builder->getEntityManager();
