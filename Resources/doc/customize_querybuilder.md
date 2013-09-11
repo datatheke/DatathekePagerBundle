@@ -36,7 +36,7 @@ public function testAction(Request $request)
     // Change column label
     $datagrid->getColumn('city')->setLabel('Office city');
 
-    $datagrid->handleRequest($this->getRequest());
+    $datagrid->handleRequest($request);
 
     return array('datagrid' => $datagrid);
 }
