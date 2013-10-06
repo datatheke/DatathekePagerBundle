@@ -20,6 +20,10 @@ class Field
 
     public function __construct($propertyPath, $type = self::TYPE_STRING, $qualifier = null, array $metadatas = array())
     {
+        if (null === $qualifier) {
+            $qualifier = $propertyPath;
+        }
+
         $this->propertyPath = $propertyPath;
         $this->type         = $type;
         $this->qualifier    = $qualifier;
