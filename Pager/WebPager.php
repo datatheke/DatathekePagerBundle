@@ -108,6 +108,6 @@ class WebPager extends Pager
         $operators = (isset($filter['o']) && is_array($filter['o'])) ? $filter['o'] : array();
         $logical   = (isset($filter['l']) && is_array($filter['l'])) ? $filter['l'] : array();
 
-        $this->setFilter(new Filter($fields, $values, $operators, $logical));
+        $this->setFilter(new Filter($fields, $values, $operators, $logical), 'pager');
     }
 }
