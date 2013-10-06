@@ -15,5 +15,5 @@ interface AdapterInterface extends Countable
 
     public function setOrderBy(OrderBy $orderBy = null);
 
-    public function setFilter(Filter $filter = null);
+    public function setFilter(Filter $filter = null, $group = 'default');
 }

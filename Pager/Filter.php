@@ -73,9 +73,70 @@ class Filter
     public function getLogical()
     {
         if (empty($this->logical)) {
-            return array(array(self::LOGICAL_AND => null));
+            return array(array(array(self::LOGICAL_AND, null)));
         }
 
         return $this->logical;
+    }
+
+    static public function createFromArray($filters)
+    {
+        $fields     = array();
+        $values     = array();
+        $operators  = array();
+        $logical    = array();
+
+        self::readLayer(array('criteria' => array($filters)), 0, $fields, $values, $operators, $logical);
+        // ksort($logical);
+
+        return new Filter($fields, $values, $operators, $logical);
+    }
+
+    static protected function readLayer($layer, $layerNum, &$fields, &$values, &$operators, &$logical)
+    {
+        $last           = 0;
+        $criteriumIndex = 0;
+
+        $hasSubLayer    = false;
+        foreach ($layer['criteria'] as $criterium) {
+            if (in_array($criterium['operator'], array(self::LOGICAL_OR, self::LOGICAL_AND))) {
+                $hasSubLayer = true;
+            }
+        }
+
+        foreach ($layer['criteria'] as $criterium) {
+
+            if (in_array($criterium['operator'], array(self::LOGICAL_OR, self::LOGICAL_AND))) {
+                // next layer
+                $criteriumIndex += self::readLayer($criterium, $layerNum + 1, $fields, $values, $operators, $logical);
+
+                // condition
+                $logical[$layerNum][] = array($criterium['operator'], $criteriumIndex - $last);
+            }
+            else {
+
+                if ($hasSubLayer) {
+                    // next layer
+                    $criteriumIndex += self::readLayer(array('operator' => self::LOGICAL_OR, 'criteria' => array($criterium)), $layerNum + 1, $fields, $values, $operators, $logical);
+
+                    // condition
+                    $logical[$layerNum][] = array(self::LOGICAL_OR, $criteriumIndex - $last);
+                }
+                else {
+                    // field
+                    $fields[]    = $criterium['field'];
+                    $operators[] = $criterium['operator'];
+                    $values[]    = $criterium['value'];
+                    $criteriumIndex++;
+
+                    // condition
+                    $logical[$layerNum][] = array(self::LOGICAL_OR, 1);
+                }
+            }
+            $last    = $criteriumIndex;
+        }
+
+        // ksort($logical[$layerNum]);
+        return $criteriumIndex;
     }
 }

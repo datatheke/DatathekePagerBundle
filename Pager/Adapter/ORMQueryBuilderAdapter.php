@@ -15,7 +15,7 @@ class ORMQueryBuilderAdapter implements AdapterInterface
     protected $fields;
 
     protected $count;
-    protected $filter;
+    protected $filter = array();
     protected $orderBy;
 
     public function __construct(QueryBuilder $builder, array $fields = null)
@@ -110,10 +110,10 @@ class ORMQueryBuilderAdapter implements AdapterInterface
         ;
     }
 
-    public function setFilter(Filter $filter = null)
+    public function setFilter(Filter $filter = null, $group = 'default')
     {
-        $this->filter = $filter;
-        $this->count  = null;
+        $this->filter[$group] = $filter;
+        $this->count          = null;
 
         return $this;
     }
@@ -144,23 +144,30 @@ class ORMQueryBuilderAdapter implements AdapterInterface
         }
     }
 
-    protected function applyFilter(QueryBuilder $builder)
+    protected function applyFilters(Builder $builder)
     {
-        if (null === $this->filter || !count($this->filter->getFields())) {
-            return;
-        }
+        foreach ($this->filter as $filter) {
+            if (!count($filter->getFields())) {
+                continue;
+            }
 
+            $this->doApplyFilter($builder, $filter);
+        }
+    }
+
+    protected function doApplyFilter(QueryBuilder $builder, Filter $filter)
+    {
         $criteria = array();
         $expr     = $builder->expr();
         $paramNum = 0;
-        foreach ($this->filter->getFields() as $key => $alias) {
+        foreach ($filter->getFields() as $key => $alias) {
 
             $paramName  = 'param_'.$paramNum++;
             $field      = $this->getField($alias);
 
             $qualifier  = $field->getQualifier();
-            $operator   = $this->filter->getOperator($key);
-            $value      = $field->formatInput($this->filter->getValue($key));
+            $operator   = $filter->getOperator($key);
+            $value      = $field->formatInput($filter->getValue($key));
 
             if (is_string($value)
                 && !strlen($value)
@@ -251,10 +258,11 @@ class ORMQueryBuilderAdapter implements AdapterInterface
             }
         }
 
-        foreach ($this->filter->getLogical() as $layer) {
+        foreach ($filter->getLogical() as $layer) {
             $criteriumIndex    = 0;
             $concatCriteria    = array();
-            foreach ($layer as $operator => $count) {
+            foreach ($layer as $log) {
+                list($operator, $count) = $log;
                 if (null === $count) {
                     $count = count($criteria) - $criteriumIndex;
                 }

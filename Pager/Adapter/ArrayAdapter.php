@@ -12,7 +12,7 @@ class ArrayAdapter implements AdapterInterface
     protected $source;
     protected $copy;
 
-    protected $filter;
+    protected $filter = array();
     protected $orderBy;
     protected $isOrdered;
 
@@ -80,11 +80,11 @@ class ArrayAdapter implements AdapterInterface
         return $this->fields[$alias];
     }
 
-    public function setFilter(Filter $filter = null)
+    public function setFilter(Filter $filter = null, $group = 'default')
     {
-        $this->filter    = $filter;
-        $this->copy      = null;
-        $this->isOrdered = false;
+        $this->filter[$group] = $filter;
+        $this->copy           = null;
+        $this->isOrdered      = false;
 
         return $this;
     }
@@ -100,13 +100,13 @@ class ArrayAdapter implements AdapterInterface
     protected function &getArray()
     {
         // Works on source if there is no filter
-        if (null === $this->filter) {
+        if (count($this->filter)) {
             return $this->source;
         }
 
         // Apply filter if it has not been done yet
         if (null === $this->copy) {
-            $this->applyFilter();
+            $this->applyFilters();
         }
 
         return $this->copy;
@@ -131,29 +131,38 @@ class ArrayAdapter implements AdapterInterface
         $this->isOrdered = true;
     }
 
-    protected function applyFilter()
+    protected function applyFilters(Builder $builder)
     {
-        if (null === $this->filter || !count($this->filter->getFields())) {
-            return;
-        }
-
         $this->copy = array();
+
         foreach ($this->source as $key => $item) {
-            if ($this->checkItem($item)) {
+            $keep = true;
+            foreach ($this->filter as $filter) {
+                if (!count($filter->getFields())) {
+                    continue;
+                }
+
+                if (!$this->checkItem($item, $filter)) {
+                    $keep = false;
+                    break;
+                }
+            }
+
+            if ($keep) {
                 $this->copy[] = $item;
             }
         }
     }
 
-    protected function checkItem($item)
+    protected function checkItem($item, Filter $filter)
     {
         $criteria = array();
-        foreach ($this->filter->getFields() as $key => $alias) {
+        foreach ($filter->getFields() as $key => $alias) {
             $field          = $this->getField($alias);
 
             $itemValue      = isset($item[$field->getQualifier()]) ? $item[$field->getQualifier()] : null;
-            $filterOperator = $this->filter->getOperator($key);
-            $filterValue    = $this->filter->getValue($key);
+            $filterOperator = $filter->getOperator($key);
+            $filterValue    = $filter->getValue($key);
 
             if (Field::TYPE_DATETIME === $field->getType()) {
                 $criteria[] = $this->checkDateTimeCondition($field, $itemValue, $filterOperator, $filterValue);
@@ -163,11 +172,12 @@ class ArrayAdapter implements AdapterInterface
             }
         }
 
-        foreach ($this->filter->getLogical() as $layer) {
+        foreach ($filter->getLogical() as $layer) {
             $criteriumIndex = 0;
             $concatCriteria = array();
 
-            foreach ($layer as $operator => $count) {
+            foreach ($layer as $log) {
+                list($operator, $count) = $log;
                 if (null === $count) {
                     $count = count($criteria) - $criteriumIndex;
                 }

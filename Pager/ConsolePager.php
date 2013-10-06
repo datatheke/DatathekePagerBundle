@@ -123,7 +123,7 @@ class ConsolePager extends Pager
                     if (!isset($filter[2])) {
                         $filter[2] = null;
                     }
-                    $this->setFilter(new Filter(array($filter[0]), array($filter[2]), array($filter[1])));
+                    $this->setFilter(new Filter(array($filter[0]), array($filter[2]), array($filter[1])), 'pager');
                 }
                 break;
 

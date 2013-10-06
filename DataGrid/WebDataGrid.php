@@ -24,11 +24,7 @@ class WebDataGrid extends DataGrid
 
     protected function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            // 'pk_param'  => 'id',
-            // 'pk_column' => 'id'
-            )
-        );
+        $resolver->setDefaults(array());
     }
 
     public function hasOption($option)
