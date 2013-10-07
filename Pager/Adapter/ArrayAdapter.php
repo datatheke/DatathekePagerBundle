@@ -131,7 +131,7 @@ class ArrayAdapter implements AdapterInterface
         $this->isOrdered = true;
     }
 
-    protected function applyFilters(Builder $builder)
+    protected function applyFilters()
     {
         $this->copy = array();
 
