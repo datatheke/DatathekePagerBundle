@@ -149,7 +149,6 @@ class MongoDBQueryBuilderAdapter implements AdapterInterface
     protected function doApplyFilter(Builder $builder, Filter $filter)
     {
         $criteria = array();
-        $paramNum = 0;
         foreach ($filter->getFields() as $key => $alias) {
             $field      = $this->getField($alias);
 
