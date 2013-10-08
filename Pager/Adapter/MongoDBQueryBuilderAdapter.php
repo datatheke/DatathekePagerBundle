@@ -151,8 +151,6 @@ class MongoDBQueryBuilderAdapter implements AdapterInterface
         $criteria = array();
         $paramNum = 0;
         foreach ($filter->getFields() as $key => $alias) {
-
-            $paramName  = 'param_'.$paramNum++;
             $field      = $this->getField($alias);
 
             $qualifier  = $field->getQualifier();

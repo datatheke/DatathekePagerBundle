@@ -14,8 +14,6 @@ use Datatheke\Bundle\PagerBundle\Pager\Pager;
 
 class PagerHandler implements SubscribingHandlerInterface
 {
-    private $translator;
-
     public static function getSubscribingMethods()
     {
         $methods = array();

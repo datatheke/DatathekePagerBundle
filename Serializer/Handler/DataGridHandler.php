@@ -14,8 +14,6 @@ use Datatheke\Bundle\PagerBundle\DataGrid\DataGrid;
 
 class DataGridHandler implements SubscribingHandlerInterface
 {
-    private $translator;
-
     public static function getSubscribingMethods()
     {
         $methods = array();

@@ -86,7 +86,7 @@ class WebPager extends Pager
         $this->setFilterFromRequest($request, $this->options['filter_param']);
     }
 
-    protected function setOrderByFromRequest($request, $parameter)
+    protected function setOrderByFromRequest(Request $request, $parameter)
     {
         $orderBy = $request->get($parameter, null, true);
         if (!is_array($orderBy)) {
@@ -96,7 +96,7 @@ class WebPager extends Pager
         $this->setOrderBy(new OrderBy($orderBy));
     }
 
-    protected function setFilterFromRequest($request, $parameter)
+    protected function setFilterFromRequest(Request $request, $parameter)
     {
         $filter = $request->get($parameter, null, true);
         if (!is_array($filter)) {

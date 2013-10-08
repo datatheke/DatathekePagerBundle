@@ -2,13 +2,12 @@
 
 namespace Datatheke\Bundle\PagerBundle\Pager\Adapter;
 
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\EntityRepository;
 
 class ORMEntityAdapter extends ORMQueryBuilderAdapter
 {
-    public function __construct(EntityManager $em, $entity)
+    public function __construct(EntityRepository $repository, $alias = 'e')
     {
-        parent::__construct($em->getRepository($entity)->createQueryBuilder('e'));
+        parent::__construct($repository->createQueryBuilder($alias));
     }
 }

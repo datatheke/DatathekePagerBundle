@@ -7,7 +7,6 @@ use Datatheke\Bundle\PagerBundle\Pager\Filter;
 use Datatheke\Bundle\PagerBundle\Pager\Field;
 
 use Doctrine\ORM\QueryBuilder;
-use Doctrine\ORM\Query\Expr;
 
 class ORMQueryBuilderAdapter implements AdapterInterface
 {
@@ -76,7 +75,7 @@ class ORMQueryBuilderAdapter implements AdapterInterface
     {
         if (null === $this->count) {
             $builder = clone $this->builder;
-            $this->applyFilter($builder);
+            $this->applyFilters($builder);
 
             $this->count = $builder
                 ->select('COUNT(DISTINCT '.$builder->getRootAlias().')')
@@ -97,7 +96,7 @@ class ORMQueryBuilderAdapter implements AdapterInterface
     {
         $builder = clone $this->builder;
         $this->applyOrderBy($builder);
-        $this->applyFilter($builder);
+        $this->applyFilters($builder);
 
         if (null !== $itemCountPerPage) {
             $builder->setMaxResults($itemCountPerPage);
@@ -144,7 +143,7 @@ class ORMQueryBuilderAdapter implements AdapterInterface
         }
     }
 
-    protected function applyFilters(Builder $builder)
+    protected function applyFilters(QueryBuilder $builder)
     {
         foreach ($this->filter as $filter) {
             if (!count($filter->getFields())) {

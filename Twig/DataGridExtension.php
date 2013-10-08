@@ -108,67 +108,67 @@ class DataGridExtension extends \Twig_Extension
         throw new \Exception('Block '.$block.' not found');
     }
 
-    public function renderDataGrid(WebDatagrid $datagrid, array $params = array())
+    public function renderDataGrid(WebDataGrid $datagrid, array $params = array())
     {
         return $this->render($datagrid, 'datagrid', $params);
     }
 
-    public function renderJavascripts(WebDatagrid $datagrid, array $params = array())
+    public function renderJavascripts(WebDataGrid $datagrid, array $params = array())
     {
         return $this->render($datagrid, 'datagrid_javascripts', $params);
     }
 
-    public function renderStyleSheets(WebDatagrid $datagrid, array $params = array())
+    public function renderStyleSheets(WebDataGrid $datagrid, array $params = array())
     {
         return $this->render($datagrid, 'datagrid_stylesheets', $params);
     }
 
-    public function renderContent(WebDatagrid $datagrid, array $params = array())
+    public function renderContent(WebDataGrid $datagrid, array $params = array())
     {
         return $this->render($datagrid, 'datagrid_content', $params);
     }
 
-    public function renderHeader(WebDatagrid $datagrid, array $params = array())
+    public function renderHeader(WebDataGrid $datagrid, array $params = array())
     {
         return $this->render($datagrid, 'datagrid_header', $params);
     }
 
-    public function renderBody(WebDatagrid $datagrid, array $params = array())
+    public function renderBody(WebDataGrid $datagrid, array $params = array())
     {
         return $this->render($datagrid, 'datagrid_body', $params);
     }
 
-    public function renderFooter(WebDatagrid $datagrid, array $params = array())
+    public function renderFooter(WebDataGrid $datagrid, array $params = array())
     {
         return $this->render($datagrid, 'datagrid_footer', $params);
     }
 
-    public function renderPaginate(WebDatagrid $datagrid, array $params = array())
+    public function renderPaginate(WebDataGrid $datagrid, array $params = array())
     {
         return $this->render($datagrid, 'datagrid_paginate', $params);
     }
 
-    public function renderItemsPerPage(WebDatagrid $datagrid, array $params = array())
+    public function renderItemsPerPage(WebDataGrid $datagrid, array $params = array())
     {
         return $this->render($datagrid, 'datagrid_items_per_page', $params);
     }
 
-    public function renderRowOrderBy(WebDatagrid $datagrid, array $params = array())
+    public function renderRowOrderBy(WebDataGrid $datagrid, array $params = array())
     {
         return $this->render($datagrid, 'datagrid_row_order_by', $params);
     }
 
-    public function renderRowFilters(WebDatagrid $datagrid, array $params = array())
+    public function renderRowFilters(WebDataGrid $datagrid, array $params = array())
     {
         return $this->render($datagrid, 'datagrid_row_filters', $params);
     }
 
-    public function renderRowItems(WebDatagrid $datagrid, $item, array $params = array())
+    public function renderRowItems(WebDataGrid $datagrid, $item, array $params = array())
     {
         return $this->render($datagrid, 'datagrid_row_items', array_merge($params, array('item' => $item)));
     }
 
-    public function renderColumnOrderBy(WebDatagrid $datagrid, ColumnInterface $column, $alias, array $params = array())
+    public function renderColumnOrderBy(WebDataGrid $datagrid, ColumnInterface $column, $alias, array $params = array())
     {
         $blocks = array(
             'datagrid_column_order_by__'.$this->sanitizeAlias($alias),
@@ -178,7 +178,7 @@ class DataGridExtension extends \Twig_Extension
         return $this->render($datagrid, $blocks, array_merge($params, array('column' => $column, 'alias' => $alias)));
     }
 
-    public function renderColumnFilter(WebDatagrid $datagrid, ColumnInterface $column, $alias, array $params = array())
+    public function renderColumnFilter(WebDataGrid $datagrid, ColumnInterface $column, $alias, array $params = array())
     {
         $blocks = array(
             'datagrid_column_filter__'.$this->sanitizeAlias($alias),
@@ -188,7 +188,7 @@ class DataGridExtension extends \Twig_Extension
         return $this->render($datagrid, $blocks, array_merge($params, array('column' => $column, 'alias' => $alias)));
     }
 
-    public function renderColumnItem(WebDatagrid $datagrid, ColumnInterface $column, $item, $alias, array $params = array())
+    public function renderColumnItem(WebDataGrid $datagrid, ColumnInterface $column, $item, $alias, array $params = array())
     {
         $blocks = array(
             'datagrid_column_item__'.$this->sanitizeAlias($alias),
@@ -198,12 +198,12 @@ class DataGridExtension extends \Twig_Extension
         return $this->render($datagrid, $blocks, array_merge($params, array('item' => $item, 'column' => $column, 'alias' => $alias)));
     }
 
-    public function renderItem(WebDatagrid $datagrid, ColumnInterface $column, $item)
+    public function renderItem(WebDataGrid $datagrid, ColumnInterface $column, $item)
     {
         return $datagrid->getColumnValue($column, $item);
     }
 
-    public function renderAction(WebDatagrid $datagrid, ActionInterface $action, $alias, $item = null, array $params = array())
+    public function renderAction(WebDataGrid $datagrid, ActionInterface $action, $alias, $item = null, array $params = array())
     {
         if (!$action->evaluateDisplay($datagrid, $item)) {
             return '';

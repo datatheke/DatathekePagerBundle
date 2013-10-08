@@ -2,8 +2,6 @@
 
 namespace Datatheke\Bundle\PagerBundle\DataGrid\Column;
 
-use Symfony\Component\Form\DataTransformerInterface;
-
 use Datatheke\Bundle\PagerBundle\Pager\Field;
 use Datatheke\Bundle\PagerBundle\DataGrid\Column\Action\ActionInterface;
 
