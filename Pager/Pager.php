@@ -66,7 +66,7 @@ class Pager
     public function setFilter(Filter $filter = null)
     {
         $this->filter = $filter;
-        $this->adapter->setFilter($filter);
+        $this->adapter->setFilter($filter, 'pager');
 
         return $this;
     }
