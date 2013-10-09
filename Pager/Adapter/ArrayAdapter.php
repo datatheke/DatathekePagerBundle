@@ -138,7 +138,7 @@ class ArrayAdapter implements AdapterInterface
         foreach ($this->source as $key => $item) {
             $keep = true;
             foreach ($this->filter as $filter) {
-                if (!count($filter->getFields())) {
+                if (null === $filter || !count($filter->getFields())) {
                     continue;
                 }
 
