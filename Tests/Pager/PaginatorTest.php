@@ -8,8 +8,8 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetOffset()
     {
-        $paginator = new Paginator(256, 25, 5);
+        $paginator = new Paginator(25, 5, 256);
 
-        $this->assertEquals(101, $paginator->getOffset());
+        $this->assertEquals(101, $paginator->getFirstItemNumber());
     }
 }

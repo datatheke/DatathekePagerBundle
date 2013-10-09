@@ -3,15 +3,13 @@
 namespace Datatheke\Bundle\PagerBundle\Tests\Pager;
 
 use Datatheke\Bundle\PagerBundle\Pager\Pager;
-use Datatheke\Bundle\PagerBundle\Pager\Configuration;
 
 class PagerTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetAdapter()
     {
-        $config  = new Configuration(10, 1);
         $adapter = $this->getMock('Datatheke\\Bundle\\PagerBundle\\Pager\\Adapter\\AdapterInterface');
-        $pager   = new Pager($adapter, $config);
+        $pager   = new Pager($adapter, 10);
 
         $this->assertEquals($adapter, $pager->getAdapter());
 
