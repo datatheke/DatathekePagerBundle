@@ -137,7 +137,7 @@ INSTALL
 
 ### Install with composer
 
-    composer.phar require "datatheke/pager-bundle"
+    composer.phar require "datatheke/pager-bundle" "*"
 
 ### Update your app/AppKernel.php
 
