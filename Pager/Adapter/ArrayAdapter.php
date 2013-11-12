@@ -8,9 +8,9 @@ use Datatheke\Bundle\PagerBundle\Pager\Field;
 
 class ArrayAdapter implements AdapterInterface
 {
-    protected $fields;
-    protected $source;
-    protected $copy;
+    protected $fields = array();
+    protected $source = array();
+    protected $copy   = array();
 
     protected $filter = array();
     protected $orderBy;
@@ -31,6 +31,10 @@ class ArrayAdapter implements AdapterInterface
 
     protected function guessFields()
     {
+        if (empty($this->source)) {
+            return;
+        }
+
         foreach (current($this->source) as $key => $val) {
             $type      = Field::TYPE_STRING;
             $metadatas = array();

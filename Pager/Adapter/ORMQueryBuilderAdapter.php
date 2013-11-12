@@ -2,11 +2,12 @@
 
 namespace Datatheke\Bundle\PagerBundle\Pager\Adapter;
 
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Mapping\ClassMetadataInfo;
+
 use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
 use Datatheke\Bundle\PagerBundle\Pager\Filter;
 use Datatheke\Bundle\PagerBundle\Pager\Field;
-
-use Doctrine\ORM\QueryBuilder;
 
 class ORMQueryBuilderAdapter implements AdapterInterface
 {
@@ -61,7 +62,21 @@ class ORMQueryBuilderAdapter implements AdapterInterface
                         $type = Field::TYPE_STRING;
                         break;
                 }
-                $this->fields[$property] = new Field($property, $type, $alias.'.'.$property);
+                $this->fields[$property] = new Field($property, $type, $alias.'.'.$property, array('mapping' => $infos));
+            }
+
+            foreach ($metas->associationMappings as $property => $infos) {
+
+                switch ($infos['type']) {
+                    case ClassMetadataInfo::ONE_TO_ONE:
+                    case ClassMetadataInfo::MANY_TO_ONE:
+                        $metadatas = array(
+                            'repository' => $em->getRepository($infos['targetEntity']),
+                            'mapping'    => $infos
+                        );
+                        $this->fields[$property] = new Field($property, Field::TYPE_OBJECT, $alias.'.'.$property, $metadatas);
+                        break;
+                }
             }
         }
     }

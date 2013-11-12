@@ -86,7 +86,7 @@
     {% import 'DatathekePagerBundle:Pager:foundation.html.twig' as helper %}
     <th>
         {% if column.filterable %}
-            {{ helper.filter(datagrid.pager, alias) }}
+            {{ helper.filter(datagrid.pager, alias, column) }}
         {% endif %}
     </th>
 {% endblock %}

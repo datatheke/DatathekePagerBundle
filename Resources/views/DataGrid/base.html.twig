@@ -48,12 +48,6 @@
 {% endblock %}
 
 
-{% block datagrid_items_per_page %}
-    {% import 'DatathekePagerBundle:Pager:bootstrap3.html.twig' as helper %}
-    {{ helper.itemCountPerPage(datagrid.pager) }}
-{% endblock %}
-
-
 {% block datagrid_body %}
     <table>
        <thead>
@@ -71,12 +65,6 @@
 
 {% block datagrid_footer %}
     {{ datagrid_paginate(datagrid) }}
-{% endblock %}
-
-
-{% block datagrid_paginate %}
-    {% import 'DatathekePagerBundle:Pager:bootstrap3.html.twig' as helper %}
-    {{ helper.paginate(datagrid.pager) }}
 {% endblock %}
 
 
@@ -104,28 +92,6 @@
            {{ datagrid_column_item(datagrid, column, item, alias) }}
         {% endfor %}
     </tr>
-{% endblock %}
-
-
-{% block datagrid_column_order_by %}
-    {% import 'DatathekePagerBundle:Pager:bootstrap3.html.twig' as helper %}
-    <th>
-        {% if column.sortable %}
-            {{ helper.orderBy(datagrid.pager, alias, column.label) }}
-        {% else %}
-            {{ column.label }}
-        {% endif %}
-    </th>
-{% endblock %}
-
-
-{% block datagrid_column_filter %}
-    {% import 'DatathekePagerBundle:Pager:bootstrap3.html.twig' as helper %}
-    <th>
-        {% if column.sortable %}
-            {{ helper.filter(datagrid.pager, alias) }}
-        {% endif %}
-    </th>
 {% endblock %}
 
 
