@@ -4,7 +4,7 @@ DatathekePagerBundle
 ABOUT
 -----
 
-Work in progress
+Pager & DataGrid bundle for Symfony2
 
 LICENSE
 -------
@@ -137,7 +137,7 @@ INSTALL
 
 ### Install with composer
 
-    composer.phar require "datatheke/pager-bundle" "dev-master"
+    composer.phar require "datatheke/pager-bundle"
 
 ### Update your app/AppKernel.php
 
