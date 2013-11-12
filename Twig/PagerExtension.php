@@ -26,7 +26,7 @@ class PagerExtension extends \Twig_Extension
 
     public function getName()
     {
-        return 'PagerExtension';
+        return 'DatathekePagerExtension';
     }
 
     public function getFunctions()
