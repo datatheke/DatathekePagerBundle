@@ -33,7 +33,7 @@ class DataGridExtension extends \Twig_Extension
 
     public function getName()
     {
-        return 'DatahtekeDataGridExtension';
+        return 'DatathekeDataGridExtension';
     }
 
     public function getTokenParsers()

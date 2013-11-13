@@ -18,7 +18,7 @@ class DataGridThemeNode extends \Twig_Node
     {
         $compiler
             ->addDebugInfo($this)
-            ->write('echo $this->env->getExtension(\'DataGridExtension\')->setTheme(')
+            ->write('echo $this->env->getExtension(\'DatathekeDataGridExtension\')->setTheme(')
             ->subcompile($this->getNode('datagrid'))
             ->raw(', array(')
         ;
