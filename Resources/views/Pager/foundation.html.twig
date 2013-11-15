@@ -220,7 +220,7 @@
 
 {# FILTERS #}
 
-{% macro filter(pager, alias, type) %}
+{% macro filter(pager, alias, column) %}
     <div class="pager-filter">
         <input type="hidden" name="{{ pager.getOption('filter_param') }}[f][{{ alias }}]" value="{{ alias }}"/>
         <input type="text"   name="{{ pager.getOption('filter_param') }}[v][{{ alias }}]" value="{{ pager.filter.getValue(alias)|default('') }}" class="form-control input-sm" placeholder="{{ 'Filter...'|trans({}, 'pager') }}"/>
