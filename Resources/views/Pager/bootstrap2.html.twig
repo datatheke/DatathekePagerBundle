@@ -1,13 +1,14 @@
 {# STYLESHEETS #}
 
-{% macro stylesheets() %}
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+{% macro stylesheets(no_externals) %}
+    {% if not no_externals %}
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    {% endif %}
 
     <style>
         .pager-filter-container {
             display: none;
             padding-top: 5px;
-            margin-left: -15px;
         }
 
         .pager-filter:hover>.pager-filter-container {
@@ -25,6 +26,16 @@
             -webkit-border-radius: 0px 0px 5px 5px;
                -moz-border-radius: 0px 0px 5px 5px;
                     border-radius: 0px 0px 5px 5px;
+        }
+
+        .pager-filter>input {
+            width: 100%;
+            display: inline;
+            height: 30px;
+            margin: 0;
+            -webkit-box-sizing: border-box;
+               -moz-box-sizing: border-box;
+                    box-sizing: border-box;
         }
 
         .pager-filter-container-body:after, .pager-filter-container-body:before {
@@ -209,7 +220,7 @@
 {% macro filter(pager, alias, column) %}
     <div class="pager-filter">
         <input type="hidden" name="{{ pager.getOption('filter_param') }}[f][{{ alias }}]" value="{{ alias }}"/>
-        <input type="text"   name="{{ pager.getOption('filter_param') }}[v][{{ alias }}]" value="{{ pager.filter.getValue(alias)|default('') }}" class="form-control input-sm" placeholder="{{ 'Filter...'|trans({}, 'pager') }}"/>
+        <input type="text"   name="{{ pager.getOption('filter_param') }}[v][{{ alias }}]" value="{{ pager.filter.getValue(alias)|default('') }}" placeholder="{{ 'Filter...'|trans({}, 'pager') }}"/>
 
         {% if column.type == 'object' %}
             <input type="hidden" name="{{ pager.getOption('filter_param') }}[o][{{ alias }}]" value="="/>
