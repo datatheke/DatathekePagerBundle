@@ -71,6 +71,7 @@ class ArrayAdapter implements AdapterInterface
         if (false === $this->isOrdered && null !== $this->orderBy) {
             $this->applyOrderBy($array);
         }
+
         return array_slice($array, $offset, $itemCountPerPage);
     }
 
@@ -104,7 +105,7 @@ class ArrayAdapter implements AdapterInterface
     protected function &getArray()
     {
         // Works on source if there is no filter
-        if (count($this->filter)) {
+        if (!count($this->filter)) {
             return $this->source;
         }
 
