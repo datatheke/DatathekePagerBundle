@@ -26,12 +26,16 @@ class ArrayAdapterTest extends \PHPUnit_Framework_TestCase
     public function testOrderBy()
     {
         $adapter = new ArrayAdapter(self::$source);
+
         $adapter->setOrderBy(new OrderBy(array('age' => OrderBy::ASC)));
-
-        $items   = $adapter->getItems();
-
+        $items = $adapter->getItems();
         $this->assertEquals('bon', $items[0]['lastname']);
         $this->assertEquals('doe', $items[1]['lastname']);
+
+        $adapter->setOrderBy(new OrderBy(array('age' => OrderBy::DESC)));
+        $items = $adapter->getItems();
+        $this->assertEquals('bon', $items[1]['lastname']);
+        $this->assertEquals('doe', $items[0]['lastname']);
     }
 
     public function testFilter()
