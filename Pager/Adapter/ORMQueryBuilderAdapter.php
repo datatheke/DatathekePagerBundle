@@ -53,16 +53,24 @@ class ORMQueryBuilderAdapter implements AdapterInterface
         foreach ($entities as $alias => $entity) {
             $metas = $em->getClassMetadata($entity);
             foreach ($metas->fieldMappings as $property => $infos) {
+                $metadatas = array('mapping' => $infos);
+
                 switch ($infos['type']) {
                     case 'datetime':
                         $type = Field::TYPE_DATETIME;
+                        break;
+
+                    case 'integer':
+                        $type = Field::TYPE_NUMBER;
+                        $metadatas['precision'] = 0;
                         break;
 
                     default:
                         $type = Field::TYPE_STRING;
                         break;
                 }
-                $this->fields[$property] = new Field($property, $type, $alias.'.'.$property, array('mapping' => $infos));
+
+                $this->fields[$property] = new Field($property, $type, $alias.'.'.$property, $metadatas);
             }
 
             foreach ($metas->associationMappings as $property => $infos) {
@@ -92,11 +100,14 @@ class ORMQueryBuilderAdapter implements AdapterInterface
             $builder = clone $this->builder;
             $this->applyFilters($builder);
 
-            $this->count = $builder
+            $count = $builder
                 ->select('COUNT(DISTINCT '.$builder->getRootAlias().')')
                 ->resetDQLPart('orderBy')
                 ->getQuery()
-                ->getSingleScalarResult();
+                ->getScalarResult()
+            ;
+
+            $this->count = array_sum(array_map('current', $count));
         }
 
         return $this->count;
@@ -113,12 +124,15 @@ class ORMQueryBuilderAdapter implements AdapterInterface
         $this->applyOrderBy($builder);
         $this->applyFilters($builder);
 
+        if (0 !== $offset) { // Fix for use with pdo_sqlite
+            $builder->setFirstResult($offset);
+        }
+
         if (null !== $itemCountPerPage) {
             $builder->setMaxResults($itemCountPerPage);
         }
 
         return $builder
-            ->setFirstResult($offset)
             ->getQuery()
             ->getResult()
         ;
