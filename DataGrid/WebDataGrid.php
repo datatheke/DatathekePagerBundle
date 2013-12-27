@@ -7,13 +7,13 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-use Datatheke\Bundle\PagerBundle\Pager\WebPager;
+use Datatheke\Bundle\PagerBundle\Pager\HttpPager;
 
 class WebDataGrid extends DataGrid
 {
     protected $options;
 
-    public function __construct(WebPager $pager, array $columns = null, array $options = array())
+    public function __construct(HttpPager $pager, array $columns = null, array $options = array())
     {
         $resolver = new OptionsResolver();
         $this->setDefaultOptions($resolver);

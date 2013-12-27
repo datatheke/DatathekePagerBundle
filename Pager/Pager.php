@@ -4,7 +4,7 @@ namespace Datatheke\Bundle\PagerBundle\Pager;
 
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\AdapterInterface;
 
-class Pager
+class Pager implements PagerInterface
 {
 	protected $adapter;
     protected $paginator;

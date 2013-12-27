@@ -2,12 +2,11 @@
 
 namespace Datatheke\Bundle\PagerBundle\Pager;
 
-use Datatheke\Bundle\PagerBundle\Pager\Configuration;
-use Datatheke\Bundle\PagerBundle\Pager\Pager;
-use Datatheke\Bundle\PagerBundle\Pager\WebPager;
-use Datatheke\Bundle\PagerBundle\Pager\ConsolePager;
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\AdapterInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser\GuesserInterface;
+
+use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\HttpHandlerInterface;
+use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\WebHandler; // FIXME
 
 class Factory
 {
@@ -31,7 +30,7 @@ class Factory
         return new Pager($adapter, $itemCountPerPage, $currentPageNumber);
     }
 
-    public function createWebPager($adapter, array $options = array())
+    public function createWebPager($adapter, array $options = array(), HttpHandlerInterface $handler = null)
     {
         $adapter = $this->guessAdapter($adapter);
 
@@ -40,7 +39,12 @@ class Factory
             'item_count_per_page_choices' => $this->config->getItemCountPerPageChoices()
         );
 
-        return new WebPager($adapter, array_merge($defaults, $options));
+        if (null === $handler) {
+            $handler = new WebHandler();
+        }
+
+        return new HttpPager($adapter, $handler, $this->config->getItemCountPerPage());
+        // return new HttpPager($adapter, $handler, array_merge($defaults, $options));
     }
 
     public function createConsolePager($adapter, array $options = array())

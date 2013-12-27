@@ -5,7 +5,6 @@ namespace Datatheke\Bundle\PagerBundle\DataGrid;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 use Datatheke\Bundle\PagerBundle\Datagrid\Column\ColumnInterface;
-// use Datatheke\Bundle\PagerBundle\Datagrid\Action\ActionInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Pager;
 
 abstract class DataGrid
@@ -13,7 +12,6 @@ abstract class DataGrid
     protected $accessor;
     protected $pager;
     protected $columns;
-    // protected $actions = array();
 
     protected $initialized;
 
@@ -80,33 +78,6 @@ abstract class DataGrid
     {
         return $this->pager;
     }
-
-    // public function addAction(ActionInterface $action, $alias = null)
-    // {
-    //     if (null !== $alias) {
-    //         $this->actions[$alias] = $action;
-    //     }
-    //     else {
-    //         $this->actions[] = $action;
-    //     }
-
-    //     return $this;
-    // }
-
-    // public function hasActions()
-    // {
-    //     return count($this->actions) > 0;
-    // }
-
-    // public function getActions()
-    // {
-    //     return $this->actions;
-    // }
-
-    // public function getAction($alias)
-    // {
-    //     return $this->actions[$alias];
-    // }
 
     public function getColumnValue(ColumnInterface $column, $item)
     {
