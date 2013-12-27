@@ -5,7 +5,7 @@ namespace Datatheke\Bundle\PagerBundle\Twig;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 use Datatheke\Bundle\PagerBundle\Pager\Configuration;
-use Datatheke\Bundle\PagerBundle\Pager\WebPager;
+use Datatheke\Bundle\PagerBundle\Pager\PagerViewInterface;
 
 class PagerExtension extends \Twig_Extension
 {
@@ -44,7 +44,7 @@ class PagerExtension extends \Twig_Extension
     /**
      * From Zend\Paginator\Paginator
      */
-    public function pagerPageRange(WebPager $pager, $pageRange = null)
+    public function pagerPageRange(PagerViewInterface $pager, $pageRange = null)
     {
         if (null == $pageRange) {
             $pageRange = $this->config->getPageRange();
@@ -80,44 +80,44 @@ class PagerExtension extends \Twig_Extension
         return $pages;
     }
 
-    public function pagerPath(WebPager $pager, $page = null, array $parameters = array(), $route = null, array $include = array())
+    public function pagerPath(PagerViewInterface $pager, $page = null, array $parameters = array(), $route = null, array $include = array())
     {
         $defaults = array(
-            $pager->getOption('filter_param') => $this->serializeFilter($pager),
+            $pager->getFilterParam() => $this->serializeFilter($pager),
         );
 
         return $this->renderPath($pager, $page, array_merge($defaults, $parameters), $route);
     }
 
-    public function pagerFormPath(WebPager $pager, $page = null, array $parameters = array(), $route = null)
+    public function pagerFormPath(PagerViewInterface $pager, $page = null, array $parameters = array(), $route = null)
     {
         return $this->renderPath($pager, $page, $parameters, $route);
     }
 
-    public function pagerOrderPath(WebPager $pager, $field, $order = 'desc', $page = null, array $parameters = array(), $route = null)
+    public function pagerOrderPath(PagerViewInterface $pager, $field, $order = 'desc', $page = null, array $parameters = array(), $route = null)
     {
         $defaults = array(
-            $pager->getOption('filter_param')   => $this->serializeFilter($pager),
-            $pager->getOption('order_by_param') => array($field => $order),
+            $pager->getFilterParam()  => $this->serializeFilter($pager),
+            $pager->getOrderByParam() => array($field => $order),
         );
 
         return $this->renderPath($pager, $page, array_merge($defaults, $parameters), $route);
     }
 
-    public function pagerPerPagePath(WebPager $pager, $itemCountPerPage, $page = null, array $parameters = array(), $route = null)
+    public function pagerPerPagePath(PagerViewInterface $pager, $itemCountPerPage, $page = null, array $parameters = array(), $route = null)
     {
         $defaults = array(
-            $pager->getOption('item_count_per_page_param') => (int) $itemCountPerPage,
-            $pager->getOption('filter_param')              => $this->serializeFilter($pager),
+            $pager->getItemCountPerPageParam() => (int) $itemCountPerPage,
+            $pager->getFilterParam()           => $this->serializeFilter($pager),
         );
 
         return $this->renderPath($pager, $page, array_merge($defaults, $parameters), $route);
     }
 
-    protected function renderPath(WebPager $pager, $page = null, array $parameters = array(), $route = null)
+    protected function renderPath(PagerViewInterface $pager, $page = null, array $parameters = array(), $route = null)
     {
         if (null === $route) {
-            $route = $pager->getOption('route');
+            $route = $pager->getRoute();
         }
 
         if (null === $page) {
@@ -125,19 +125,20 @@ class PagerExtension extends \Twig_Extension
         }
 
         $defaults = array(
-            $pager->getOption('item_count_per_page_param') => (int) $pager->getItemCountPerPage(),
-            $pager->getOption('current_page_number_param') => (int) $page,
-            $pager->getOption('order_by_param')            => $pager->getOrderBy(),
+            $pager->getItemCountPerPageParam()  => (int) $pager->getItemCountPerPage(),
+            $pager->getCurrentPageNumberParam() => (int) $page,
+            $pager->getOrderByParam()           => $pager->getOrderBy(),
         );
 
-        $globals = $pager->getOption('parameters');
+        $globals = $pager->getParameters();
 
         return $this->urlGenerator->generate($route, array_merge($defaults, $globals, $parameters));
     }
 
-    protected function serializeFilter(WebPager $pager)
+    protected function serializeFilter(PagerViewInterface $pager)
     {
         list($fields, $values, $operators, $logical) = $pager->getFilter()->toArray();
+
         return array('f' => $fields, 'v' => $values, 'o' => $operators, 'l' => $logical);
     }
 }

@@ -79,7 +79,7 @@ class Filter
         return $this->logical;
     }
 
-    static public function createFromArray($filters)
+    public static function createFromArray($filters)
     {
         $fields     = array();
         $values     = array();
@@ -88,11 +88,10 @@ class Filter
 
         self::readLayer(array('criteria' => array($filters)), 0, $fields, $values, $operators, $logical);
         // ksort($logical);
-
         return new Filter($fields, $values, $operators, $logical);
     }
 
-    static protected function readLayer($layer, $layerNum, &$fields, &$values, &$operators, &$logical)
+    protected static function readLayer($layer, $layerNum, &$fields, &$values, &$operators, &$logical)
     {
         $last           = 0;
         $criteriumIndex = 0;
@@ -112,8 +111,7 @@ class Filter
 
                 // condition
                 $logical[$layerNum][] = array($criterium['operator'], $criteriumIndex - $last);
-            }
-            else {
+            } else {
 
                 if ($hasSubLayer) {
                     // next layer
@@ -121,8 +119,7 @@ class Filter
 
                     // condition
                     $logical[$layerNum][] = array(self::LOGICAL_OR, $criteriumIndex - $last);
-                }
-                else {
+                } else {
                     // field
                     $fields[]    = $criterium['field'];
                     $operators[] = $criterium['operator'];

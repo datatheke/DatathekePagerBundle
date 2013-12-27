@@ -96,8 +96,7 @@ abstract class AbstractColumn implements ColumnInterface
     {
         if (null !== $alias) {
             $this->actions[$alias] = $action;
-        }
-        else {
+        } else {
             $this->actions[] = $action;
         }
 

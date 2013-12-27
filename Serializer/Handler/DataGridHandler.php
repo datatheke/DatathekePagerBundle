@@ -25,7 +25,7 @@ class DataGridHandler implements SubscribingHandlerInterface
             );
             $methods[] = array(
                 'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
-                'type'      => 'Datatheke\Bundle\PagerBundle\DataGrid\WebDataGrid',
+                'type'      => 'Datatheke\Bundle\PagerBundle\DataGrid\HttpDataGrid',
                 'format'    => $format,
             );
             $methods[] = array(
@@ -43,7 +43,7 @@ class DataGridHandler implements SubscribingHandlerInterface
         return $this->convertDataGridToArray($visitor, $datagrid, $type, $context);
     }
 
-    public function serializeWebDataGridToJson(JsonSerializationVisitor $visitor, DataGrid $datagrid, array $type, Context $context)
+    public function serializeHttpDataGridToJson(JsonSerializationVisitor $visitor, DataGrid $datagrid, array $type, Context $context)
     {
         return $this->convertDataGridToArray($visitor, $datagrid, $type, $context);
     }

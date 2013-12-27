@@ -1,36 +1,32 @@
 <?php
 
-namespace Datatheke\Bundle\PagerBundle\Pager;
+namespace Datatheke\Bundle\PagerBundle\Pager\Handler\Http;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-use Datatheke\Bundle\PagerBundle\Pager\Adapter\AdapterInterface;
+use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
+use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
+use Datatheke\Bundle\PagerBundle\Pager\Filter;
+use Datatheke\Bundle\PagerBundle\Pager\PagerView;
 
-class WebPager extends Pager
+class ViewHandler implements HttpHandlerInterface
 {
     protected $options;
 
-    public function __construct(AdapterInterface $adapter, array $options = array())
+    public function __construct(array $options = array())
     {
         $resolver = new OptionsResolver();
         $this->setDefaultOptions($resolver);
         $this->options = $resolver->resolve($options);
-
-        parent::__construct($adapter, $this->options['item_count_per_page']);
     }
 
     protected function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         static $pagerNum;
         $pagerParam = '_p'.$pagerNum++;
-
-        $resolver->setRequired(array(
-            'item_count_per_page',
-            )
-        );
 
         $resolver->setDefaults(array(
             'pager_param'                 => $pagerParam,
@@ -39,7 +35,6 @@ class WebPager extends Pager
             'current_page_number_param'   => function (Options $options) { return $options['pager_param'].'[p]'; },
             'item_count_per_page_param'   => function (Options $options) { return $options['pager_param'].'[pp]'; },
 
-            'item_count_per_page_choices' => array(),
             'route'                       => null,
             'parameters'                  => array(),
             )
@@ -60,10 +55,8 @@ class WebPager extends Pager
         return $this->options[$option];
     }
 
-    public function handleRequest(Request $request)
+    public function handleRequest(PagerInterface $pager, Request $request)
     {
-        $this->request = $request;
-
         // Use current route as default
         if (null === $this->options['route']) {
             $this->options['route'] = $request->get('_route');
@@ -71,32 +64,32 @@ class WebPager extends Pager
 
         // Set item count per page
         if ($itemCountPerPage = $request->get($this->options['item_count_per_page_param'], null, true)) {
-            if (in_array($itemCountPerPage, $this->options['item_count_per_page_choices'])) {
-                $this->setItemCountPerPage($itemCountPerPage);
-            }
+            $pager->setItemCountPerPage($itemCountPerPage);
         }
 
         // Set current page number
         if ($currentPageNumber = $request->get($this->options['current_page_number_param'], null, true)) {
-            $this->setCurrentPageNumber($currentPageNumber);
+            $pager->setCurrentPageNumber($currentPageNumber);
         }
 
         // Set order by & filter
-        $this->setOrderByFromRequest($request, $this->options['order_by_param']);
-        $this->setFilterFromRequest($request, $this->options['filter_param']);
+        $this->setOrderByFromRequest($pager, $request, $this->options['order_by_param']);
+        $this->setFilterFromRequest($pager, $request, $this->options['filter_param']);
+
+        return new PagerView($pager, $this);
     }
 
-    protected function setOrderByFromRequest(Request $request, $parameter)
+    protected function setOrderByFromRequest(PagerInterface $pager, Request $request, $parameter)
     {
         $orderBy = $request->get($parameter, null, true);
         if (!is_array($orderBy)) {
             return;
         }
 
-        $this->setOrderBy(new OrderBy($orderBy));
+        $pager->setOrderBy(new OrderBy($orderBy));
     }
 
-    protected function setFilterFromRequest(Request $request, $parameter)
+    protected function setFilterFromRequest(PagerInterface $pager, Request $request, $parameter)
     {
         $filter = $request->get($parameter, null, true);
         if (!is_array($filter)) {
@@ -108,6 +101,6 @@ class WebPager extends Pager
         $operators = (isset($filter['o']) && is_array($filter['o'])) ? $filter['o'] : array();
         $logical   = (isset($filter['l']) && is_array($filter['l'])) ? $filter['l'] : array();
 
-        $this->setFilter(new Filter($fields, $values, $operators, $logical));
+        $pager->setFilter(new Filter($fields, $values, $operators, $logical));
     }
 }

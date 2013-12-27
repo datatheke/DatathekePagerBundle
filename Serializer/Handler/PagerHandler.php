@@ -25,7 +25,7 @@ class PagerHandler implements SubscribingHandlerInterface
             );
             $methods[] = array(
                 'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
-                'type'      => 'Datatheke\Bundle\PagerBundle\Pager\WebPager',
+                'type'      => 'Datatheke\Bundle\PagerBundle\Pager\HttpPager',
                 'format'    => $format,
             );
             $methods[] = array(
@@ -43,7 +43,7 @@ class PagerHandler implements SubscribingHandlerInterface
         return $this->convertPagerToArray($visitor, $pager, $type, $context);
     }
 
-    public function serializeWebPagerToJson(JsonSerializationVisitor $visitor, Pager $pager, array $type, Context $context)
+    public function serializeHttpPagerToJson(JsonSerializationVisitor $visitor, Pager $pager, array $type, Context $context)
     {
         return $this->convertPagerToArray($visitor, $pager, $type, $context);
     }

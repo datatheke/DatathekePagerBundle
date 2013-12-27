@@ -3,35 +3,58 @@
 namespace Datatheke\Bundle\PagerBundle\DataGrid;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 use Datatheke\Bundle\PagerBundle\Datagrid\Column\ColumnInterface;
-// use Datatheke\Bundle\PagerBundle\Datagrid\Action\ActionInterface;
-use Datatheke\Bundle\PagerBundle\Pager\Pager;
+use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
 
-abstract class DataGrid
+class DataGrid implements DataGridInterface
 {
     protected $accessor;
     protected $pager;
     protected $columns;
-    // protected $actions = array();
+    protected $options;
 
     protected $initialized;
 
-    public function __construct(Pager $pager, array $columns)
+    public function __construct(PagerInterface $pager, array $columns, array $options = array())
     {
-        $this->accessor    = PropertyAccess::createPropertyAccessor();
-        $this->pager       = $pager;
-        $this->columns     = $columns;
+        $this->accessor = PropertyAccess::createPropertyAccessor();
+        $this->pager    = $pager;
+        $this->columns  = $columns;
+
+        $resolver = new OptionsResolver();
+        $this->setDefaultOptions($resolver);
+        $this->options = $resolver->resolve($options);
 
         $this->initialized = false;
+    }
+
+    protected function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+    }
+
+    public function hasOption($option)
+    {
+        return array_key_exists($option, $this->options);
+    }
+
+    public function getOption($option)
+    {
+        if (!$this->hasOption($option)) {
+            throw new \InvalidArgumentException(sprintf('The "%s" option does not exist.', $option));
+        }
+
+        return $this->options[$option];
     }
 
     public function addColumn(ColumnInterface $column, $alias = null)
     {
         if (null !== $alias) {
             $this->columns[$alias] = $column;
-        }
-        else {
+        } else {
             $this->columns[] = $column;
         }
 
@@ -80,33 +103,6 @@ abstract class DataGrid
     {
         return $this->pager;
     }
-
-    // public function addAction(ActionInterface $action, $alias = null)
-    // {
-    //     if (null !== $alias) {
-    //         $this->actions[$alias] = $action;
-    //     }
-    //     else {
-    //         $this->actions[] = $action;
-    //     }
-
-    //     return $this;
-    // }
-
-    // public function hasActions()
-    // {
-    //     return count($this->actions) > 0;
-    // }
-
-    // public function getActions()
-    // {
-    //     return $this->actions;
-    // }
-
-    // public function getAction($alias)
-    // {
-    //     return $this->actions[$alias];
-    // }
 
     public function getColumnValue(ColumnInterface $column, $item)
     {
