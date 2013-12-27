@@ -7,6 +7,10 @@
     <parameters>
         <parameter key="datatheke.datagrid.configuration.class">Datatheke\Bundle\PagerBundle\DataGrid\Configuration</parameter>
         <parameter key="datatheke.datagrid.factory.class">Datatheke\Bundle\PagerBundle\DataGrid\Factory</parameter>
+        <parameter key="datatheke.datagrid.http_handler.view.class">Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\ViewHandler</parameter>
+        <parameter key="datatheke.datagrid.http_handler.jqgrid.class">Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\jqGridHandler</parameter>
+        <parameter key="datatheke.datagrid.http_handler.autocomplete.class">Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\AutocompleteHandler</parameter>
+        <parameter key="datatheke.datagrid.console_handler.default.class">Datatheke\Bundle\PagerBundle\DataGrid\Handler\Console\DefaultHandler</parameter>
         <parameter key="datatheke.datagrid.column.guesser_chain.class">Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser\GuesserChain</parameter>
         <parameter key="datatheke.datagrid.column.guesser.string.class">Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser\StringGuesser</parameter>
         <parameter key="datatheke.datagrid.column.guesser.object.class">Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser\ObjectGuesser</parameter>
@@ -27,6 +31,8 @@
             <argument type="service" id="datatheke.datagrid.configuration"/>
             <argument type="service" id="datatheke.pager.factory"/>
             <argument type="service" id="datatheke.datagrid.column.guesser_chain"/>
+            <argument type="collection" />
+            <argument type="collection" />
         </service>
 
         <service id="datatheke.datagrid.column.guesser_chain" class="%datatheke.datagrid.column.guesser_chain.class%">
@@ -46,6 +52,22 @@
 
         <service id="datatheke.datagrid.column.guesser.localized_datetime" class="%datatheke.datagrid.column.guesser.localized_datetime.class%">
             <tag name="datatheke_pager.column_guesser" priority="100"/>
+        </service>
+
+        <service id="datatheke.datagrid.http_handler.view" class="%datatheke.datagrid.http_handler.view.class%">
+            <tag name="datatheke_pager.datagrid_http_handler" alias="view"/>
+        </service>
+
+        <service id="datatheke.datagrid.http_handler.jqgrid" class="%datatheke.datagrid.http_handler.jqgrid.class%">
+            <tag name="datatheke_pager.datagrid_http_handler" alias="jqgrid"/>
+        </service>
+
+        <service id="datatheke.datagrid.http_handler.autocomplete" class="%datatheke.datagrid.http_handler.autocomplete.class%">
+            <tag name="datatheke_pager.datagrid_http_handler" alias="autocomplete"/>
+        </service>
+
+        <service id="datatheke.datagrid.console_handler.default" class="%datatheke.datagrid.console_handler.default.class%">
+            <tag name="datatheke_pager.datagrid_console_handler" alias="default"/>
         </service>
     </services>
 </container>

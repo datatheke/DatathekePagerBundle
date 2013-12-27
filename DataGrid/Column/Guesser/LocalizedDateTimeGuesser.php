@@ -10,8 +10,7 @@ class LocalizedDateTimeGuesser implements GuesserInterface
 {
     public function guess(Field $field, $fieldAlias)
     {
-        if (Field::TYPE_DATETIME === $field->getType())
-        {
+        if (Field::TYPE_DATETIME === $field->getType()) {
             return new LocalizedDateTimeColumn($field);
         }
 

@@ -70,16 +70,13 @@ class Paginator
 
         if ($this->currentPageNumber < 1) {
             $this->currentPageNumber = 1;
-        }
-        elseif ($this->currentPageNumber > $this->pageCount) {
+        } elseif ($this->currentPageNumber > $this->pageCount) {
             $this->currentPageNumber = $this->pageCount;
         }
 
-
         if ($this->currentPageNumber < $this->pageCount) {
             $this->currentItemCount = $this->itemCountPerPage;
-        }
-        else {
+        } else {
             $this->currentItemCount = $this->totalItemCount - (($this->currentPageNumber - 1) * $this->itemCountPerPage);
         }
 

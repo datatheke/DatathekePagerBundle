@@ -10,8 +10,7 @@ class StringGuesser implements GuesserInterface
 {
     public function guess(Field $field, $fieldAlias)
     {
-        if (Field::TYPE_STRING === $field->getType())
-        {
+        if (Field::TYPE_STRING === $field->getType()) {
             return new StringColumn($field);
         }
 

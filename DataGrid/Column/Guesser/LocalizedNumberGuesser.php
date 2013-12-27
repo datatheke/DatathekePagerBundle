@@ -10,8 +10,7 @@ class LocalizedNumberGuesser implements GuesserInterface
 {
     public function guess(Field $field, $fieldAlias)
     {
-        if (Field::TYPE_NUMBER === $field->getType())
-        {
+        if (Field::TYPE_NUMBER === $field->getType()) {
             $column = new LocalizedNumberColumn($field);
 
             $metadatas = $field->getMetadatas();

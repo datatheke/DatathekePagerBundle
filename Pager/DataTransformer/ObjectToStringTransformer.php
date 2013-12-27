@@ -37,8 +37,7 @@ class ObjectToStringTransformer implements DataTransformerInterface
 
         try {
             $item = $this->objectRepository->findOneBy(array($this->property => $value));
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return $value;
         }
 

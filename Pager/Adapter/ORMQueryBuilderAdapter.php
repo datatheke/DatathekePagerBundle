@@ -24,8 +24,7 @@ class ORMQueryBuilderAdapter implements AdapterInterface
 
         if (!is_array($fields)) {
             $this->guessFields();
-        }
-        else {
+        } else {
             $this->fields = $fields;
         }
     }
@@ -34,8 +33,7 @@ class ORMQueryBuilderAdapter implements AdapterInterface
     {
         if (null !== $alias) {
             $this->fields[$alias] = $field;
-        }
-        else {
+        } else {
             $this->fields[] = $field;
         }
     }
@@ -165,8 +163,7 @@ class ORMQueryBuilderAdapter implements AdapterInterface
             if ($first) {
                 $builder->orderBy($sort, $order);
                 $first = false;
-            }
-            else {
+            } else {
                 $builder->addOrderBy($sort, $order);
             }
         }
@@ -309,8 +306,7 @@ class ORMQueryBuilderAdapter implements AdapterInterface
                     $method    = (Filter::LOGICAL_OR === $operator) ? 'orX' : 'andX';
                     $concatCriteria[] = ($subCriteria) ? call_user_func_array(array($builder->expr(), $method), $subCriteria)
                                                        : null;
-                }
-                else {
+                } else {
                     $concatCriteria[] = current($subCriteria);
                 }
 
@@ -338,6 +334,7 @@ class ORMQueryBuilderAdapter implements AdapterInterface
         if (!isset($this->fields[$alias])) {
             throw new \Exception('Unknown alias '.$alias);
         }
+
         return $this->fields[$alias];
     }
 }
