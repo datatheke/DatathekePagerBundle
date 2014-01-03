@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\AdapterInterface;
 
-class ConsolePager extends Pager
+class ConsolePager extends Pager implements ConsolePagerInterface
 {
     protected $options;
 
@@ -20,7 +20,7 @@ class ConsolePager extends Pager
         $this->setDefaultOptions($resolver);
         $this->options = $resolver->resolve($options);
 
-        parent::__construct($adapter, $this->options['item_count_per_page']);
+        parent::__construct($adapter, $this->options['item_count_per_page'], $this->options['item_count_per_page_choices']);
     }
 
     protected function setDefaultOptions(OptionsResolverInterface $resolver)

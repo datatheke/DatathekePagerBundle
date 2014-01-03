@@ -5,7 +5,7 @@ namespace Datatheke\Bundle\PagerBundle\Twig;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 use Datatheke\Bundle\PagerBundle\Twig\TokenParser\DataGridThemeTokenParser;
-use Datatheke\Bundle\PagerBundle\DataGrid\WebDataGrid;
+use Datatheke\Bundle\PagerBundle\DataGrid\DataGridViewInterface;
 use Datatheke\Bundle\PagerBundle\DataGrid\Column\Action\ActionInterface;
 use Datatheke\Bundle\PagerBundle\DataGrid\Column\ColumnInterface;
 use Datatheke\Bundle\PagerBundle\DataGrid\Configuration;
@@ -108,67 +108,67 @@ class DataGridExtension extends \Twig_Extension
         throw new \Exception('Block '.$block.' not found');
     }
 
-    public function renderDataGrid(WebDataGrid $datagrid, array $params = array())
+    public function renderDataGrid(DataGridViewInterface $datagrid, array $params = array())
     {
         return $this->render($datagrid, 'datagrid', $params);
     }
 
-    public function renderJavascripts(WebDataGrid $datagrid, array $params = array())
+    public function renderJavascripts(DataGridViewInterface $datagrid, array $params = array())
     {
         return $this->render($datagrid, 'datagrid_javascripts', $params);
     }
 
-    public function renderStyleSheets(WebDataGrid $datagrid, array $params = array())
+    public function renderStyleSheets(DataGridViewInterface $datagrid, array $params = array())
     {
         return $this->render($datagrid, 'datagrid_stylesheets', $params);
     }
 
-    public function renderContent(WebDataGrid $datagrid, array $params = array())
+    public function renderContent(DataGridViewInterface $datagrid, array $params = array())
     {
         return $this->render($datagrid, 'datagrid_content', $params);
     }
 
-    public function renderHeader(WebDataGrid $datagrid, array $params = array())
+    public function renderHeader(DataGridViewInterface $datagrid, array $params = array())
     {
         return $this->render($datagrid, 'datagrid_header', $params);
     }
 
-    public function renderBody(WebDataGrid $datagrid, array $params = array())
+    public function renderBody(DataGridViewInterface $datagrid, array $params = array())
     {
         return $this->render($datagrid, 'datagrid_body', $params);
     }
 
-    public function renderFooter(WebDataGrid $datagrid, array $params = array())
+    public function renderFooter(DataGridViewInterface $datagrid, array $params = array())
     {
         return $this->render($datagrid, 'datagrid_footer', $params);
     }
 
-    public function renderPaginate(WebDataGrid $datagrid, array $params = array())
+    public function renderPaginate(DataGridViewInterface $datagrid, array $params = array())
     {
         return $this->render($datagrid, 'datagrid_paginate', $params);
     }
 
-    public function renderItemsPerPage(WebDataGrid $datagrid, array $params = array())
+    public function renderItemsPerPage(DataGridViewInterface $datagrid, array $params = array())
     {
         return $this->render($datagrid, 'datagrid_items_per_page', $params);
     }
 
-    public function renderRowOrderBy(WebDataGrid $datagrid, array $params = array())
+    public function renderRowOrderBy(DataGridViewInterface $datagrid, array $params = array())
     {
         return $this->render($datagrid, 'datagrid_row_order_by', $params);
     }
 
-    public function renderRowFilters(WebDataGrid $datagrid, array $params = array())
+    public function renderRowFilters(DataGridViewInterface $datagrid, array $params = array())
     {
         return $this->render($datagrid, 'datagrid_row_filters', $params);
     }
 
-    public function renderRowItems(WebDataGrid $datagrid, $item, array $params = array())
+    public function renderRowItems(DataGridViewInterface $datagrid, $item, array $params = array())
     {
         return $this->render($datagrid, 'datagrid_row_items', array_merge($params, array('item' => $item)));
     }
 
-    public function renderColumnOrderBy(WebDataGrid $datagrid, ColumnInterface $column, $alias, array $params = array())
+    public function renderColumnOrderBy(DataGridViewInterface $datagrid, ColumnInterface $column, $alias, array $params = array())
     {
         $blocks = array(
             'datagrid_column_order_by__'.$this->sanitizeAlias($alias),
@@ -178,7 +178,7 @@ class DataGridExtension extends \Twig_Extension
         return $this->render($datagrid, $blocks, array_merge($params, array('column' => $column, 'alias' => $alias)));
     }
 
-    public function renderColumnFilter(WebDataGrid $datagrid, ColumnInterface $column, $alias, array $params = array())
+    public function renderColumnFilter(DataGridViewInterface $datagrid, ColumnInterface $column, $alias, array $params = array())
     {
         $blocks = array(
             'datagrid_column_filter__'.$this->sanitizeAlias($alias),
@@ -188,7 +188,7 @@ class DataGridExtension extends \Twig_Extension
         return $this->render($datagrid, $blocks, array_merge($params, array('column' => $column, 'alias' => $alias)));
     }
 
-    public function renderColumnItem(WebDataGrid $datagrid, ColumnInterface $column, $item, $alias, array $params = array())
+    public function renderColumnItem(DataGridViewInterface $datagrid, ColumnInterface $column, $item, $alias, array $params = array())
     {
         $blocks = array(
             'datagrid_column_item__'.$this->sanitizeAlias($alias),
@@ -198,12 +198,12 @@ class DataGridExtension extends \Twig_Extension
         return $this->render($datagrid, $blocks, array_merge($params, array('item' => $item, 'column' => $column, 'alias' => $alias)));
     }
 
-    public function renderItem(WebDataGrid $datagrid, ColumnInterface $column, $item)
+    public function renderItem(DataGridViewInterface $datagrid, ColumnInterface $column, $item)
     {
         return $datagrid->getColumnValue($column, $item);
     }
 
-    public function renderAction(WebDataGrid $datagrid, ActionInterface $action, $alias, $item = null, array $params = array())
+    public function renderAction(DataGridViewInterface $datagrid, ActionInterface $action, $alias, $item = null, array $params = array())
     {
         if (!$action->evaluateDisplay($datagrid, $item)) {
             return '';

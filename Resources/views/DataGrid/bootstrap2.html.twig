@@ -5,7 +5,7 @@
 {% block datagrid_stylesheets %}
     {{ parent() }}
 
-    {% import 'DatathekePagerBundle:Pager:bootstrap3.html.twig' as helper %}
+    {% import 'DatathekePagerBundle:Pager:bootstrap2.html.twig' as helper %}
     {{ helper.stylesheets() }}
 {% endblock %}
 
@@ -13,7 +13,7 @@
 {% block datagrid_javascripts %}
     {{ parent() }}
 
-    {% import 'DatathekePagerBundle:Pager:bootstrap3.html.twig' as helper %}
+    {% import 'DatathekePagerBundle:Pager:bootstrap2.html.twig' as helper %}
     {{ helper.javascripts() }}
 {% endblock %}
 
@@ -34,7 +34,7 @@
 
 
 {% block datagrid_header %}
-    {% import 'DatathekePagerBundle:Pager:bootstrap3.html.twig' as helper %}
+    {% import 'DatathekePagerBundle:Pager:bootstrap2.html.twig' as helper %}
 
     {#% if datagrid.hasActions() %}
         <div class="btn-group">
@@ -72,19 +72,19 @@
 
 
 {% block datagrid_paginate %}
-    {% import 'DatathekePagerBundle:Pager:bootstrap3.html.twig' as helper %}
+    {% import 'DatathekePagerBundle:Pager:bootstrap2.html.twig' as helper %}
     {{ helper.paginate(datagrid.pager) }}
 {% endblock %}
 
 
 {% block datagrid_items_per_page %}
-    {% import 'DatathekePagerBundle:Pager:bootstrap3.html.twig' as helper %}
+    {% import 'DatathekePagerBundle:Pager:bootstrap2.html.twig' as helper %}
     {{ helper.itemCountPerPage(datagrid.pager) }}
 {% endblock %}
 
 
 {% block datagrid_column_order_by %}
-    {% import 'DatathekePagerBundle:Pager:bootstrap3.html.twig' as helper %}
+    {% import 'DatathekePagerBundle:Pager:bootstrap2.html.twig' as helper %}
     <th>
         {% if column.sortable %}
             {{ helper.orderBy(datagrid.pager, alias, column.label) }}
@@ -96,7 +96,7 @@
 
 
 {% block datagrid_column_filter %}
-    {% import 'DatathekePagerBundle:Pager:bootstrap3.html.twig' as helper %}
+    {% import 'DatathekePagerBundle:Pager:bootstrap2.html.twig' as helper %}
     <th>
         {% if column.sortable %}
             {{ helper.filter(datagrid.pager, alias, column.type) }}

@@ -9,7 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 use Datatheke\Bundle\PagerBundle\Pager\HttpPager;
 
-class WebDataGrid extends DataGrid
+class HttpDataGrid extends DataGrid
 {
     protected $options;
 
@@ -44,6 +44,8 @@ class WebDataGrid extends DataGrid
     public function handleRequest(Request $request)
     {
         $this->initialize();
-        $this->pager->handleRequest($request);
+        $pagerView = $this->pager->handleRequest($request);
+
+        return new DataGridView($this, $pagerView);
     }
 }

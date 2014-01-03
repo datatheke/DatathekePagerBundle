@@ -5,9 +5,9 @@ namespace Datatheke\Bundle\PagerBundle\DataGrid;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 use Datatheke\Bundle\PagerBundle\Datagrid\Column\ColumnInterface;
-use Datatheke\Bundle\PagerBundle\Pager\Pager;
+use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
 
-abstract class DataGrid
+abstract class DataGrid implements DataGridInterface
 {
     protected $accessor;
     protected $pager;
@@ -15,7 +15,7 @@ abstract class DataGrid
 
     protected $initialized;
 
-    public function __construct(Pager $pager, array $columns)
+    public function __construct(PagerInterface $pager, array $columns)
     {
         $this->accessor    = PropertyAccess::createPropertyAccessor();
         $this->pager       = $pager;

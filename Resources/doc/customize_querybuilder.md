@@ -10,11 +10,7 @@ public function testAction(Request $request)
      * Create a custom pager
      */
 
-    $pager = $this->get('datatheke.pager')->createWebPager('MyBundle:MyEntity', array(
-        // Static parameter for routing
-        'parameters' => array('id' => '42')
-        )
-    );
+    $pager = $this->get('datatheke.pager')->createHttpPager('MyBundle:MyEntity');
 
     /**
      * Customize the QueryBuilder
@@ -31,13 +27,13 @@ public function testAction(Request $request)
      * Create the DataGrid
      */
 
-    $datagrid = $this->get('datatheke.datagrid')->createWebDataGrid($pager);
+    $datagrid = $this->get('datatheke.datagrid')->createHttpDataGrid($pager);
 
     // Change column label
     $datagrid->getColumn('city')->setLabel('Office city');
 
-    $datagrid->handleRequest($request);
+    $view = $datagrid->handleRequest($request);
 
-    return array('datagrid' => $datagrid);
+    return array('datagrid' => $view);
 }
 ```

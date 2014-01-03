@@ -2,7 +2,7 @@
 
 namespace Datatheke\Bundle\PagerBundle\DataGrid;
 
-use Datatheke\Bundle\PagerBundle\Pager\Pager;
+use Datatheke\Bundle\PagerBundle\Pager\HttpPagerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Factory as PagerFactory;
 use Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser\GuesserInterface;
 
@@ -19,17 +19,27 @@ class Factory
         $this->guesser      = $guesser;
     }
 
+    /**
+     * @deprecated
+     */
     public function createWebDataGrid($pager, array $options = array(), array $columns = null)
     {
-        if (!$pager instanceOf Pager) {
-            $pager = $this->pagerFactory->createWebPager($pager);
+        trigger_error('createWebDataGrid() is deprecated. Use createHttpDataGrid() instead.', E_USER_DEPRECATED);
+
+        return $this->createHttpDataGrid($pager, $options, $columns);
+    }
+
+    public function createHttpDataGrid($pager, array $options = array(), array $columns = null)
+    {
+        if (!$pager instanceOf HttpPagerInterface) {
+            $pager = $this->pagerFactory->createHttpPager($pager);
         }
 
         if (null == $columns) {
-            $columns = $this->guessColumns($pager->getAdapter()->getFields());
+            $columns = $this->guessColumns($pager->getFields());
         }
 
-        return new WebDataGrid($pager, $columns, $options);
+        return new HttpDataGrid($pager, $columns, $options);
     }
 
     public function createConsoleDataGrid($pager, array $options = array(), array $columns = null)
@@ -39,7 +49,7 @@ class Factory
         }
 
         if (null == $columns) {
-            $columns = $this->guessColumns($pager->getAdapter()->getFields());
+            $columns = $this->guessColumns($pager->getFields());
         }
 
         return new ConsoleDataGrid($pager, $columns, $options);

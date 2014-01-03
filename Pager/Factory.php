@@ -4,9 +4,8 @@ namespace Datatheke\Bundle\PagerBundle\Pager;
 
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\AdapterInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser\GuesserInterface;
-
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\HttpHandlerInterface;
-use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\WebHandler; // FIXME
+use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\ViewHandler;
 
 class Factory
 {
@@ -19,32 +18,30 @@ class Factory
         $this->guesser = $guesser;
     }
 
-    public function createPager($adapter, $itemCountPerPage = null, $currentPageNumber = 1)
+    /**
+     * @deprecated
+     */
+    public function createWebPager($adapter, array $options = array())
     {
-        $adapter = $this->guessAdapter($adapter);
+        trigger_error('createWebPager() is deprecated. Use createHttpPager() instead.', E_USER_DEPRECATED);
 
-        if (null === $itemCountPerPage) {
-            $itemCountPerPage = $this->config->getItemCountPerPage();
-        }
-
-        return new Pager($adapter, $itemCountPerPage, $currentPageNumber);
+        return $this->createHttpPager($adapter, $options);
     }
 
-    public function createWebPager($adapter, array $options = array(), HttpHandlerInterface $handler = null)
+    public function createHttpPager($adapter, array $options = array(), HttpHandlerInterface $handler = null)
     {
         $adapter = $this->guessAdapter($adapter);
+
+        if (null === $handler) {
+            $handler = new ViewHandler();
+        }
 
         $defaults = array(
             'item_count_per_page'         => $this->config->getItemCountPerPage(),
             'item_count_per_page_choices' => $this->config->getItemCountPerPageChoices()
         );
 
-        if (null === $handler) {
-            $handler = new WebHandler();
-        }
-
-        return new HttpPager($adapter, $handler, $this->config->getItemCountPerPage());
-        // return new HttpPager($adapter, $handler, array_merge($defaults, $options));
+        return new HttpPager($adapter, $handler, array_merge($defaults, $options));
     }
 
     public function createConsolePager($adapter, array $options = array())

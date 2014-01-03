@@ -7,11 +7,13 @@ use Datatheke\Bundle\PagerBundle\Pager\Filter;
 
 interface PagerInterface
 {
-    public function getAdapter();
+    public function getFields();
 
     public function setCurrentPageNumber($currentPageNumber);
 
     public function getCurrentPageNumber();
+
+    public function getItemCountPerPageChoices();
 
     public function setItemCountPerPage($itemCountPerPage);
 

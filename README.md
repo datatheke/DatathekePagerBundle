@@ -27,10 +27,10 @@ PHP
      */
     public function datagridAction()
     {
-        $datagrid = $this->get('datatheke.datagrid')->createWebDataGrid('MyBundle:MyEntity');
-        $datagrid->handleRequest($this->getRequest());
+        $datagrid = $this->get('datatheke.datagrid')->createHttpDataGrid('MyBundle:MyEntity');
+        $view = $datagrid->handleRequest($this->getRequest());
 
-        return array('datagrid' => $datagrid);
+        return array('datagrid' => $view);
     }
 ```
 
@@ -72,10 +72,10 @@ PHP
      */
     public function pagerAction()
     {
-        $pager = $this->get('datatheke.pager')->createWebPager('MyBundle:MyEntity');
-        $pager->handleRequest($this->getRequest());
+        $pager = $this->get('datatheke.pager')->createHttpPager('MyBundle:MyEntity');
+        $view = $pager->handleRequest($this->getRequest());
 
-        return array('pager' => $pager);
+        return array('pager' => $view);
     }
 ```
 

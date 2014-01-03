@@ -10,8 +10,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Datatheke\Bundle\PagerBundle\Pager\HttpPagerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
 use Datatheke\Bundle\PagerBundle\Pager\Filter;
+use Datatheke\Bundle\PagerBundle\Pager\PagerView;
 
-class WebHandler implements HttpHandlerInterface
+class ViewHandler implements HttpHandlerInterface
 {
     protected $options;
 
@@ -34,7 +35,6 @@ class WebHandler implements HttpHandlerInterface
             'current_page_number_param'   => function (Options $options) { return $options['pager_param'].'[p]'; },
             'item_count_per_page_param'   => function (Options $options) { return $options['pager_param'].'[pp]'; },
 
-            'item_count_per_page_choices' => array(),
             'route'                       => null,
             'parameters'                  => array(),
             )
@@ -64,9 +64,7 @@ class WebHandler implements HttpHandlerInterface
 
         // Set item count per page
         if ($itemCountPerPage = $request->get($this->options['item_count_per_page_param'], null, true)) {
-            if (in_array($itemCountPerPage, $this->options['item_count_per_page_choices'])) {
-                $pager->setItemCountPerPage($itemCountPerPage);
-            }
+            $pager->setItemCountPerPage($itemCountPerPage);
         }
 
         // Set current page number
@@ -77,6 +75,8 @@ class WebHandler implements HttpHandlerInterface
         // Set order by & filter
         $this->setOrderByFromRequest($pager, $request, $this->options['order_by_param']);
         $this->setFilterFromRequest($pager, $request, $this->options['filter_param']);
+
+        return new PagerView($pager, $this);
     }
 
     protected function setOrderByFromRequest(HttpPagerInterface $pager, Request $request, $parameter)

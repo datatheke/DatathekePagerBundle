@@ -8,14 +8,16 @@ class Pager implements PagerInterface
 {
 	protected $adapter;
     protected $paginator;
+    protected $itemCountPerPageChoices;
 
     protected $orderBy;
     protected $filter;
 
-	public function __construct(AdapterInterface $adapter, $itemCountPerPage, $currentPageNumber = 1)
+	public function __construct(AdapterInterface $adapter, $itemCountPerPage, array $itemCountPerPageChoices = array(), $currentPageNumber = 1)
 	{
 		$this->adapter   = $adapter;
         $this->paginator = new Paginator($itemCountPerPage, $currentPageNumber);
+        $this->itemCountPerPageChoices = $itemCountPerPageChoices;
 
         $this->orderBy   = new OrderBy();
         $this->filter    = new Filter();
@@ -24,6 +26,11 @@ class Pager implements PagerInterface
     public function getAdapter()
     {
         return $this->adapter;
+    }
+
+    public function getFields()
+    {
+        return $this->adapter->getFields();
     }
 
     public function setCurrentPageNumber($currentPageNumber)
@@ -36,6 +43,11 @@ class Pager implements PagerInterface
     public function getCurrentPageNumber()
     {
         return $this->getPaginator()->getCurrentPageNumber();
+    }
+
+    public function getItemCountPerPageChoices()
+    {
+        return $this->itemCountPerPageChoices;
     }
 
     public function setItemCountPerPage($itemCountPerPage)

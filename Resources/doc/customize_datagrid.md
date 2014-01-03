@@ -11,7 +11,7 @@ use Datatheke\Bundle\PagerBundle\DataGrid\Column\Action\Action;
  */
 public function pagerAction(Request $request)
 {
-    $datagrid = $this->get('datatheke.datagrid')->createWebDataGrid('MyBundle:MyEntity');
+    $datagrid = $this->get('datatheke.datagrid')->createHttpDataGrid('MyBundle:MyEntity');
 
     // Add a column 'Actions' with 2 buttons
     $actions = new StaticColumn('Actions');
@@ -31,8 +31,8 @@ public function pagerAction(Request $request)
     // Hide column 'firstname'
     $datagrid->getColumn('firstname')->hide();
 
-    $datagrid->handleRequest($request);
+    $view = $datagrid->handleRequest($request);
 
-    return array('datagrid' => $datagrid);
+    return array('datagrid' => $view);
 }
 ```
