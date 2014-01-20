@@ -138,6 +138,7 @@ class PagerExtension extends \Twig_Extension
     protected function serializeFilter(PagerViewInterface $pager)
     {
         list($fields, $values, $operators, $logical) = $pager->getFilter()->toArray();
+
         return array('f' => $fields, 'v' => $values, 'o' => $operators, 'l' => $logical);
     }
 }

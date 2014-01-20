@@ -1,5 +1,6 @@
 v0.2 -> v0.3
 ------------
 
-- Datatheke\Bundle\PagerBundle\Pager\Factory::createWebPager($adapter, array $options = array()) is deprecated
-- Datatheke\Bundle\PagerBundle\DataGrid\Factory::createWebDataGrid($pager, array $options = array(), array $columns = null) is deprecated
+- Datatheke\Bundle\PagerBundle\Pager\Factory::createWebPager() is deprecated, use createHttpPager()
+- Datatheke\Bundle\PagerBundle\DataGrid\Factory::createWebDataGrid() is deprecated, use createHttpDataGrid()
+- Datatheke\Bundle\PagerBundle\Pager\Pager::__construct() has changed

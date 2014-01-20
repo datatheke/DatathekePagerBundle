@@ -22,8 +22,7 @@ class GuesserChain implements GuesserInterface
         foreach ($this->guessers as $guesser) {
             try {
                 return $guesser->guess($field, $fieldAlias);
-            }
-            catch (UnableToGuessException $exception) {
+            } catch (UnableToGuessException $exception) {
             }
         }
 

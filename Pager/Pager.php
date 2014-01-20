@@ -2,26 +2,60 @@
 
 namespace Datatheke\Bundle\PagerBundle\Pager;
 
+use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\AdapterInterface;
 
 class Pager implements PagerInterface
 {
-	protected $adapter;
+    protected $adapter;
     protected $paginator;
-    protected $itemCountPerPageChoices;
+    protected $options;
 
     protected $orderBy;
     protected $filter;
 
-	public function __construct(AdapterInterface $adapter, $itemCountPerPage, array $itemCountPerPageChoices = array(), $currentPageNumber = 1)
-	{
-		$this->adapter   = $adapter;
-        $this->paginator = new Paginator($itemCountPerPage, $currentPageNumber);
-        $this->itemCountPerPageChoices = $itemCountPerPageChoices;
+    public function __construct(AdapterInterface $adapter, array $options = array(), $currentPageNumber = 1)
+    {
+        $this->adapter = $adapter;
+        $this->orderBy = new OrderBy();
+        $this->filter  = new Filter();
 
-        $this->orderBy   = new OrderBy();
-        $this->filter    = new Filter();
-	}
+        $resolver = new OptionsResolver();
+        $this->setDefaultOptions($resolver);
+        $this->options = $resolver->resolve($options);
+
+        $this->paginator = new Paginator($this->options['item_count_per_page'], $currentPageNumber);
+    }
+
+    protected function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setRequired(array(
+            'item_count_per_page',
+            )
+        );
+
+        $resolver->setDefaults(array(
+            'item_count_per_page_choices' => array(),
+            )
+        );
+    }
+
+    public function hasOption($option)
+    {
+        return array_key_exists($option, $this->options);
+    }
+
+    public function getOption($option)
+    {
+        if (!$this->hasOption($option)) {
+            throw new \InvalidArgumentException(sprintf('The "%s" option does not exist.', $option));
+        }
+
+        return $this->options[$option];
+    }
 
     public function getAdapter()
     {
@@ -47,7 +81,7 @@ class Pager implements PagerInterface
 
     public function getItemCountPerPageChoices()
     {
-        return $this->itemCountPerPageChoices;
+        return $this->options['item_count_per_page_choices'];
     }
 
     public function setItemCountPerPage($itemCountPerPage)

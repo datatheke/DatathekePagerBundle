@@ -95,8 +95,7 @@ class DataGridExtension extends \Twig_Extension
             foreach ($blocks as $block) {
                 if ($template->hasBlock($block)) {
                     return $template->renderBlock($block, $context);
-                }
-                else {
+                } else {
                     $parent = $template->getParent(array());
                     if (false !== $parent && $parent->hasBlock($block)) {
                         return $parent->renderBlock($block, $context);
@@ -175,6 +174,7 @@ class DataGridExtension extends \Twig_Extension
             'datagrid_column_order_by_'.$column->getType(),
             'datagrid_column_order_by'
         );
+
         return $this->render($datagrid, $blocks, array_merge($params, array('column' => $column, 'alias' => $alias)));
     }
 
@@ -185,6 +185,7 @@ class DataGridExtension extends \Twig_Extension
             'datagrid_column_filter_'.$column->getType(),
             'datagrid_column_filter'
         );
+
         return $this->render($datagrid, $blocks, array_merge($params, array('column' => $column, 'alias' => $alias)));
     }
 
@@ -195,6 +196,7 @@ class DataGridExtension extends \Twig_Extension
             'datagrid_column_item_'.$column->getType(),
             'datagrid_column_item'
         );
+
         return $this->render($datagrid, $blocks, array_merge($params, array('item' => $item, 'column' => $column, 'alias' => $alias)));
     }
 
@@ -214,6 +216,7 @@ class DataGridExtension extends \Twig_Extension
             'datagrid_action_'.$action->getType(),
             'datagrid_action'
         );
+
         return $this->render($datagrid, $blocks, array_merge($params, array('action' => $action, 'alias' => $alias, 'item' => $item)));
     }
 

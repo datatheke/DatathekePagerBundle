@@ -19,8 +19,7 @@ class DateTimeToStringFallbackTransformer implements DataTransformerInterface
 
         try {
             $datetime = new \DateTime($value);
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return $value;
         }
 

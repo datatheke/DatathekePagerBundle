@@ -8,7 +8,7 @@ interface GuesserInterface
 {
     /**
      * @return Datatheke\Bundle\PagerBundle\DataGrid\Column\ColumnInterface
-     * @throw Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser\Exception\UnableToGuessException
+     *                                                                      @throw Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser\Exception\UnableToGuessException
      */
     public function guess(Field $field, $fieldAlias);
 }

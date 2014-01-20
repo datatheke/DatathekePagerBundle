@@ -23,8 +23,7 @@ class MongoDBQueryBuilderAdapter implements AdapterInterface
 
         if (!is_array($fields)) {
             $this->guessFields();
-        }
-        else {
+        } else {
             $this->fields = $fields;
         }
     }
@@ -33,8 +32,7 @@ class MongoDBQueryBuilderAdapter implements AdapterInterface
     {
         if (null !== $alias) {
             $this->fields[$alias] = $field;
-        }
-        else {
+        } else {
             $this->fields[] = $field;
         }
     }
@@ -250,14 +248,12 @@ class MongoDBQueryBuilderAdapter implements AdapterInterface
                     foreach ($subCriteria as $cri) {
                         if (Filter::LOGICAL_OR === $operator) {
                             $cond->addOr($cri);
-                        }
-                        else {
+                        } else {
                             $cond->addAnd($cri);
                         }
                     }
                     $concatCriteria[] = $cond;
-                }
-                else {
+                } else {
                     $concatCriteria[] = current($subCriteria);
                 }
 

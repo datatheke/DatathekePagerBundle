@@ -21,15 +21,13 @@ class ORMEntityGuesser implements GuesserInterface
     {
         if (is_object($input) && $input instanceOf EntityRepository) {
             return new ORMEntityAdapter($input);
-        }
-        elseif (is_string($input))
-        {
+        } elseif (is_string($input)) {
             try {
                 // Check repository
                 $repository = $this->em->getRepository($input);
+
                 return new ORMEntityAdapter($repository);
-            }
-            catch (\Exception $e) {
+            } catch (\Exception $e) {
             }
         }
 

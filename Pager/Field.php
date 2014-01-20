@@ -61,8 +61,7 @@ class Field
         foreach ($this->dataTransformers as $dataTransformer) {
             try {
                 $value = $dataTransformer->reverseTransform($value);
-            }
-            catch (TransformationFailedException $e) {
+            } catch (TransformationFailedException $e) {
             }
         }
 
@@ -74,8 +73,7 @@ class Field
         foreach ($this->dataTransformers as $dataTransformer) {
             try {
                 $value = $dataTransformer->transform($value);
-            }
-            catch (TransformationFailedException $e) {
+            } catch (TransformationFailedException $e) {
             }
         }
 

@@ -3,7 +3,6 @@
 namespace Datatheke\Bundle\PagerBundle\Pager\Handler\Http;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 use Datatheke\Bundle\PagerBundle\Pager\HttpPagerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
@@ -25,14 +24,5 @@ class jqGridHandler implements HttpHandlerInterface
             $order = $request->query->get('sord', 'asc') === 'asc' ? OrderBy::ASC : OrderBy::DESC;
             $pager->setOrderBy(new OrderBy(array($field => $order)));
         }
-
-        $response = array(
-            'page' => $pager->getCurrentPageNumber(),
-            'total' => $pager->getPageCount(),
-            'records' => $pager->getTotalItemCount(),
-            'rows' => $pager->getItems()
-        );
-
-        return new Response(json_encode($response), 200, array('Content-type' => 'application/json'));
     }
 }

@@ -23,8 +23,7 @@ class ArrayAdapter implements AdapterInterface
 
         if (!is_array($fields)) {
             $this->guessFields();
-        }
-        else {
+        } else {
             $this->fields = $fields;
         }
     }
@@ -41,8 +40,7 @@ class ArrayAdapter implements AdapterInterface
 
             if ($val instanceOf \DateTime) {
                 $type = Field::TYPE_DATETIME;
-            }
-            else {
+            } else {
                 switch (gettype($val)) {
 
                     case 'integer':
@@ -171,8 +169,7 @@ class ArrayAdapter implements AdapterInterface
 
             if (Field::TYPE_DATETIME === $field->getType()) {
                 $criteria[] = $this->checkDateTimeCondition($field, $itemValue, $filterOperator, $filterValue);
-            }
-            else {
+            } else {
                 $criteria[] = $this->checkStringCondition($field, $itemValue, $filterOperator, $filterValue);
             }
         }
@@ -199,8 +196,7 @@ class ArrayAdapter implements AdapterInterface
                 // Apply operator
                 if (Filter::LOGICAL_OR === $operator) {
                     $concatCriteria[] = in_array(true, $subCriteria, true);
-                }
-                else {
+                } else {
                     $concatCriteria[] = !in_array(false, $subCriteria, true);
                 }
 
@@ -240,8 +236,7 @@ class ArrayAdapter implements AdapterInterface
                 $filterValue = $field->formatInput($filterValue);
                 if ($itemValue instanceOf \DateTime && $filterValue instanceOf \DateTime) {
                     $keep = ($itemValue == $filterValue);
-                }
-                else {
+                } else {
                     $keep = false;
                 }
                 break;
@@ -251,8 +246,7 @@ class ArrayAdapter implements AdapterInterface
                 $filterValue = $field->formatInput($filterValue);
                 if ($itemValue instanceOf \DateTime && $filterValue instanceOf \DateTime) {
                     $keep = ($itemValue != $filterValue);
-                }
-                else {
+                } else {
                     $keep = false;
                 }
                 break;
@@ -269,8 +263,7 @@ class ArrayAdapter implements AdapterInterface
                 $filterValue = $field->formatInput($filterValue);
                 if ($itemValue instanceOf \DateTime && $filterValue instanceOf \DateTime) {
                     $keep = ($itemValue > $filterValue);
-                }
-                else {
+                } else {
                     $keep = false;
                 }
                 break;
@@ -279,8 +272,7 @@ class ArrayAdapter implements AdapterInterface
                 $filterValue = $field->formatInput($filterValue);
                 if ($itemValue instanceOf \DateTime && $filterValue instanceOf \DateTime) {
                     $keep = ($itemValue >= $filterValue);
-                }
-                else {
+                } else {
                     $keep = false;
                 }
                 break;
@@ -289,8 +281,7 @@ class ArrayAdapter implements AdapterInterface
                 $filterValue = $field->formatInput($filterValue);
                 if ($itemValue instanceOf \DateTime && $filterValue instanceOf \DateTime) {
                     $keep = ($itemValue < $filterValue);
-                }
-                else {
+                } else {
                     $keep = false;
                 }
                 break;
@@ -299,8 +290,7 @@ class ArrayAdapter implements AdapterInterface
                 $filterValue = $field->formatInput($filterValue);
                 if ($itemValue instanceOf \DateTime && $filterValue instanceOf \DateTime) {
                     $keep = ($itemValue <= $filterValue);
-                }
-                else {
+                } else {
                     $keep = false;
                 }
                 break;
@@ -328,8 +318,7 @@ class ArrayAdapter implements AdapterInterface
         // Because of rounded value, we transform item value in output format
         if (Field::TYPE_NUMBER === $field->getType()) {
             $itemValue   = $field->formatOutput($itemValue);
-        }
-        else {
+        } else {
             $filterValue = $field->formatInput($filterValue);
         }
 

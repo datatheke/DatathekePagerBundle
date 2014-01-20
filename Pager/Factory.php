@@ -6,6 +6,8 @@ use Datatheke\Bundle\PagerBundle\Pager\Adapter\AdapterInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser\GuesserInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\HttpHandlerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\ViewHandler;
+use Datatheke\Bundle\PagerBundle\Pager\Handler\Console\ConsoleHandlerInterface;
+use Datatheke\Bundle\PagerBundle\Pager\Handler\Console\DefaultHandler;
 
 class Factory
 {
@@ -31,11 +33,11 @@ class Factory
         return $this->createHttpPager($adapter, $pagerOptions, new ViewHandler($options));
     }
 
-    public function createHttpPager($adapter, array $options = array(), HttpHandlerInterface $handler = null)
+    public function createHttpPager($adapter, array $options = array(), $handler = null)
     {
         $adapter = $this->guessAdapter($adapter);
 
-        if (null === $handler) {
+        if (!$handler instanceOf HttpHandlerInterface) {
             $handler = new ViewHandler();
         }
 
@@ -47,16 +49,20 @@ class Factory
         return new HttpPager($adapter, $handler, array_merge($defaults, $options));
     }
 
-    public function createConsolePager($adapter, array $options = array())
+    public function createConsolePager($adapter, array $options = array(), $handler = null)
     {
         $adapter = $this->guessAdapter($adapter);
+
+        if (!$handler instanceOf ConsoleHandlerInterface) {
+            $handler = new DefaultHandler();
+        }
 
         $defaults = array(
             'item_count_per_page'         => $this->config->getItemCountPerPage(),
             'item_count_per_page_choices' => $this->config->getItemCountPerPageChoices()
         );
 
-        return new ConsolePager($adapter, array_merge($defaults, $options));
+        return new ConsolePager($adapter, $handler, array_merge($defaults, $options));
     }
 
     protected function guessAdapter($adapter)

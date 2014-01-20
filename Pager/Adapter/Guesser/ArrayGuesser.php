@@ -9,8 +9,7 @@ class ArrayGuesser implements GuesserInterface
 {
     public function guess($input)
     {
-        if (is_array($input))
-        {
+        if (is_array($input)) {
             return new ArrayAdapter($input);
         }
 

@@ -9,7 +9,7 @@ use Datatheke\Bundle\PagerBundle\Pager\Filter;
 
 class ArrayAdapterTest extends \PHPUnit_Framework_TestCase
 {
-    static protected $source = array(
+    protected static $source = array(
         array('firstname' => 'john', 'lastname' => 'doe', 'age' => 32),
         array('firstname' => 'jean', 'lastname' => 'bon', 'age' => 25)
     );

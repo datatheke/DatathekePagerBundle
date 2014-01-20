@@ -9,7 +9,7 @@ class PagerView implements PagerViewInterface
     protected $pager;
     protected $handler;
 
-    public function __construct(PagerInterface $pager, ViewHandler $handler)
+    public function __construct(PagerInterface $pager, ViewHandler $handler = null)
     {
         $this->pager   = $pager;
         $this->handler = $handler;

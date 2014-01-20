@@ -11,8 +11,7 @@ class MongoDBQueryBuilderGuesser implements GuesserInterface
 {
     public function guess($input)
     {
-        if (is_object($input) && $input instanceOf Builder)
-        {
+        if (is_object($input) && $input instanceOf Builder) {
             return new MongoDBQueryBuilderAdapter($input);
         }
 
