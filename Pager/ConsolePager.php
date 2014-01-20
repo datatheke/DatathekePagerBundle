@@ -34,4 +34,9 @@ class ConsolePager extends Pager implements ConsolePagerInterface
     {
         return $this->handler->handleConsole($this, $output, $helperSet);
     }
+
+    public function getHandler()
+    {
+        return $this->handler;
+    }
 }

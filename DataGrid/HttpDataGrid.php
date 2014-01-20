@@ -24,4 +24,9 @@ class HttpDataGrid extends DataGrid implements HttpDataGridInterface
 
         return $this->handler->handleRequest($this, $request);
     }
+
+    public function getHandler()
+    {
+        return $this->handler;
+    }
 }

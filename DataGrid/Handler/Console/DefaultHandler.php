@@ -19,6 +19,11 @@ class DefaultHandler implements ConsoleHandlerInterface
         $this->handler = new PagerDefaultHandler($options);
     }
 
+    public function setInteractive($interactive)
+    {
+        $this->handler->setInteractive($interactive);
+    }
+
     public function handleConsole(ConsoleDataGridInterface $datagrid, OutputInterface $output, HelperSet $helperSet)
     {
         $interactive = $this->handler->isInteractive();

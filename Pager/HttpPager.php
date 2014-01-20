@@ -22,4 +22,9 @@ class HttpPager extends Pager implements HttpPagerInterface
     {
         return $this->handler->handleRequest($this, $request);
     }
+
+    public function getHandler()
+    {
+        return $this->handler;
+    }
 }

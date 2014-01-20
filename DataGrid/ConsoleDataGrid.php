@@ -26,4 +26,9 @@ class ConsoleDataGrid extends DataGrid implements ConsoleDataGridInterface
 
         return $this->handler->handleConsole($this, $output, $helperSet);
     }
+
+    public function getHandler()
+    {
+        return $this->handler;
+    }
 }

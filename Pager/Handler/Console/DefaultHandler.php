@@ -31,6 +31,11 @@ class DefaultHandler implements ConsoleHandlerInterface
         );
     }
 
+    public function setInteractive($interactive)
+    {
+        $this->options['interactive'] = (bool) $interactive;
+    }
+
     public function isInteractive()
     {
         return (bool) $this->options['interactive'];

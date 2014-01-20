@@ -21,11 +21,7 @@ class DataGridEntityCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $datagrid = $this->getContainer()->get('datatheke.datagrid')->createConsoleDataGrid('DatathekeDemoBundle:Country', array(
-            'item_count_per_page' => 3,
-            // 'interactive' => false
-            )
-        );
+        $datagrid = $this->getContainer()->get('datatheke.datagrid')->createConsoleDataGrid('DatathekeDemoBundle:Country');
 
         $datagrid->handleConsole($output, $this->getHelperSet());
     }
