@@ -7,25 +7,17 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\HelperSet;
 
 use Datatheke\Bundle\PagerBundle\DataGrid\Handler\Console\ConsoleHandlerInterface;
-use Datatheke\Bundle\PagerBundle\Pager\ConsolePager;
+use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
 
 class ConsoleDataGrid extends DataGrid implements ConsoleDataGridInterface
 {
     protected $handler;
 
-    public function __construct(ConsolePager $pager, ConsoleHandlerInterface $handler, array $columns = null, array $options = array())
+    public function __construct(PagerInterface $pager, ConsoleHandlerInterface $handler, array $columns = null)
     {
         $this->handler = $handler;
 
-        parent::__construct($pager, $columns, $options);
-    }
-
-    protected function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(array(
-            'interactive' => true
-            )
-        );
+        parent::__construct($pager, $columns);
     }
 
     public function handleConsole(OutputInterface $output, HelperSet $helperSet)

@@ -4,9 +4,9 @@ namespace Datatheke\Bundle\PagerBundle\Pager\Handler\Http;
 
 use Symfony\Component\HttpFoundation\Request;
 
-use Datatheke\Bundle\PagerBundle\Pager\HttpPagerInterface;
+use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
 
 interface HttpHandlerInterface
 {
-    public function handleRequest(HttpPagerInterface $pager, Request $request);
+    public function handleRequest(PagerInterface $pager, Request $request);
 }

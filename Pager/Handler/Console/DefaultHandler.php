@@ -8,7 +8,7 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-use Datatheke\Bundle\PagerBundle\Pager\ConsolePagerInterface;
+use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
 use Datatheke\Bundle\PagerBundle\Pager\Filter;
 
@@ -36,7 +36,7 @@ class DefaultHandler implements ConsoleHandlerInterface
         return (bool) $this->options['interactive'];
     }
 
-    public function handleConsole(ConsolePagerInterface $pager, OutputInterface $output, HelperSet $helperSet)
+    public function handleConsole(PagerInterface $pager, OutputInterface $output, HelperSet $helperSet)
     {
         $interactive = $this->isInteractive();
         do {
@@ -48,7 +48,7 @@ class DefaultHandler implements ConsoleHandlerInterface
         } while ($interactive);
     }
 
-    public function handleInput(ConsolePagerInterface $pager, OutputInterface $output, HelperSet $helperSet)
+    public function handleInput(PagerInterface $pager, OutputInterface $output, HelperSet $helperSet)
     {
         $dialog    = $helperSet->get('dialog');
         $formatter = $helperSet->get('formatter');
@@ -111,7 +111,7 @@ class DefaultHandler implements ConsoleHandlerInterface
         return true;
     }
 
-    protected function createView(ConsolePagerInterface $pager, OutputInterface $output, HelperSet $helperSet)
+    protected function createView(PagerInterface $pager, OutputInterface $output, HelperSet $helperSet)
     {
         $table     = $helperSet->get('table');
         $formatter = $helperSet->get('formatter');

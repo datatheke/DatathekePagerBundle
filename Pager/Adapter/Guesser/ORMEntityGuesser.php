@@ -19,7 +19,7 @@ class ORMEntityGuesser implements GuesserInterface
 
     public function guess($input)
     {
-        if (is_object($input) && $input instanceOf EntityRepository) {
+        if (is_object($input) && $input instanceof EntityRepository) {
             return new ORMEntityAdapter($input);
         } elseif (is_string($input)) {
             try {

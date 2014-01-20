@@ -4,12 +4,12 @@ namespace Datatheke\Bundle\PagerBundle\Pager\Handler\Http;
 
 use Symfony\Component\HttpFoundation\Request;
 
-use Datatheke\Bundle\PagerBundle\Pager\HttpPagerInterface;
+use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
 
 class jqGridHandler implements HttpHandlerInterface
 {
-    public function handleRequest(HttpPagerInterface $pager, Request $request)
+    public function handleRequest(PagerInterface $pager, Request $request)
     {
         if ($request->query->has('page')) {
             $pager->setCurrentPageNumber($request->query->get('page'));

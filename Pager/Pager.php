@@ -17,7 +17,7 @@ class Pager implements PagerInterface
     protected $orderBy;
     protected $filter;
 
-    public function __construct(AdapterInterface $adapter, array $options = array(), $currentPageNumber = 1)
+    public function __construct(AdapterInterface $adapter, array $options = array())
     {
         $this->adapter = $adapter;
         $this->orderBy = new OrderBy();
@@ -27,7 +27,7 @@ class Pager implements PagerInterface
         $this->setDefaultOptions($resolver);
         $this->options = $resolver->resolve($options);
 
-        $this->paginator = new Paginator($this->options['item_count_per_page'], $currentPageNumber);
+        $this->paginator = new Paginator($this->options['item_count_per_page'], $this->options['current_page_number']);
     }
 
     protected function setDefaultOptions(OptionsResolverInterface $resolver)
@@ -38,6 +38,7 @@ class Pager implements PagerInterface
         );
 
         $resolver->setDefaults(array(
+            'current_page_number'         => 1,
             'item_count_per_page_choices' => array(),
             )
         );

@@ -5,19 +5,35 @@ namespace Datatheke\Bundle\PagerBundle\Pager;
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\AdapterInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser\GuesserInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\HttpHandlerInterface;
-use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\ViewHandler;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Console\ConsoleHandlerInterface;
-use Datatheke\Bundle\PagerBundle\Pager\Handler\Console\DefaultHandler;
 
 class Factory
 {
     protected $config;
     protected $guesser;
+    protected $httpHandlers;
+    protected $consoleHandlers;
 
-    public function __construct(Configuration $config, GuesserInterface $guesser)
+    public function __construct(Configuration $config, GuesserInterface $guesser, array $httpHandlers, array $consoleHandlers)
     {
-        $this->config  = $config;
-        $this->guesser = $guesser;
+        $this->config          = $config;
+        $this->guesser         = $guesser;
+        $this->httpHandlers    = $httpHandlers;
+        $this->consoleHandlers = $consoleHandlers;
+    }
+
+    public function createPager($adapter, array $options = array())
+    {
+        if (!$adapter instanceof AdapterInterface) {
+            $adapter = $this->guessAdapter($adapter);
+        }
+
+        $defaults = array(
+            'item_count_per_page'         => $this->config->getItemCountPerPage(),
+            'item_count_per_page_choices' => $this->config->getItemCountPerPageChoices()
+        );
+
+        return new Pager($adapter, array_merge($defaults, $options));
     }
 
     /**
@@ -33,12 +49,14 @@ class Factory
         return $this->createHttpPager($adapter, $pagerOptions, new ViewHandler($options));
     }
 
-    public function createHttpPager($adapter, array $options = array(), $handler = null)
+    public function createHttpPager($adapter, array $options = array(), $handler = 'view')
     {
-        $adapter = $this->guessAdapter($adapter);
+        if (!$adapter instanceof AdapterInterface) {
+            $adapter = $this->guessAdapter($adapter);
+        }
 
-        if (!$handler instanceOf HttpHandlerInterface) {
-            $handler = new ViewHandler();
+        if (!$handler instanceof HttpHandlerInterface) {
+            $handler = $this->createHandler($handler, $this->httpHandlers);
         }
 
         $defaults = array(
@@ -49,12 +67,14 @@ class Factory
         return new HttpPager($adapter, $handler, array_merge($defaults, $options));
     }
 
-    public function createConsolePager($adapter, array $options = array(), $handler = null)
+    public function createConsolePager($adapter, array $options = array(), $handler = 'default')
     {
-        $adapter = $this->guessAdapter($adapter);
+        if (!$adapter instanceof AdapterInterface) {
+            $adapter = $this->guessAdapter($adapter);
+        }
 
-        if (!$handler instanceOf ConsoleHandlerInterface) {
-            $handler = new DefaultHandler();
+        if (!$handler instanceof ConsoleHandlerInterface) {
+            $handler = $this->createHandler($handler, $this->consoleHandlers);
         }
 
         $defaults = array(
@@ -65,12 +85,17 @@ class Factory
         return new ConsolePager($adapter, $handler, array_merge($defaults, $options));
     }
 
-    protected function guessAdapter($adapter)
+    protected function createHandler($name, $list)
     {
-        if ($adapter instanceOf AdapterInterface) {
-            return $adapter;
+        if (!isset($list[$name])) {
+            throw new \Exception('The handler "'.$name.'" does not exist');
         }
 
+        return $list[$name];
+    }
+
+    protected function guessAdapter($adapter)
+    {
         return $this->guesser->guess($adapter);
     }
 }

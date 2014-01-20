@@ -11,7 +11,7 @@ class ORMQueryBuilderGuesser implements GuesserInterface
 {
     public function guess($input)
     {
-        if (is_object($input) && $input instanceOf QueryBuilder) {
+        if (is_object($input) && $input instanceof QueryBuilder) {
             return new ORMQueryBuilderAdapter($input);
         }
 

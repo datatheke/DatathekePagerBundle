@@ -7,7 +7,7 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-use Datatheke\Bundle\PagerBundle\Pager\HttpPagerInterface;
+use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
 use Datatheke\Bundle\PagerBundle\Pager\Filter;
 use Datatheke\Bundle\PagerBundle\Pager\PagerView;
@@ -55,7 +55,7 @@ class ViewHandler implements HttpHandlerInterface
         return $this->options[$option];
     }
 
-    public function handleRequest(HttpPagerInterface $pager, Request $request)
+    public function handleRequest(PagerInterface $pager, Request $request)
     {
         // Use current route as default
         if (null === $this->options['route']) {
@@ -79,7 +79,7 @@ class ViewHandler implements HttpHandlerInterface
         return new PagerView($pager, $this);
     }
 
-    protected function setOrderByFromRequest(HttpPagerInterface $pager, Request $request, $parameter)
+    protected function setOrderByFromRequest(PagerInterface $pager, Request $request, $parameter)
     {
         $orderBy = $request->get($parameter, null, true);
         if (!is_array($orderBy)) {
@@ -89,7 +89,7 @@ class ViewHandler implements HttpHandlerInterface
         $pager->setOrderBy(new OrderBy($orderBy));
     }
 
-    protected function setFilterFromRequest(HttpPagerInterface $pager, Request $request, $parameter)
+    protected function setFilterFromRequest(PagerInterface $pager, Request $request, $parameter)
     {
         $filter = $request->get($parameter, null, true);
         if (!is_array($filter)) {

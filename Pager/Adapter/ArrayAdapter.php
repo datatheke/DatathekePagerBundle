@@ -38,7 +38,7 @@ class ArrayAdapter implements AdapterInterface
             $type      = Field::TYPE_STRING;
             $metadatas = array();
 
-            if ($val instanceOf \DateTime) {
+            if ($val instanceof \DateTime) {
                 $type = Field::TYPE_DATETIME;
             } else {
                 switch (gettype($val)) {
@@ -234,7 +234,7 @@ class ArrayAdapter implements AdapterInterface
             case Filter::OPERATOR_EQUALS:
                 // $keep = preg_match('/^'.preg_quote($filterValue, '/').'$/i', $field->formatOutput($itemValue));
                 $filterValue = $field->formatInput($filterValue);
-                if ($itemValue instanceOf \DateTime && $filterValue instanceOf \DateTime) {
+                if ($itemValue instanceof \DateTime && $filterValue instanceof \DateTime) {
                     $keep = ($itemValue == $filterValue);
                 } else {
                     $keep = false;
@@ -244,7 +244,7 @@ class ArrayAdapter implements AdapterInterface
             case Filter::OPERATOR_NOT_EQUALS:
                 // $keep = !preg_match('/^'.preg_quote($filterValue, '/').'$/i', $field->formatOutput($itemValue));
                 $filterValue = $field->formatInput($filterValue);
-                if ($itemValue instanceOf \DateTime && $filterValue instanceOf \DateTime) {
+                if ($itemValue instanceof \DateTime && $filterValue instanceof \DateTime) {
                     $keep = ($itemValue != $filterValue);
                 } else {
                     $keep = false;
@@ -261,7 +261,7 @@ class ArrayAdapter implements AdapterInterface
 
             case Filter::OPERATOR_GREATER:
                 $filterValue = $field->formatInput($filterValue);
-                if ($itemValue instanceOf \DateTime && $filterValue instanceOf \DateTime) {
+                if ($itemValue instanceof \DateTime && $filterValue instanceof \DateTime) {
                     $keep = ($itemValue > $filterValue);
                 } else {
                     $keep = false;
@@ -270,7 +270,7 @@ class ArrayAdapter implements AdapterInterface
 
             case Filter::OPERATOR_GREATER_EQUALS:
                 $filterValue = $field->formatInput($filterValue);
-                if ($itemValue instanceOf \DateTime && $filterValue instanceOf \DateTime) {
+                if ($itemValue instanceof \DateTime && $filterValue instanceof \DateTime) {
                     $keep = ($itemValue >= $filterValue);
                 } else {
                     $keep = false;
@@ -279,7 +279,7 @@ class ArrayAdapter implements AdapterInterface
 
             case Filter::OPERATOR_LESS:
                 $filterValue = $field->formatInput($filterValue);
-                if ($itemValue instanceOf \DateTime && $filterValue instanceOf \DateTime) {
+                if ($itemValue instanceof \DateTime && $filterValue instanceof \DateTime) {
                     $keep = ($itemValue < $filterValue);
                 } else {
                     $keep = false;
@@ -288,7 +288,7 @@ class ArrayAdapter implements AdapterInterface
 
             case Filter::OPERATOR_LESS_EQUALS:
                 $filterValue = $field->formatInput($filterValue);
-                if ($itemValue instanceOf \DateTime && $filterValue instanceOf \DateTime) {
+                if ($itemValue instanceof \DateTime && $filterValue instanceof \DateTime) {
                     $keep = ($itemValue <= $filterValue);
                 } else {
                     $keep = false;
