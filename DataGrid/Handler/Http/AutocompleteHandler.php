@@ -3,18 +3,17 @@
 namespace Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 use Datatheke\Bundle\PagerBundle\DataGrid\HttpDatagridInterface;
-use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\jqGridHandler as jqGridPagerHandler;
+use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\AutocompleteHandler as AutocompletePagerHandler;
 
-class jqGridHandler extends AbstractHandler
+class AutocompleteHandler extends AbstractHandler
 {
     protected $pagerHandler;
 
     public function __construct()
     {
-        $this->pagerHandler = new jqGridPagerHandler();
+        $this->pagerHandler = new AutocompletePagerHandler();
     }
 
     public function handleRequest(HttpDatagridInterface $datagrid, Request $request)
@@ -27,15 +26,6 @@ class jqGridHandler extends AbstractHandler
 
     protected function createView(HttpDatagridInterface $datagrid, Request $request)
     {
-        $pager = $datagrid->getPager();
-
-        $response = array(
-            'page' => $pager->getCurrentPageNumber(),
-            'total' => $pager->getPageCount(),
-            'records' => $pager->getTotalItemCount(),
-            'rows' => $this->getItems($datagrid)
-        );
-
-        return $this->createJsonResponse($response);
+        return $this->createJsonResponse($this->getItems($datagrid));
     }
 }

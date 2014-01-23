@@ -6,10 +6,15 @@ ABOUT
 
 Pager & DataGrid bundle for Symfony2
 
+Main features are :
+ - HTTP or Console mode
+ - Connectors to javascript's libraries (jqGrid, Jquery Autocomplete). More to come (Bootstrap TypeAhead, DataTables, Dynatable, SlickGrid, ...)
+
+
 LICENSE
 -------
 
-MIT
+MIT (see LICENSE file)
 
 USAGE
 -----
@@ -137,7 +142,7 @@ INSTALL
 
 ### Install with composer
 
-    composer.phar require "datatheke/pager-bundle" "*"
+    composer.phar require "datatheke/pager-bundle" "~0.3"
 
 ### Update your app/AppKernel.php
 
