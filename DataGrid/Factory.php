@@ -7,6 +7,7 @@ use Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\HttpHandlerInterface;
 use Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\ViewHandler;
 use Datatheke\Bundle\PagerBundle\DataGrid\Handler\Console\ConsoleHandlerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
+use Datatheke\Bundle\PagerBundle\Pager\HttpPagerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Factory as PagerFactory;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\ViewHandler as PagerViewHandler;
 
@@ -35,7 +36,7 @@ class Factory
         trigger_error('createWebDataGrid() is deprecated. Use createHttpDataGrid() instead.', E_USER_DEPRECATED);
 
         $hanlder = 'view';
-        if ($pager instanceof PagerInterface && ($pagerHandler = $pager->getHandler()) instanceof PagerViewHandler) {
+        if ($pager instanceof HttpPagerInterface && ($pagerHandler = $pager->getHandler()) instanceof PagerViewHandler) {
             $handler = new ViewHandler($pagerHandler);
         }
 
