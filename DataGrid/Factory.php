@@ -4,9 +4,11 @@ namespace Datatheke\Bundle\PagerBundle\DataGrid;
 
 use Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser\GuesserInterface;
 use Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\HttpHandlerInterface;
+use Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\ViewHandler;
 use Datatheke\Bundle\PagerBundle\DataGrid\Handler\Console\ConsoleHandlerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Factory as PagerFactory;
+use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\ViewHandler as PagerViewHandler;
 
 class Factory
 {
@@ -32,7 +34,12 @@ class Factory
     {
         trigger_error('createWebDataGrid() is deprecated. Use createHttpDataGrid() instead.', E_USER_DEPRECATED);
 
-        return $this->createHttpDataGrid($pager, $options, $columns);
+        $hanlder = 'view';
+        if ($pager instanceof PagerInterface && ($pagerHandler = $pager->getHandler()) instanceof PagerViewHandler) {
+            $handler = new ViewHandler($pagerHandler);
+        }
+
+        return $this->createHttpDataGrid($pager, $options, $columns, $handler);
     }
 
     public function createHttpDataGrid($pager, array $options = array(), array $columns = null, $handler = 'view')
