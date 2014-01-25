@@ -6,6 +6,7 @@ use Datatheke\Bundle\PagerBundle\Pager\Adapter\AdapterInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser\GuesserInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\HttpHandlerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Console\ConsoleHandlerInterface;
+use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\ViewHandler;
 
 class Factory
 {
@@ -43,10 +44,10 @@ class Factory
     {
         trigger_error('createWebPager() is deprecated. Use createHttpPager() instead.', E_USER_DEPRECATED);
 
-        $pagerOptions = array_intersect_key($options, array('item_count_per_page' => null, 'item_count_per_page_choices' => null));
-        $options      = array_diff_key($options, array('item_count_per_page' => null, 'item_count_per_page_choices' => null));
+        $pagerOptions   = array_intersect_key($options, array('item_count_per_page' => null, 'item_count_per_page_choices' => null));
+        $handlerOptions = array_diff_key($options, array('item_count_per_page' => null, 'item_count_per_page_choices' => null));
 
-        return $this->createHttpPager($adapter, $pagerOptions, new ViewHandler($options));
+        return $this->createHttpPager($adapter, $pagerOptions, new ViewHandler($handlerOptions));
     }
 
     public function createHttpPager($adapter, array $options = array(), $handler = 'view')

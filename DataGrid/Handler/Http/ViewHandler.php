@@ -13,9 +13,15 @@ class ViewHandler implements HttpHandlerInterface
 {
     protected $pagerHandler;
 
-    public function __construct(array $options = array())
+    public function __construct($options = array())
     {
-        $this->pagerHandler = new PagerViewHandler($options);
+        if ($options instanceof PagerViewHandler) {
+            $this->pagerHandler = $options;
+        } elseif (is_array($options)) {
+            $this->pagerHandler = new PagerViewHandler($options);
+        } else {
+            throw new Exception('ViewHandler::__construct() first agrument should be an array or a Datatheke\Bundle\PagerBundle\Pager\Handler\Http\ViewHandler object');
+        }
     }
 
     public function handleRequest(HttpDataGridInterface $datagrid, Request $request)
