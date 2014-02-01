@@ -2,9 +2,6 @@
 
 namespace Datatheke\Bundle\PagerBundle\Pager;
 
-use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
-use Datatheke\Bundle\PagerBundle\Pager\Filter;
-
 interface PagerInterface
 {
     public function getFields();

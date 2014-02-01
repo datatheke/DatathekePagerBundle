@@ -87,7 +87,7 @@ class Filter
         $logical    = array();
 
         self::readLayer(array('criteria' => array($filters)), 0, $fields, $values, $operators, $logical);
-        // ksort($logical);
+
         return new Filter($fields, $values, $operators, $logical);
     }
 
@@ -133,7 +133,6 @@ class Filter
             $last    = $criteriumIndex;
         }
 
-        // ksort($logical[$layerNum]);
         return $criteriumIndex;
     }
 }

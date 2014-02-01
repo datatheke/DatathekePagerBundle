@@ -10,7 +10,7 @@ public function testAction(Request $request)
      * Create a custom pager
      */
 
-    $pager = $this->get('datatheke.pager')->createHttpPager('MyBundle:MyEntity');
+    $pager = $this->get('datatheke.pager')->createPager('MyBundle:MyEntity');
 
     /**
      * Customize the QueryBuilder

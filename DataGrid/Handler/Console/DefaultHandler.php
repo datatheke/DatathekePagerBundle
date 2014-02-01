@@ -4,8 +4,6 @@ namespace Datatheke\Bundle\PagerBundle\DataGrid\Handler\Console;
 
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\HelperSet;
-use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Datatheke\Bundle\PagerBundle\DataGrid\ConsoleDataGridInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Console\DefaultHandler as PagerDefaultHandler;

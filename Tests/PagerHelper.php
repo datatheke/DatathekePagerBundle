@@ -4,6 +4,21 @@ namespace Datatheke\Bundle\PagerBundle\Tests;
 
 class PagerHelper
 {
+    protected static $persons = array(
+        array('firstname' => 'jean', 'lastname' => 'bon', 'age' => 32),
+        array('firstname' => 'claude', 'lastname' => 'chouette', 'age' => 22),
+        array('firstname' => 'aurélie', 'lastname' => 'vélo', 'age' => 18),
+        array('firstname' => 'yves', 'lastname' => 'bon', 'age' => 32),
+        array('firstname' => 'paul', 'lastname' => 'jesus', 'age' => 55),
+        array('firstname' => 'jean', 'lastname' => 'bon', 'age' => 17),
+        array('firstname' => 'sophie', 'lastname' => 'bon', 'age' => 17),
+        array('firstname' => 'jean', 'lastname' => 'veux', 'age' => 18),
+        array('firstname' => 'marc', 'lastname' => 'bon', 'age' => 26),
+        array('firstname' => 'steve', 'lastname' => 'bon', 'age' => 27),
+        array('firstname' => 'verycoolfirstname', 'lastname' => 'verycoollastname', 'age' => 8),
+        array('firstname' => 'jean', 'lastname' => 'doublon', 'age' => 99)
+        );
+
     public static function createPagerFactory()
     {
         $config  = new \Datatheke\Bundle\PagerBundle\Pager\Configuration(26, array(10, 20, 50), 5);
@@ -25,5 +40,10 @@ class PagerHelper
         $consoleHandlers = array('default' => new \Datatheke\Bundle\PagerBundle\DataGrid\Handler\Console\DefaultHandler());
 
         return new \Datatheke\Bundle\PagerBundle\DataGrid\Factory($config, $pagerFactory, $guesser, $httpHandlers, $consoleHandlers);
+    }
+
+    public static function getPersons()
+    {
+        return self::$persons;
     }
 }

@@ -20,7 +20,7 @@ class ViewHandler implements HttpHandlerInterface
         } elseif (is_array($options)) {
             $this->pagerHandler = new PagerViewHandler($options);
         } else {
-            throw new Exception('ViewHandler::__construct() first agrument should be an array or a Datatheke\Bundle\PagerBundle\Pager\Handler\Http\ViewHandler object');
+            throw new \Exception('ViewHandler::__construct() first agrument should be an array or a Datatheke\Bundle\PagerBundle\Pager\Handler\Http\ViewHandler object');
         }
     }
 

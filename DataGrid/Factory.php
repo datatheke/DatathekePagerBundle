@@ -3,6 +3,7 @@
 namespace Datatheke\Bundle\PagerBundle\DataGrid;
 
 use Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser\GuesserInterface;
+use Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser\Exception\UnableToGuessException;
 use Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\HttpHandlerInterface;
 use Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\ViewHandler;
 use Datatheke\Bundle\PagerBundle\DataGrid\Handler\Console\ConsoleHandlerInterface;
@@ -35,7 +36,7 @@ class Factory
     {
         trigger_error('createWebDataGrid() is deprecated. Use createHttpDataGrid() instead.', E_USER_DEPRECATED);
 
-        $hanlder = 'view';
+        $handler = 'view';
         if ($pager instanceof HttpPagerInterface && ($pagerHandler = $pager->getHandler()) instanceof PagerViewHandler) {
             $handler = new ViewHandler($pagerHandler);
         }
@@ -90,7 +91,10 @@ class Factory
     {
         $columns = array();
         foreach ($fields as $fieldAlias => $field) {
-            $columns[$fieldAlias] = $this->guesser->guess($field, $fieldAlias);
+            try {
+                $columns[$fieldAlias] = $this->guesser->guess($field, $fieldAlias);
+            } catch (UnableToGuessException $e) {
+            }
         }
 
         return $columns;

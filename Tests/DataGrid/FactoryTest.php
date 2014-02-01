@@ -18,7 +18,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $datagrid = $this->factory->createHttpDataGrid(array(array('aa'), array('bb'), array('cc')));
 
         $this->assertCount(1, $datagrid->getColumns());
-        $this->assertInstanceOf('Datatheke\Bundle\PagerBundle\DataGrid\HttpDataGrid', $datagrid);
+        $this->assertInstanceOf('Datatheke\Bundle\PagerBundle\DataGrid\HttpDataGridInterface', $datagrid);
     }
 
     public function testCreateConsoleDataGrid()
@@ -26,6 +26,6 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $datagrid = $this->factory->createConsoleDataGrid(array(array('aa'), array('bb'), array('cc')));
 
         $this->assertCount(1, $datagrid->getColumns());
-        $this->assertInstanceOf('Datatheke\Bundle\PagerBundle\DataGrid\ConsoleDataGrid', $datagrid);
+        $this->assertInstanceOf('Datatheke\Bundle\PagerBundle\DataGrid\ConsoleDataGridInterface', $datagrid);
     }
 }

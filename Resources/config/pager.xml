@@ -8,7 +8,7 @@
         <parameter key="datatheke.pager.configuration.class">Datatheke\Bundle\PagerBundle\Pager\Configuration</parameter>
         <parameter key="datatheke.pager.factory.class">Datatheke\Bundle\PagerBundle\Pager\Factory</parameter>
         <parameter key="datatheke.pager.http_handler.view.class">Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\ViewHandler</parameter>
-        <parameter key="datatheke.pager.http_handler.jqgrid.class">Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\jqGridHandler</parameter>
+        <parameter key="datatheke.pager.http_handler.jqgrid.class">Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\JqGridHandler</parameter>
         <parameter key="datatheke.pager.http_handler.autocomplete.class">Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\AutocompleteHandler</parameter>
         <parameter key="datatheke.pager.console_handler.default.class">Datatheke\Bundle\PagerBundle\DataGrid\Handler\Console\DefaultHandler</parameter>
         <parameter key="datatheke.pager.adapter.guesser_chain.class">Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser\GuesserChain</parameter>

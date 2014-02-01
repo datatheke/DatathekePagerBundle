@@ -19,7 +19,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(3, $pager->getTotalItemCount());
         $this->assertEquals(26, $pager->getItemCountPerPage());
-        $this->assertInstanceOf('Datatheke\Bundle\PagerBundle\Pager\HttpPager', $pager);
+        $this->assertInstanceOf('Datatheke\Bundle\PagerBundle\Pager\HttpPagerInterface', $pager);
     }
 
     public function testCreateConsolePager()
@@ -28,6 +28,6 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(3, $pager->getTotalItemCount());
         $this->assertEquals(26, $pager->getItemCountPerPage());
-        $this->assertInstanceOf('Datatheke\Bundle\PagerBundle\Pager\ConsolePager', $pager);
+        $this->assertInstanceOf('Datatheke\Bundle\PagerBundle\Pager\ConsolePagerInterface', $pager);
     }
 }

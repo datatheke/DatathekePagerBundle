@@ -7,7 +7,8 @@
 public function pagerAction(Request $request)
 {
     $pager = $this->get('datatheke.pager')->createHttpPager('MyBundle:MyEntity', array(
-        'item_count_per_page' => 2,
+        'item_count_per_page' => 50,
+        'item_count_per_page_choices' => array(10, 20, 50, 100)
         )
     );
 

@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
 
-class jqGridHandler implements HttpHandlerInterface
+class JqGridHandler implements HttpHandlerInterface
 {
     public function handleRequest(PagerInterface $pager, Request $request)
     {

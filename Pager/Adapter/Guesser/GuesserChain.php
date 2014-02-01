@@ -2,7 +2,6 @@
 
 namespace Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser;
 
-use Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser\GuesserInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser\Exception\UnableToGuessException;
 
 class GuesserChain implements GuesserInterface

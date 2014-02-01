@@ -6,15 +6,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use Datatheke\Bundle\PagerBundle\DataGrid\HttpDatagridInterface;
-use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\jqGridHandler as jqGridPagerHandler;
+use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\JqGridHandler as jqGridPagerHandler;
 
-class jqGridHandler extends AbstractHandler
+class JqGridHandler extends AbstractHandler
 {
     protected $pagerHandler;
 
     public function __construct()
     {
-        $this->pagerHandler = new jqGridPagerHandler();
+        $this->pagerHandler = new JqGridPagerHandler();
     }
 
     public function handleRequest(HttpDatagridInterface $datagrid, Request $request)
