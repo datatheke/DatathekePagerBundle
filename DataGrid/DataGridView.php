@@ -30,4 +30,18 @@ class DataGridView implements DataGridViewInterface
     {
         return $this->datagrid->getColumnValue($column, $item);
     }
+
+    public function setRoute($route)
+    {
+        $this->pagerView->setRoute($route);
+
+        return $this;
+    }
+
+    public function setParameters($parameters)
+    {
+        $this->pagerView->setParameters($parameters);
+
+        return $this;
+    }
 }

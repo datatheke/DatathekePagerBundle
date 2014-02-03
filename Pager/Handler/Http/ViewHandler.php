@@ -35,6 +35,7 @@ class ViewHandler implements HttpHandlerInterface
             'current_page_number_param'   => function (Options $options) { return $options['pager_param'].'[p]'; },
             'item_count_per_page_param'   => function (Options $options) { return $options['pager_param'].'[pp]'; },
 
+            // Deprecated, must be set in PagerView
             'route'                       => null,
             'parameters'                  => array(),
             )

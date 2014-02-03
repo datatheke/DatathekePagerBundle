@@ -9,40 +9,68 @@ class PagerView implements PagerViewInterface
     protected $pager;
     protected $handler;
 
+    protected $filterParam;
+    protected $orderByParam;
+    protected $currentPageNumberParam;
+    protected $itemCountPerPage;
+    protected $route;
+    protected $parameters;
+
     public function __construct(PagerInterface $pager, ViewHandler $handler = null)
     {
         $this->pager   = $pager;
         $this->handler = $handler;
+
+        $this->filterParam            = $this->handler->getOption('filter_param');
+        $this->orderByParam           = $this->handler->getOption('order_by_param');
+        $this->currentPageNumberParam = $this->handler->getOption('current_page_number_param');
+        $this->itemCountPerPage       = $this->handler->getOption('item_count_per_page_param');
+        $this->route                  = $this->handler->getOption('route');
+        $this->parameters             = $this->handler->getOption('parameters');
     }
 
     public function getFilterParam()
     {
-        return $this->handler->getOption('filter_param');
+        return $this->filterParam;
     }
 
     public function getOrderByParam()
     {
-        return $this->handler->getOption('order_by_param');
+        return $this->orderByParam;
     }
 
     public function getCurrentPageNumberParam()
     {
-        return $this->handler->getOption('current_page_number_param');
+        return $this->currentPageNumberParam;
     }
 
     public function getItemCountPerPageParam()
     {
-        return $this->handler->getOption('item_count_per_page_param');
+        return $this->itemCountPerPage;
+    }
+
+    public function setRoute($route)
+    {
+        $this->route = $route;
+
+        return $this;
     }
 
     public function getRoute()
     {
-        return $this->handler->getOption('route');
+        return $this->route;
+    }
+
+    public function setParameters(array $parameters)
+    {
+        $this->parameters = $parameters;
+
+        return $this;
     }
 
     public function getParameters()
     {
-        return $this->handler->getOption('parameters');
+        return $this->parameters;
     }
 
     public function getItemCountPerPageChoices()
