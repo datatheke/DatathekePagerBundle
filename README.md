@@ -8,7 +8,15 @@ Pager & DataGrid bundle for Symfony2
 
 Main features are :
  - HTTP or Console mode
- - Connectors to javascript's libraries (jqGrid, Jquery Autocomplete). More to come (Bootstrap TypeAhead, DataTables, Dynatable, SlickGrid, ...)
+ - "Adapters" with the ability to sort and filter:
+    - Array
+    - Doctrine ORM QueryBuilder
+    - Doctrine MongoDB QueryBuilder
+    - More to come (Doctrine DBal QueryBuilder, Solarium, ...)
+ - "Handlers" for various javascript libraries
+    - jqGrid
+    - Jquery Autocomplete
+    - More to come (Bootstrap TypeAhead, DataTables, Dynatable, SlickGrid, ...)
 
 [![Build Status](https://api.travis-ci.org/datatheke/DatathekePagerBundle.png?branch=master)](https://travis-ci.org/datatheke/DatathekePagerBundle) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/303a41d8-f1d5-4b5f-a5b1-859eb99239d8/mini.png)](https://insight.sensiolabs.com/projects/303a41d8-f1d5-4b5f-a5b1-859eb99239d8) [![Total Downloads](https://poser.pugx.org/datatheke/pager-bundle/downloads.png)](https://packagist.org/packages/datatheke/pager-bundle)
 
