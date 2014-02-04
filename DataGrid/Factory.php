@@ -41,10 +41,10 @@ class Factory
             $handler = new ViewHandler($pagerHandler);
         }
 
-        return $this->createHttpDataGrid($pager, $options, $columns, $handler);
+        return $this->createHttpDataGrid($pager, $options, $handler, $columns);
     }
 
-    public function createHttpDataGrid($pager, array $options = array(), array $columns = null, $handler = 'view')
+    public function createHttpDataGrid($pager, array $options = array(), $handler = 'view', array $columns = null)
     {
         if (!$pager instanceof PagerInterface) {
             $pager = $this->pagerFactory->createPager($pager);
@@ -61,7 +61,7 @@ class Factory
         return new HttpDataGrid($pager, $handler, $columns, $options);
     }
 
-    public function createConsoleDataGrid($pager, array $options = array(), array $columns = null, $handler = 'default')
+    public function createConsoleDataGrid($pager, array $options = array(), $handler = 'default', array $columns = null)
     {
         if (!$pager instanceof PagerInterface) {
             $pager = $this->pagerFactory->createPager($pager);

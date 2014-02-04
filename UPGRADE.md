@@ -1,6 +1,23 @@
+v0.3.3 -> v0.3.4
+----------------
+### Datagrid
+- In Factory, changed createHttpDataGrid() signature from
+public function createHttpDataGrid($pager, array $options = array(), array $columns = null, $handler = 'view')
+to
+public function createHttpDataGrid($pager, array $options = array(), $handler = 'view', array $columns = null)
+
+- In Factory, changed createConsoleDataGrid() signature from
+public function createConsoleDataGrid($pager, array $options = array(), array $columns = null, $handler = 'default')
+to
+public function createConsoleDataGrid($pager, array $options = array(), $handler = 'default', array $columns = null)
+
+v0.3.1 -> v0.3.2
+----------------
+### Pager & Datagrid
+- jgGridHandler class has been renamed from jqGridHandler to JqGridHandler
+
 v0.2 -> v0.3
 ------------
-
 ### Pager
 - Pager:handleRequest() returns now a PagerView object (with the default handler) that you must give to your template.
 - Pager\Factory::createWebPager() is deprecated, use createHttpPager().

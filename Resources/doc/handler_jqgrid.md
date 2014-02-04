@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 
     public function jggridAction(Request $request)
     {
-        $datagrid = $this->get('datatheke.datagrid')->createHttpDataGrid('MyBundle:MyEntity', array(), null, 'jqgrid');
+        $datagrid = $this->get('datatheke.datagrid')->createHttpDataGrid('MyBundle:MyEntity', array(), 'jqgrid');
 
         return $datagrid->handleRequest($request);
     }

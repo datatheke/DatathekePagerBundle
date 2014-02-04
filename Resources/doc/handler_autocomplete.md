@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 
     public function aucompleteAction(Request $request)
     {
-        $datagrid = $this->get('datatheke.datagrid')->createHttpDataGrid('MyBundle:MyEntity', array(), null, 'autocomplete');
+        $datagrid = $this->get('datatheke.datagrid')->createHttpDataGrid('MyBundle:MyEntity', array(), 'autocomplete');
 
         return $datagrid->handleRequest($request);
     }
