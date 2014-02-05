@@ -13,7 +13,7 @@ class PagerHelper
         array('firstname' => 'jean', 'lastname' => 'bon', 'age' => 17),
         array('firstname' => 'sophie', 'lastname' => 'bon', 'age' => 17),
         array('firstname' => 'jean', 'lastname' => 'veux', 'age' => 18),
-        array('firstname' => 'marc', 'lastname' => 'bon', 'age' => 26),
+        array('firstname' => 'marc', 'lastname' => 'jean', 'age' => 26),
         array('firstname' => 'steve', 'lastname' => 'bon', 'age' => 27),
         array('firstname' => 'verycoolfirstname', 'lastname' => 'verycoollastname', 'age' => 8),
         array('firstname' => 'jean', 'lastname' => 'doublon', 'age' => 99)
@@ -40,6 +40,13 @@ class PagerHelper
         $consoleHandlers = array('default' => new \Datatheke\Bundle\PagerBundle\DataGrid\Handler\Console\DefaultHandler());
 
         return new \Datatheke\Bundle\PagerBundle\DataGrid\Factory($config, $pagerFactory, $guesser, $httpHandlers, $consoleHandlers);
+    }
+
+    public static function createPager()
+    {
+        $adapter = new \Datatheke\Bundle\PagerBundle\Pager\Adapter\ArrayAdapter(self::getPersons());
+
+        return new \Datatheke\Bundle\PagerBundle\Pager\Pager($adapter, array('item_count_per_page' => 10));
     }
 
     public static function getPersons()
