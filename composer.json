@@ -19,6 +19,7 @@
         "symfony/property-access": "~2.3"
     },
     "require-dev": {
+        "ext-pdo_sqlite": "*",
         "doctrine/orm": "~2.3"
     },
     "suggest": {
