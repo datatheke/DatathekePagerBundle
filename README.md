@@ -16,7 +16,12 @@ Main features are :
  - "Handlers" for various javascript libraries
     - jqGrid
     - Jquery Autocomplete
-    - More to come (Bootstrap TypeAhead, DataTables, Dynatable, SlickGrid, ...)
+    - Bootstrap Typeahead
+    - More to come (DataTables, Dynatable, SlickGrid, ...)
+ - Themable:
+    - Bootstrap 2
+    - Bootstrap 3
+    - Foundation
 
 [![Build Status](https://api.travis-ci.org/datatheke/DatathekePagerBundle.png?branch=master)](https://travis-ci.org/datatheke/DatathekePagerBundle) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/303a41d8-f1d5-4b5f-a5b1-859eb99239d8/mini.png)](https://insight.sensiolabs.com/projects/303a41d8-f1d5-4b5f-a5b1-859eb99239d8) [![Total Downloads](https://poser.pugx.org/datatheke/pager-bundle/downloads.png)](https://packagist.org/packages/datatheke/pager-bundle)
 

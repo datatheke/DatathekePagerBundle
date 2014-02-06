@@ -23,14 +23,14 @@ use Symfony\Component\HttpFoundation\Request;
 {% block stylesheets %}
     {{ parent() }}
 
-    <link href="{{ asset('bundles/datathekedemo/lib/jquery-ui/themes/base/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('bundles/datathekedemo/vendor/jquery-ui/themes/base/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
 
-    <script src="{{ asset('bundles/datathekedemo/lib/jqgrid/js/jquery-1.9.0.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('bundles/datathekedemo/lib/jquery-ui/ui/jquery-ui.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/datathekedemo/vendor/jqgrid/js/jquery-1.9.0.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/datathekedemo/vendor/jquery-ui/ui/jquery-ui.js') }}" type="text/javascript"></script>
 
     <script>
 
