@@ -29,8 +29,8 @@ use Symfony\Component\HttpFoundation\Request;
 {% block javascripts %}
     {{ parent() }}
 
-    <script src="{{ asset('bundles/datathekedemo/vendor/jqgrid/js/jquery-1.9.0.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('bundles/datathekedemo/vendor/jquery-ui/ui/jquery-ui.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/datathekedemo/vendor/jquery/jquery.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/datathekedemo/vendor/jquery-ui/js/jquery-ui.js') }}" type="text/javascript"></script>
 
     <script>
 

@@ -16,9 +16,10 @@ Main features are :
  - "Handlers" for various javascript libraries
     - jqGrid
     - Flexigrid
+    - Dynatable
     - Jquery Autocomplete
     - Bootstrap Typeahead
-    - More to come (DataTables, Dynatable, SlickGrid, ...)
+    - More to come (DataTables, SlickGrid, ...)
  - Themable:
     - Bootstrap 2
     - Bootstrap 3

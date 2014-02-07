@@ -30,7 +30,7 @@ use Symfony\Component\HttpFoundation\Request;
 {% block javascripts %}
     {{ parent() }}
 
-    <script src="{{ asset('bundles/datathekedemo/vendor/jquery/jquery-1.9.0.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/datathekedemo/vendor/jquery/jquery.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('bundles/datathekedemo/vendor/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
 
     <script>
