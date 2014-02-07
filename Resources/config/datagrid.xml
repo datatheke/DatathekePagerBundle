@@ -9,6 +9,7 @@
         <parameter key="datatheke.datagrid.factory.class">Datatheke\Bundle\PagerBundle\DataGrid\Factory</parameter>
         <parameter key="datatheke.datagrid.http_handler.view.class">Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\ViewHandler</parameter>
         <parameter key="datatheke.datagrid.http_handler.jqgrid.class">Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\JqGridHandler</parameter>
+        <parameter key="datatheke.datagrid.http_handler.flexigrid.class">Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\FlexigridHandler</parameter>
         <parameter key="datatheke.datagrid.http_handler.autocomplete.class">Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\AutocompleteHandler</parameter>
         <parameter key="datatheke.datagrid.http_handler.bootstrap_typeahead.class">Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\BootstrapTypeaheadHandler</parameter>
         <parameter key="datatheke.datagrid.console_handler.default.class">Datatheke\Bundle\PagerBundle\DataGrid\Handler\Console\DefaultHandler</parameter>
@@ -61,6 +62,10 @@
 
         <service id="datatheke.datagrid.http_handler.jqgrid" class="%datatheke.datagrid.http_handler.jqgrid.class%">
             <tag name="datatheke_pager.datagrid_http_handler" alias="jqgrid"/>
+        </service>
+
+        <service id="datatheke.datagrid.http_handler.flexigrid" class="%datatheke.datagrid.http_handler.flexigrid.class%">
+            <tag name="datatheke_pager.datagrid_http_handler" alias="flexigrid"/>
         </service>
 
         <service id="datatheke.datagrid.http_handler.autocomplete" class="%datatheke.datagrid.http_handler.autocomplete.class%">

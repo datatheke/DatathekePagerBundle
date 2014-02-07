@@ -20,7 +20,7 @@ class JqGridHandler implements HttpHandlerInterface
         }
 
         $fields = $pager->getFields();
-        if (($request->query->has('sidx')) && isset($fields[$field = $request->query->get('sidx')])) {
+        if ($request->query->has('sidx') && isset($fields[$field = $request->query->get('sidx')])) {
             $order = $request->query->get('sord', 'asc') === 'asc' ? OrderBy::ASC : OrderBy::DESC;
             $pager->setOrderBy(new OrderBy(array($field => $order)));
         }

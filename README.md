@@ -15,6 +15,7 @@ Main features are :
     - More to come (Doctrine DBal QueryBuilder, Solarium, ...)
  - "Handlers" for various javascript libraries
     - jqGrid
+    - Flexigrid
     - Jquery Autocomplete
     - Bootstrap Typeahead
     - More to come (DataTables, Dynatable, SlickGrid, ...)
