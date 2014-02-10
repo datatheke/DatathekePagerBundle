@@ -13,6 +13,8 @@ class JqGridHandler extends AbstractHandler
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->pagerHandler = new JqGridPagerHandler();
     }
 
@@ -35,6 +37,6 @@ class JqGridHandler extends AbstractHandler
             'rows' => $this->getItems($datagrid)
         );
 
-        return $this->createJsonResponse($response);
+        return $this->createJsonResponse($request, $response);
     }
 }

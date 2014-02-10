@@ -11,6 +11,8 @@ class BootstrapTypeaheadHandler extends AutocompleteHandler
 {
     public function __construct(array $options = array())
     {
+        parent::__construct();
+
         $this->pagerHandler = new BootstrapTypeaheadPagerHandler($options);
     }
 }

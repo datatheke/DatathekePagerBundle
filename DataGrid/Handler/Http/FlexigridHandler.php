@@ -13,6 +13,8 @@ class FlexigridHandler extends AbstractHandler
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->pagerHandler = new FlexigridPagerHandler();
     }
 
@@ -34,6 +36,6 @@ class FlexigridHandler extends AbstractHandler
             'rows' => $this->getItems($datagrid)
         );
 
-        return $this->createJsonResponse($response);
+        return $this->createJsonResponse($request, $response);
     }
 }

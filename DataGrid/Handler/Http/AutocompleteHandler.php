@@ -13,11 +13,14 @@ class AutocompleteHandler extends AbstractHandler
 
     public function __construct(array $options = array())
     {
+        parent::__construct();
+
         $this->pagerHandler = new AutocompletePagerHandler($options);
     }
 
     public function setMethod($method)
     {
+        parent::setMethod($method);
         $this->pagerHandler->setMethod($method);
 
         return $this;
@@ -47,6 +50,6 @@ class AutocompleteHandler extends AbstractHandler
 
     protected function createView(HttpDatagridInterface $datagrid, Request $request)
     {
-        return $this->createJsonResponse($this->getItems($datagrid));
+        return $this->createJsonResponse($request, $this->getItems($datagrid));
     }
 }

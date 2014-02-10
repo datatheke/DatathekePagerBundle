@@ -13,6 +13,8 @@ class DynatableHandler extends AbstractHandler
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->pagerHandler = new DynatablePagerHandler();
     }
 
@@ -34,6 +36,6 @@ class DynatableHandler extends AbstractHandler
             'records'          => $this->getItems($datagrid)
         );
 
-        return $this->createJsonResponse($response);
+        return $this->createJsonResponse($request, $response);
     }
 }
