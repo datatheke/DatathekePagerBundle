@@ -2,7 +2,7 @@
     "name": "datatheke/pager-bundle",
     "description": "Pager & DataGrid bundle for Symfony2",
     "type": "symfony-bundle",
-    "keywords": ["pager", "paginator", "datagrid"],
+    "keywords": ["pager", "paginator", "datagrid", "jqGrid", "Flexigrid", "Dynatable", "Autocomplete", "Typeahead"],
     "homepage": "https://github.com/datatheke/DatathekePagerBundle",
     "license": "MIT",
     "authors": [
@@ -23,7 +23,10 @@
         "doctrine/orm": "~2.3"
     },
     "suggest": {
-        "doctrine/orm": "To use ORMQueryBuilderdapter and ORMEntityAdapter"
+        "doctrine/doctrine-bundle": "To use ORMQueryBuilderAdapter and ORMEntityAdapter",
+        "doctrine/orm": "To use ORMQueryBuilderAdapter and ORMEntityAdapter",
+        "doctrine/mongodb-odm-bundle": "To use MongoDBQueryBuilderAdapter and MongoDBDocumentAdapter",
+        "jms/serializer": "To serialize Pager and DataGrid"
     },
     "autoload": {
         "psr-0": {

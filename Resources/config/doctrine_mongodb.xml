@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="datatheke.pager.adapter.guesser.mongodb_query_builder.class">Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser\MongoDBQueryBuilderGuesser</parameter>
+        <parameter key="datatheke.pager.adapter.guesser.mongodb_document.class">Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser\MongoDBDocumentGuesser</parameter>
+    </parameters>
+
+    <services>
+        <service id="datatheke.pager.adapter.guesser.mongodb_query_builder" class="%datatheke.pager.adapter.guesser.mongodb_query_builder.class%">
+            <tag name="datatheke_pager.adapter_guesser" priority="250"/>
+        </service>
+
+        <service id="datatheke.pager.adapter.guesser.mongodb_document" class="%datatheke.pager.adapter.guesser.mongodb_document.class%">
+            <argument type="service" id="doctrine_mongodb.odm.document_manager"/>
+            <tag name="datatheke_pager.adapter_guesser" priority="850"/>
+        </service>
+    </services>
+</container>

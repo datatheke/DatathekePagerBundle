@@ -44,26 +44,28 @@ class MongoDBQueryBuilderAdapter implements AdapterInterface
 
                 case 'one':
                 case 'many':
+                    $type = Field::TYPE_OBJECT;
+                    $qualifier = $infos['fieldName'].'.$id';
                     continue;
-
-                // case 'boolean':
-                //     break;
 
                 case 'date':
                     $type = Field::TYPE_DATETIME;
+                    $qualifier = $infos['fieldName'];
                     break;
 
                 case 'int':
                     $type = Field::TYPE_NUMBER;
+                    $qualifier = $infos['fieldName'];
                     break;
 
                 default:
                 case 'string':
                     $type = Field::TYPE_STRING;
+                    $qualifier = $infos['fieldName'];
                     break;
             }
 
-            $this->fields[$property] = new Field($property, $type, $infos['fieldName']);
+            $this->fields[$property] = new Field($property, $type, $qualifier);
         }
     }
 
