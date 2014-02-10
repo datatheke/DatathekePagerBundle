@@ -11,7 +11,7 @@ class Configuration
     public function __construct($itemCountPerPage, array $itemCountPerPageChoices, $pageRange)
     {
         $this->itemCountPerPage        = (int) $itemCountPerPage;
-        $this->itemCountPerPageChoices = (array) $itemCountPerPageChoices;
+        $this->itemCountPerPageChoices = $itemCountPerPageChoices;
         $this->pageRange               = (int) $pageRange;
     }
 

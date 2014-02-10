@@ -3,6 +3,7 @@
 namespace Datatheke\Bundle\PagerBundle\DataGrid;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -109,7 +110,12 @@ class DataGrid implements DataGridInterface
         if (null === $column->getField()) {
             return null;
         }
-        $value  = $this->accessor->getValue($item, $column->getField()->getPropertyPath());
+
+        try {
+            $value = $this->accessor->getValue($item, $column->getField()->getPropertyPath());
+        } catch (NoSuchPropertyException $e) {
+            return null;
+        }
 
         return $column->format($value);
     }

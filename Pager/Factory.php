@@ -92,7 +92,7 @@ class Factory
             throw new \Exception('The handler "'.$name.'" does not exist');
         }
 
-        return $list[$name];
+        return clone $list[$name];
     }
 
     protected function guessAdapter($adapter)
