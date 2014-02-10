@@ -7,25 +7,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Datatheke\Bundle\PagerBundle\DataGrid\HttpDatagridInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\BootstrapTypeaheadHandler as BootstrapTypeaheadPagerHandler;
 
-class BootstrapTypeaheadHandler extends AbstractHandler
+class BootstrapTypeaheadHandler extends AutocompleteHandler
 {
-    protected $pagerHandler;
-
-    public function __construct()
+    public function __construct(array $options = array())
     {
-        $this->pagerHandler = new BootstrapTypeaheadPagerHandler();
-    }
-
-    public function handleRequest(HttpDatagridInterface $datagrid, Request $request)
-    {
-        $pager = $datagrid->getPager();
-        $this->pagerHandler->handleRequest($pager, $request);
-
-        return $this->createView($datagrid, $request);
-    }
-
-    protected function createView(HttpDatagridInterface $datagrid, Request $request)
-    {
-        return $this->createJsonResponse($this->getItems($datagrid));
+        $this->pagerHandler = new BootstrapTypeaheadPagerHandler($options);
     }
 }

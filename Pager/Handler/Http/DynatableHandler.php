@@ -9,20 +9,20 @@ use Datatheke\Bundle\PagerBundle\Pager\Field;
 use Datatheke\Bundle\PagerBundle\Pager\Filter;
 use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
 
-class DynatableHandler implements HttpHandlerInterface
+class DynatableHandler extends AbstractHandler
 {
     public function handleRequest(PagerInterface $pager, Request $request)
     {
-        if ($request->query->has('page')) {
-            $pager->setCurrentPageNumber($request->query->get('page'));
+        if ($this->has($request, 'page')) {
+            $pager->setCurrentPageNumber($this->get($request, 'page'));
         }
 
-        if ($request->query->has('perPage')) {
-            $pager->setItemCountPerPage($request->query->get('perPage'));
+        if ($this->has($request, 'perPage')) {
+            $pager->setItemCountPerPage($this->get($request, 'perPage'));
         }
 
         $fields = $pager->getFields();
-        if ($request->query->has('sorts') && is_array($sort = $request->query->get('sorts'))) {
+        if ($this->has($request, 'sorts') && is_array($sort = $this->get($request, 'sorts'))) {
             $field = key($sort);
             $order = current($sort) > 0 ? OrderBy::ASC : OrderBy::DESC;
 
@@ -31,20 +31,8 @@ class DynatableHandler implements HttpHandlerInterface
             }
         }
 
-        if ($request->query->has('queries') && is_array($query = $request->query->get('queries'))) {
-            $term  = current($query);
-
-            $filter = array('operator' => Filter::LOGICAL_OR, 'criteria' => array());
-            foreach ($fields as $alias => $field) {
-                $operator = Field::TYPE_STRING === $field->getType() ? Filter::OPERATOR_CONTAINS : Filter::OPERATOR_EQUALS;
-
-                $filter['criteria'][] = array(
-                    'field'    => $alias,
-                    'operator' => $operator,
-                    'value'    => $term
-                    );
-            }
-            $pager->setFilter(Filter::createFromArray($filter));
+        if ($this->has($request, 'queries') && is_array($query = $this->get($request, 'queries'))) {
+            $this->search($pager, current($query));
         }
     }
 }

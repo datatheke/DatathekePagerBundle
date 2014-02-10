@@ -11,9 +11,30 @@ class AutocompleteHandler extends AbstractHandler
 {
     protected $pagerHandler;
 
-    public function __construct()
+    public function __construct(array $options = array())
     {
-        $this->pagerHandler = new AutocompletePagerHandler();
+        $this->pagerHandler = new AutocompletePagerHandler($options);
+    }
+
+    public function setMethod($method)
+    {
+        $this->pagerHandler->setMethod($method);
+
+        return $this;
+    }
+
+    public function setSearchParameter($searchParameter)
+    {
+        $this->pagerHandler->setSearchParameter($searchParameter);
+
+        return $this;
+    }
+
+    public function setSearchFields($searchFields)
+    {
+        $this->pagerHandler->setSearchFields($searchFields);
+
+        return $this;
     }
 
     public function handleRequest(HttpDatagridInterface $datagrid, Request $request)

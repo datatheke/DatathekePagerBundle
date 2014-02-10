@@ -3,29 +3,19 @@
 namespace Datatheke\Bundle\PagerBundle\Pager\Handler\Http;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
-use Datatheke\Bundle\PagerBundle\Pager\Filter;
-use Datatheke\Bundle\PagerBundle\Pager\Field;
 
-class BootstrapTypeaheadHandler implements HttpHandlerInterface
+class BootstrapTypeaheadHandler extends AutocompleteHandler
 {
-    public function handleRequest(PagerInterface $pager, Request $request)
+    protected function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        if ($request->query->has('query')) {
-            $query = $request->query->get('query');
-            $filter = array('operator' => Filter::LOGICAL_OR, 'criteria' => array());
-            foreach ($pager->getFields() as $alias => $field) {
-                $operator = Field::TYPE_STRING === $field->getType() ? Filter::OPERATOR_CONTAINS : Filter::OPERATOR_EQUALS;
+        parent::setDefaultOptions($resolver);
 
-                $filter['criteria'][] = array(
-                    'field'    => $alias,
-                    'operator' => $operator,
-                    'value'    => $query
-                    );
-            }
-
-            $pager->setFilter(Filter::createFromArray($filter));
-        }
+        $resolver->setDefaults(array(
+            'search_param'  => 'query'
+            )
+        );
     }
 }
