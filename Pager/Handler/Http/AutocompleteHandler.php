@@ -6,8 +6,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
-use Datatheke\Bundle\PagerBundle\Pager\Filter;
-use Datatheke\Bundle\PagerBundle\Pager\Field;
 
 class AutocompleteHandler extends AbstractHandler
 {

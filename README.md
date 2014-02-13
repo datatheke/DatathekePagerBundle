@@ -12,14 +12,13 @@ Main features are :
     - Array
     - Doctrine ORM QueryBuilder
     - Doctrine MongoDB QueryBuilder
-    - More to come (Doctrine DBal QueryBuilder, Solarium, ...)
  - "Handlers" for various javascript libraries
     - jqGrid
     - Flexigrid
     - Dynatable
+    - DataTables
     - Jquery Autocomplete
     - Bootstrap Typeahead
-    - More to come (DataTables, SlickGrid, ...)
  - Themable:
     - Bootstrap 2
     - Bootstrap 3

@@ -69,22 +69,26 @@ abstract class AbstractHandler implements HttpHandlerInterface
         return $request->query->has($param);
     }
 
-    protected function get(Request $request, $param)
+    protected function get(Request $request, $param, $default = null, $deep = false)
     {
         if ('request' === $this->options['method']) {
-            return $request->request->get($param);
+            return $request->request->get($param, $default, $deep);
         }
 
-        return $request->query->get($param);
+        return $request->query->get($param, $default, $deep);
     }
 
-    protected function getItems(HttpDatagridInterface $datagrid)
+    protected function getItems(HttpDatagridInterface $datagrid, $forceArray = false)
     {
         $items = array();
         foreach ($datagrid->getPager()->getItems() as $row) {
             $item = array();
             foreach ($datagrid->getColumns() as $alias => $column) {
-                $item[$alias] = $datagrid->getColumnValue($column, $row);
+                if ($forceArray) {
+                    $item[] = $datagrid->getColumnValue($column, $row);
+                } else {
+                    $item[$alias] = $datagrid->getColumnValue($column, $row);
+                }
             }
             $items[] = $item;
         }

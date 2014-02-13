@@ -6,7 +6,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Field;
-use Datatheke\Bundle\PagerBundle\Pager\Filter;
 use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
 
 class DynatableHandler extends AbstractHandler
