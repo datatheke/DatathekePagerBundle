@@ -10,5 +10,7 @@ interface DataGridViewInterface
 
     public function getColumns();
 
+    public function getColumn($alias);
+
     public function getColumnValue(ColumnInterface $column, $item);
 }

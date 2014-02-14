@@ -21,6 +21,11 @@ class DataGridView implements DataGridViewInterface
         return $this->pagerView;
     }
 
+    public function getColumn($alias)
+    {
+        return $this->datagrid->getColumn($alias);
+    }
+
     public function getColumns()
     {
         return $this->datagrid->getColumns();

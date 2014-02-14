@@ -1,3 +1,15 @@
+v0.3.4 -> v0.3.5
+----------------
+### Datagrid
+- Change Datatheke\Bundle\PagerBundle\DataGrid\DataGridViewInterface
+    -> new method :  public function getColumn($alias)
+
+- Change Datatheke\Bundle\PagerBundle\DataGrid\Column\Action\ActionInterface
+    -> public function getParameters(Datagrid $datagrid, $item) becomes public function getParameters(DatagridView $datagrid, $item)
+    -> public function evaluateDisplay(Datagrid $datagrid, $item) becomes public function evaluateDisplay(DatagridView $datagrid, $item)
+
+- Change Datatheke\Bundle\PagerBundle\DataGrid\Column\Action\Action according to ActionInterface changes
+
 v0.3.3 -> v0.3.4
 ----------------
 ### Datagrid

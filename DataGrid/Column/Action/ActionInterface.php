@@ -2,7 +2,7 @@
 
 namespace Datatheke\Bundle\PagerBundle\DataGrid\Column\Action;
 
-use Datatheke\Bundle\PagerBundle\DataGrid\Datagrid;
+use Datatheke\Bundle\PagerBundle\DataGrid\DatagridView;
 
 interface ActionInterface
 {
@@ -10,9 +10,9 @@ interface ActionInterface
 
     public function getRoute();
 
-    public function getParameters(Datagrid $datagrid, $item);
+    public function getParameters(DatagridView $datagrid, $item);
 
-    public function evaluateDisplay(Datagrid $datagrid, $item);
+    public function evaluateDisplay(DatagridView $datagrid, $item);
 
     public function getType();
 }

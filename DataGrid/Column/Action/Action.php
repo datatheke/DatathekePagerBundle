@@ -6,7 +6,7 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-use Datatheke\Bundle\PagerBundle\DataGrid\Datagrid;
+use Datatheke\Bundle\PagerBundle\DataGrid\DatagridView;
 
 class Action implements ActionInterface
 {
@@ -62,7 +62,7 @@ class Action implements ActionInterface
         return $this->route;
     }
 
-    public function getParameters(Datagrid $datagrid, $item)
+    public function getParameters(DatagridView $datagrid, $item)
     {
         $parameters = array();
         if ($this->options['map_item']) {
@@ -74,7 +74,7 @@ class Action implements ActionInterface
         return array_merge($parameters, $this->options['parameters']);
     }
 
-    public function evaluateDisplay(Datagrid $datagrid, $item)
+    public function evaluateDisplay(DatagridView $datagrid, $item)
     {
         if (null === ($callback = $this->options['evaluate_callback'])) {
             return true;
