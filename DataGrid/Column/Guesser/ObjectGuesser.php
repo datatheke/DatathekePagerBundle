@@ -11,7 +11,7 @@ class ObjectGuesser implements GuesserInterface
     public function guess(Field $field, $fieldAlias)
     {
         if (Field::TYPE_OBJECT === $field->getType()) {
-            $column = new ObjectColumn($field, null, 'id');
+            $column = new ObjectColumn($field);
 
             $metadatas = $field->getMetadatas();
             if (isset($metadatas['repository'])) {

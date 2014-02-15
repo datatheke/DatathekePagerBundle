@@ -36,11 +36,9 @@ class ObjectColumn extends AbstractColumn
 
     public function initialize()
     {
-        if (null !== $this->property) {
-            $this->field->addDataTransformer(
-                new ObjectToStringTransformer($this->property, $this->objectRepository)
-            );
-        }
+        $this->field->addDataTransformer(
+            new ObjectToStringTransformer($this->property, $this->objectRepository)
+        );
     }
 
     public function format($value)

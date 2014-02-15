@@ -9,6 +9,8 @@ use Doctrine\Common\Persistence\ObjectRepository;
 
 class ObjectToStringTransformer implements DataTransformerInterface
 {
+    const FALLBACK_PROPERTY = 'id';
+
     protected $accessor;
     protected $property;
     protected $objectRepository;
@@ -26,17 +28,24 @@ class ObjectToStringTransformer implements DataTransformerInterface
             return;
         }
 
-        return $this->accessor->getValue($item, $this->property);
+        if (null !== $this->property) {
+            return $this->accessor->getValue($item, $this->property);
+        } elseif (method_exists($item, '__toString')) {
+            return (string) $item;
+        }
+
+        return $this->accessor->getValue($item, self::FALLBACK_PROPERTY);
     }
 
     public function reverseTransform($value)
     {
-        if (!$this->objectRepository) {
+        if (null === $this->objectRepository) {
             return $value;
         }
 
         try {
-            $item = $this->objectRepository->findOneBy(array($this->property => $value));
+            $property = null !== $this->property ? $this->property : self::FALLBACK_PROPERTY;
+            $item = $this->objectRepository->findOneBy(array($property => $value));
         } catch (\Exception $e) {
             return $value;
         }
