@@ -44,9 +44,12 @@ class PagerHelper
 
     public static function createPager()
     {
-        $adapter = new \Datatheke\Bundle\PagerBundle\Pager\Adapter\ArrayAdapter(self::getPersons());
+        return self::createPagerFactory()->createHttpPager(self::getPersons());
+    }
 
-        return new \Datatheke\Bundle\PagerBundle\Pager\Pager($adapter, array('item_count_per_page' => 10));
+    public static function createDataGrid()
+    {
+        return self::createDataGridFactory()->createHttpDataGrid(self::getPersons());
     }
 
     public static function getPersons()
