@@ -47,6 +47,13 @@ class ViewHandler implements HttpHandlerInterface
         return array_key_exists($option, $this->options);
     }
 
+    public function setOption($option, $value)
+    {
+        $this->options[$option] = $value;
+
+        return $this;
+    }
+
     public function getOption($option)
     {
         if (!$this->hasOption($option)) {
