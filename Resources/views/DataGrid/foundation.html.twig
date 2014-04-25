@@ -76,7 +76,7 @@
         {% if column.sortable %}
             {{ helper.orderBy(datagrid.pager, alias, column.label) }}
         {% else %}
-            {{ column.label }}
+            {{ column.label | trans }}
         {% endif %}
     </th>
 {% endblock %}
@@ -102,9 +102,9 @@
             {% if action.getOption('icon')|slice(0, 11) == '.glyphicon-'  %}
                 <span class="glyphicon {{ action.getOption('icon')|slice(1) }}"></span>
             {% else %}
-                <img src="{{ asset(action.getOption('icon')) }}" title="{{ action.label }}"/>
+                <img src="{{ asset(action.getOption('icon')) }}" title="{{ action.label | trans}}"/>
             {% endif %}
         {%  endif %}
-        {{ action.label }}
+        {{ action.label | trans }}
     </a>
 {% endblock %}
