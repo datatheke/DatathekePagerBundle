@@ -6,7 +6,7 @@
     {{ parent() }}
 
     {% import 'DatathekePagerBundle:Pager:bootstrap2.html.twig' as helper %}
-    {{ helper.stylesheets() }}
+    {{ helper.stylesheets(no_externals|default(false)) }}
 {% endblock %}
 
 
@@ -99,7 +99,7 @@
     {% import 'DatathekePagerBundle:Pager:bootstrap2.html.twig' as helper %}
     <th>
         {% if column.sortable %}
-            {{ helper.filter(datagrid.pager, alias, column.type) }}
+            {{ helper.filter(datagrid.pager, alias, column.field.type) }}
         {% endif %}
     </th>
 {% endblock %}
