@@ -86,7 +86,7 @@ class DataGridExtension extends \Twig_Extension
             $templates = array_merge($this->themes[$datagrid], $templates);
         }
 
-        $context = array_merge($params, array('datagrid' => $datagrid));
+        $context = $this->environment->mergeGlobals(array_merge($params, array('datagrid' => $datagrid)));
         foreach ($templates as $template) {
             if (!$template instanceof \Twig_Template) {
                 $template = $this->environment->loadTemplate($template);
