@@ -9,7 +9,7 @@ class Field
 {
     const TYPE_STRING   = 'string';
     const TYPE_NUMBER   = 'number';
-    const TYPE_BOOLEAN   = 'boolean';
+    const TYPE_BOOLEAN  = 'boolean';
     const TYPE_DATETIME = 'datetime';
     const TYPE_OBJECT   = 'object';
 
