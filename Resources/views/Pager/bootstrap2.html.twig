@@ -232,7 +232,7 @@
                     <select name="{{ pager.filterParam }}[o][{{ alias }}]" onchange="$(this).closest('.pager-filter').find('input[type=text]:first').focus()">
                         <option value="~" {% if operator == '~' %}selected="selected"{% endif %}>{{ 'Contains'|trans([], 'pager') }}</option>
                         <option value="!~" {% if operator == '!~' %}selected="selected"{% endif %}>{{ 'Not Contains'|trans([], 'pager') }}</option>
-                        <option value="=" {% if operator == '=' %}selected="selected"{% endif %}>{{ 'Equals'|trans([], 'pager') }}</option>
+                        <option value="=" {% if operator == '=' %}selected="selected"{% endif %}>{{ 'Equals'|trans([], 'pager') }}</options>
                         <option value="!=" {% if operator == '!=' %}selected="selected"{% endif %}>{{ 'Not Equals'|trans([], 'pager') }}</option>
                         <option value=">" {% if operator == '>' %}selected="selected"{% endif %}>{{ 'Greater'|trans([], 'pager') }}</option>
                         <option value=">=" {% if operator == '>=' %}selected="selected"{% endif %}>{{ 'Greater or Equals'|trans([], 'pager') }}</option>
