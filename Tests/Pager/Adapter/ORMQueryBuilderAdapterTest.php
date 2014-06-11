@@ -62,11 +62,13 @@ class ORMQueryBuilderAdapterTest extends \PHPUnit_Framework_TestCase
         $person1->firstname = 'john';
         $person1->lastname  = 'doe';
         $person1->age       = 32;
+        $person1->friend    = true;
 
         $person2 = new Person();
         $person2->firstname = 'jean';
         $person2->lastname  = 'bon';
         $person2->age       = 25;
+        $person1->friend    = false;
 
         $this->em->persist($person1);
         $this->em->persist($person2);
@@ -84,6 +86,7 @@ class ORMQueryBuilderAdapterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('e.firstname', $fields['firstname']->getQualifier());
         $this->assertEquals(Field::TYPE_NUMBER, $fields['age']->getType());
+        $this->assertEquals(Field::TYPE_BOOLEAN, $fields['friend']->getType());
     }
 
     public function testOrderBy()

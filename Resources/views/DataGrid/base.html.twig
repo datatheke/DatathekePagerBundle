@@ -13,12 +13,16 @@
             left: -1000px;
         }
 
-        .column_localized_datetime {
+        table td.column_localized_datetime {
             text-align: center;
         }
 
-        .column_localized_number {
+        table td.column_localized_number {
             text-align: right;
+        }
+
+        table td.column_boolean {
+            text-align: center;
         }
     </style>
 {% endblock %}
@@ -118,6 +122,17 @@
 {% block datagrid_column_item_localized_datetime %}
     <td class="column_localized_datetime">
         {{ datagrid_item(datagrid, column, item) }}
+        {% for alias, action in column.actions %}
+            {{ datagrid_action(datagrid, action, alias, item) }}
+        {% endfor %}
+    </td>
+{% endblock %}
+
+
+{% block datagrid_column_item_boolean %}
+    <td class="column_boolean">
+        <input type="checkbox" disabled="disabled" {% if datagrid_item(datagrid, column, item) %}checked="checked"{% endif %}>
+
         {% for alias, action in column.actions %}
             {{ datagrid_action(datagrid, action, alias, item) }}
         {% endfor %}

@@ -63,6 +63,14 @@
                 <source>Filter...</source>
                 <target>Filtrer...</target>
             </trans-unit>
+            <trans-unit id="16">
+                <source>Yes</source>
+                <target>Oui</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>No</source>
+                <target>Non</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

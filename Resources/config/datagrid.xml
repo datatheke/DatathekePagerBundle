@@ -18,6 +18,7 @@
         <parameter key="datatheke.datagrid.column.guesser_chain.class">Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser\GuesserChain</parameter>
         <parameter key="datatheke.datagrid.column.guesser.string.class">Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser\StringGuesser</parameter>
         <parameter key="datatheke.datagrid.column.guesser.object.class">Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser\ObjectGuesser</parameter>
+        <parameter key="datatheke.datagrid.column.guesser.boolean.class">Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser\BooleanGuesser</parameter>
         <parameter key="datatheke.datagrid.column.guesser.localized_number.class">Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser\LocalizedNumberGuesser</parameter>
         <parameter key="datatheke.datagrid.column.guesser.localized_datetime.class">Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser\LocalizedDateTimeGuesser</parameter>
 
@@ -48,6 +49,10 @@
 
         <service id="datatheke.datagrid.column.guesser.object" class="%datatheke.datagrid.column.guesser.object.class%">
             <tag name="datatheke_pager.column_guesser" priority="1200"/>
+        </service>
+
+        <service id="datatheke.datagrid.column.guesser.boolean" class="%datatheke.datagrid.column.guesser.boolean.class%">
+            <tag name="datatheke_pager.column_guesser" priority="900"/>
         </service>
 
         <service id="datatheke.datagrid.column.guesser.localized_number" class="%datatheke.datagrid.column.guesser.localized_number.class%">

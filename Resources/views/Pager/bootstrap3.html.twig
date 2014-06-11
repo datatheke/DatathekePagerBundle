@@ -209,17 +209,18 @@
 {# FILTERS #}
 
 {% macro filter(pager, alias, type) %}
+    {% set value = pager.filter.getValue(alias)|default('') %}
+
     <div class="pager-filter">
         <input type="hidden" name="{{ pager.filterParam }}[f][{{ alias }}]" value="{{ alias }}"/>
         {% if type == 'boolean' %}
-            {% set value = pager.filter.getValue(alias)|default('') %}
-            <select name="{{ pager.filterParam }}[v][{{ alias }}]" class="form-control input-sm">
+            <select name="{{ pager.filterParam }}[v][{{ alias }}]" class="form-control input-sm" onchange="this.form.submit()">
                 <option value="">{{ 'Filter...'|trans({}, 'pager') }}</option>
                 <option value="1" {% if value == '1' %}selected="selected"{% endif %}>{{ 'Yes'|trans({}, 'pager') }}</option>
                 <option value="0" {% if value == '0' %}selected="selected"{% endif %}>{{ 'No'|trans({}, 'pager') }}</option>
             </select>
         {% else %}
-            <input type="text"   name="{{ pager.filterParam }}[v][{{ alias }}]" value="{{ pager.filter.getValue(alias)|default('') }}" class="form-control input-sm" placeholder="{{ 'Filter...'|trans({}, 'pager') }}"/>
+            <input type="text"   name="{{ pager.filterParam }}[v][{{ alias }}]" value="{{ value }}" class="form-control input-sm" placeholder="{{ 'Filter...'|trans({}, 'pager') }}"/>
         {% endif %}
 
         {% if type == 'object' or type == 'boolean' %}

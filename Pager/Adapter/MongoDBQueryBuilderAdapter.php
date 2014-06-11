@@ -58,6 +58,11 @@ class MongoDBQueryBuilderAdapter implements AdapterInterface
                     $qualifier = $infos['fieldName'];
                     break;
 
+                case 'boolean':
+                    $type = Field::TYPE_BOOLEAN;
+                    $qualifier = $infos['fieldName'];
+                    break;
+
                 default:
                 case 'string':
                     $type = Field::TYPE_STRING;

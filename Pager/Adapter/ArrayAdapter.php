@@ -51,6 +51,10 @@ class ArrayAdapter implements AdapterInterface
                     case 'double':
                         $type = Field::TYPE_NUMBER;
                         break;
+
+                    case 'boolean':
+                        $type = Field::TYPE_BOOLEAN;
+                        break;
                 }
             }
 

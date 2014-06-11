@@ -39,4 +39,11 @@ class Person
      * @ORM\Column(type="integer", nullable=true)
      */
     public $age;
+
+    /**
+     * @var integer $friend
+     *
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    public $friend;
 }

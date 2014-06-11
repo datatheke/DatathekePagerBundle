@@ -28,7 +28,7 @@
                     border-radius: 0px 0px 5px 5px;
         }
 
-        .pager-filter>input {
+        .pager-filter>input, .pager-filter>select {
             width: 100%;
             display: inline;
             height: 30px;
@@ -218,17 +218,18 @@
 {# FILTERS #}
 
 {% macro filter(pager, alias, type) %}
+    {% set value = pager.filter.getValue(alias)|default('') %}
+
     <div class="pager-filter">
         <input type="hidden" name="{{ pager.filterParam }}[f][{{ alias }}]" value="{{ alias }}"/>
         {% if type == 'boolean' %}
-            {% set value = pager.filter.getValue(alias)|default('') %}
-            <select name="{{ pager.filterParam }}[v][{{ alias }}]">
+            <select name="{{ pager.filterParam }}[v][{{ alias }}]" onchange="this.form.submit()">
                 <option value="">{{ 'Filter...'|trans({}, 'pager') }}</option>
                 <option value="1" {% if value == '1' %}selected="selected"{% endif %}>{{ 'Yes'|trans({}, 'pager') }}</option>
                 <option value="0" {% if value == '0' %}selected="selected"{% endif %}>{{ 'No'|trans({}, 'pager') }}</option>
             </select>
         {% else %}
-            <input type="text"   name="{{ pager.filterParam }}[v][{{ alias }}]" value="{{ pager.filter.getValue(alias)|default('') }}" placeholder="{{ 'Filter...'|trans({}, 'pager') }}"/>
+            <input type="text"   name="{{ pager.filterParam }}[v][{{ alias }}]" value="{{ value }}" placeholder="{{ 'Filter...'|trans({}, 'pager') }}"/>
         {% endif %}
 
         {% if type == 'object' or type == 'boolean' %}
@@ -241,7 +242,7 @@
                     <select name="{{ pager.filterParam }}[o][{{ alias }}]" onchange="$(this).closest('.pager-filter').find('input[type=text]:first').focus()">
                         <option value="~" {% if operator == '~' %}selected="selected"{% endif %}>{{ 'Contains'|trans([], 'pager') }}</option>
                         <option value="!~" {% if operator == '!~' %}selected="selected"{% endif %}>{{ 'Not Contains'|trans([], 'pager') }}</option>
-                        <option value="=" {% if operator == '=' %}selected="selected"{% endif %}>{{ 'Equals'|trans([], 'pager') }}</options>
+                        <option value="=" {% if operator == '=' %}selected="selected"{% endif %}>{{ 'Equals'|trans([], 'pager') }}</option>
                         <option value="!=" {% if operator == '!=' %}selected="selected"{% endif %}>{{ 'Not Equals'|trans([], 'pager') }}</option>
                         <option value=">" {% if operator == '>' %}selected="selected"{% endif %}>{{ 'Greater'|trans([], 'pager') }}</option>
                         <option value=">=" {% if operator == '>=' %}selected="selected"{% endif %}>{{ 'Greater or Equals'|trans([], 'pager') }}</option>

@@ -10,8 +10,8 @@ use Datatheke\Bundle\PagerBundle\Pager\Filter;
 class ArrayAdapterTest extends \PHPUnit_Framework_TestCase
 {
     protected static $source = array(
-        array('firstname' => 'john', 'lastname' => 'doe', 'age' => 32),
-        array('firstname' => 'jean', 'lastname' => 'bon', 'age' => 25)
+        array('firstname' => 'john', 'lastname' => 'doe', 'age' => 32, 'friend' => true),
+        array('firstname' => 'jean', 'lastname' => 'bon', 'age' => 25, 'friend' => false)
     );
 
     public function testGuessFields()
@@ -21,6 +21,7 @@ class ArrayAdapterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('firstname', $fields['firstname']->getQualifier());
         $this->assertEquals(Field::TYPE_NUMBER, $fields['age']->getType());
+        $this->assertEquals(Field::TYPE_BOOLEAN, $fields['friend']->getType());
     }
 
     public function testOrderBy()

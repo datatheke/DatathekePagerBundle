@@ -63,6 +63,10 @@ class ORMQueryBuilderAdapter implements AdapterInterface
                         $metadatas['precision'] = 0;
                         break;
 
+                    case 'boolean':
+                        $type = Field::TYPE_BOOLEAN;
+                        break;
+
                     default:
                         $type = Field::TYPE_STRING;
                         break;
