@@ -12,6 +12,8 @@ use Datatheke\Bundle\PagerBundle\DataGrid\HttpDatagridInterface;
 
 abstract class AbstractHandler implements HttpHandlerInterface
 {
+    protected $options;
+
     public function __construct(array $options = array())
     {
         $resolver = new OptionsResolver();

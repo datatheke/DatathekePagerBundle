@@ -8,7 +8,7 @@ use Datatheke\Bundle\PagerBundle\DataGrid\Column\Action\ActionInterface;
 abstract class AbstractColumn implements ColumnInterface
 {
     protected $label;
-    protected $fiel;
+    protected $field;
 
     protected $filterable = true;
     protected $sortable   = true;
