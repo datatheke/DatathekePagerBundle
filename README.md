@@ -24,7 +24,7 @@ Main features are :
     - Bootstrap 3
     - Foundation
 
-[![Build Status](https://api.travis-ci.org/datatheke/DatathekePagerBundle.png?branch=master)](https://travis-ci.org/datatheke/DatathekePagerBundle) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/303a41d8-f1d5-4b5f-a5b1-859eb99239d8/mini.png)](https://insight.sensiolabs.com/projects/303a41d8-f1d5-4b5f-a5b1-859eb99239d8) [![Total Downloads](https://poser.pugx.org/datatheke/pager-bundle/downloads.png)](https://packagist.org/packages/datatheke/pager-bundle)
+[![Build Status](https://api.travis-ci.org/datatheke/DatathekePagerBundle.png?branch=master)](https://travis-ci.org/datatheke/DatathekePagerBundle) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/303a41d8-f1d5-4b5f-a5b1-859eb99239d8/mini.png)](https://insight.sensiolabs.com/projects/303a41d8-f1d5-4b5f-a5b1-859eb99239d8) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/datatheke/DatathekePagerBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/datatheke/DatathekePagerBundle/?branch=master) [![Total Downloads](https://poser.pugx.org/datatheke/pager-bundle/downloads.png)](https://packagist.org/packages/datatheke/pager-bundle)
 
 LICENSE
 -------
@@ -157,7 +157,7 @@ INSTALL
 
 ### Install with composer
 
-    composer.phar require "datatheke/pager-bundle" "~0.3"
+    composer.phar require "datatheke/pager-bundle" "0.3.*"
 
 ### Update your app/AppKernel.php
 
