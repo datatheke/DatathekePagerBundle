@@ -11,7 +11,7 @@ class HttpDataGrid extends DataGrid implements HttpDataGridInterface
 {
     protected $handler;
 
-    public function __construct(PagerInterface $pager, HttpHandlerInterface $handler, array $columns = null)
+    public function __construct(PagerInterface $pager, HttpHandlerInterface $handler, array $columns)
     {
         $this->handler = $handler;
 

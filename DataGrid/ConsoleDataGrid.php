@@ -12,7 +12,7 @@ class ConsoleDataGrid extends DataGrid implements ConsoleDataGridInterface
 {
     protected $handler;
 
-    public function __construct(PagerInterface $pager, ConsoleHandlerInterface $handler, array $columns = null)
+    public function __construct(PagerInterface $pager, ConsoleHandlerInterface $handler, array $columns)
     {
         $this->handler = $handler;
 
