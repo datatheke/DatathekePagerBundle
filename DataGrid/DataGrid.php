@@ -100,6 +100,19 @@ class DataGrid implements DataGridInterface
         return $this;
     }
 
+    public function showOnly(array $columns)
+    {
+        foreach ($this->columns as $alias => $column) {
+            if (in_array($alias, $columns)) {
+                $column->show();
+            } else {
+                $column->hide();
+            }
+        }
+
+        return $this;
+    }
+
     public function getPager()
     {
         return $this->pager;
