@@ -18,10 +18,27 @@ class AutocompleteHandlerTest extends \PHPUnit_Framework_TestCase
             'term' => 'jean'
         ));
 
-        $handler->handleRequest($datagrid, $request);
+        $response = $handler->handleRequest($datagrid, $request);
         $pager = $datagrid->getPager();
 
+        $this->assertEquals('[{"firstname":"jean","lastname":"bon"},{"firstname":"jean","lastname":"bon"},{"firstname":"jean","lastname":"veux"},{"firstname":"marc","lastname":"jean"},{"firstname":"jean","lastname":"doublon"}]', $response->getContent());
         $this->assertEquals(1, $pager->getCurrentPageNumber());
         $this->assertEquals(5, $pager->getTotalItemCount());
+    }
+
+    public function testJsonPHandleRequest()
+    {
+        $handler = new AutocompleteHandler();
+        $handler->setJsonPPadding('callback');
+
+        $datagrid = PagerHelper::createDatagrid();
+        $request = new Request(array(
+            'callback' => 'cb_test',
+            'term' => 'marc'
+        ));
+
+        $response = $handler->handleRequest($datagrid, $request);
+
+        $this->assertEquals('cb_test([{"firstname":"marc","lastname":"jean"}]);', $response->getContent());
     }
 }

@@ -4,6 +4,7 @@ namespace Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -48,18 +49,15 @@ abstract class AbstractHandler implements HttpHandlerInterface
 
     protected function createJsonResponse(Request $request, $content)
     {
+        $response = new JsonResponse($content);
+
         if ($this->has($request, $this->options['jsonp_padding'])) {
-            return new Response($this->get($request, $this->options['jsonp_padding']).'('.json_encode($content).')', 200, array(
-                'Content-type' => 'application/javascript'
-                )
-            );
+            $response->setCallback($this->get($request, $this->options['jsonp_padding']));
+        } else {
+            $response->headers->set('Access-Control-Allow-Origin', '*');
         }
 
-        return new Response(json_encode($content), 200, array(
-            'Content-type'                => 'application/json',
-            'Access-Control-Allow-Origin' => '*',
-            )
-        );
+        return $response;
     }
 
     protected function has(Request $request, $param)
