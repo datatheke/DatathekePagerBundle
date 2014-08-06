@@ -39,6 +39,6 @@ class AutocompleteHandlerTest extends \PHPUnit_Framework_TestCase
 
         $response = $handler->handleRequest($datagrid, $request);
 
-        $this->assertEquals('cb_test([{"firstname":"marc","lastname":"jean"}]);', $response->getContent());
+        $this->assertContains('cb_test([{"firstname":"marc","lastname":"jean"}]);', $response->getContent());
     }
 }
