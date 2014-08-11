@@ -24,6 +24,13 @@ class ViewHandler implements HttpHandlerInterface
         }
     }
 
+    public function setOption($option, $value)
+    {
+        $this->pagerHandler->setOption($option, $value);
+
+        return $this;
+    }
+
     public function handleRequest(HttpDataGridInterface $datagrid, Request $request)
     {
         $pager = $datagrid->getPager();
