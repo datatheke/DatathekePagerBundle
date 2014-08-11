@@ -198,8 +198,7 @@ class ORMQueryBuilderAdapter implements AdapterInterface
             $operator   = $filter->getOperator($key);
             $value      = $field->formatInput($filter->getValue($key));
 
-            if (is_string($value)
-                && !strlen($value)
+            if (((is_string($value) && !strlen($value)) || null === $value)
                 && !in_array($operator, array(Filter::OPERATOR_NULL, Filter::OPERATOR_NOT_NULL))
                 ) {
                 $criteria[] = null;

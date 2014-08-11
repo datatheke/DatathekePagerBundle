@@ -63,12 +63,14 @@ class ORMQueryBuilderAdapterTest extends \PHPUnit_Framework_TestCase
         $person1->lastname  = 'doe';
         $person1->age       = 32;
         $person1->friend    = true;
+        $person1->birthday  = \DateTime::createFromFormat('Y-m-d H:i:s', '1982-12-03 22:10:09');
 
         $person2 = new Person();
         $person2->firstname = 'jean';
         $person2->lastname  = 'bon';
         $person2->age       = 25;
         $person1->friend    = false;
+        $person2->birthday  = \DateTime::createFromFormat('Y-m-d H:i:s', '1983-09-27 10:43:32');
 
         $this->em->persist($person1);
         $this->em->persist($person2);
@@ -122,5 +124,42 @@ class ORMQueryBuilderAdapterTest extends \PHPUnit_Framework_TestCase
 
         $items   = $adapter->getItems();
         $this->assertEquals(25, $items[0]->age);
+    }
+
+    public function testFilterFromArray()
+    {
+        $qb = $this->em
+            ->getRepository('Datatheke\Bundle\PagerBundle\Tests\Entity\Person')
+            ->createQueryBuilder('e')
+        ;
+        $adapter = new ORMQueryBuilderAdapter($qb);
+
+        $filter = array(
+            'operator' => Filter::LOGICAL_AND,
+            'criteria' => array(
+                array(
+                    'field'    => 'lastname',
+                    'operator' => Filter::OPERATOR_CONTAINS,
+                    'value'    => 'bon'
+                ),
+                array(
+                    'field'    => 'firstname',
+                    'operator' => Filter::OPERATOR_CONTAINS,
+                    'value'    => ''
+                ),
+                array(
+                    'field'    => 'birthday',
+                    'operator' => Filter::OPERATOR_CONTAINS,
+                    'value'    => null
+                ),
+            )
+        );
+
+        $adapter->setFilter(Filter::createFromArray($filter));
+
+        $items = $adapter->getItems();
+
+        $this->assertEquals(1, $adapter->count());
+        $this->assertEquals('jean', $items[0]->firstname);
     }
 }

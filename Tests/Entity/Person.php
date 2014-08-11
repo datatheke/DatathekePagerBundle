@@ -46,4 +46,11 @@ class Person
      * @ORM\Column(type="boolean", nullable=true)
      */
     public $friend;
+
+    /**
+     * @var DateTime $birthday
+     *
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    public $birthday;
 }
