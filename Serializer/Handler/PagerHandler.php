@@ -58,23 +58,36 @@ class PagerHandler implements SubscribingHandlerInterface
         return $this->convertPagerToArray($visitor, $pager, $type, $context);
     }
 
+    public function serializePagerViewToJson(JsonSerializationVisitor $visitor, StaticPagerInterface $pager, array $type, Context $context)
+    {
+        return $this->convertPagerToArray($visitor, $pager, $type, $context);
+    }
+
     private function convertPagerToArray(GenericSerializationVisitor $visitor, StaticPagerInterface $pager, array $type, Context $context)
     {
         $isRoot = null === $visitor->getRoot();
 
-        $result = array(
-            'current_page_number' => $pager->getCurrentPageNumber(),
-            'page_count'          => $pager->getPageCount(),
 
-            'item_count_per_page' => $pager->getItemCountPerPage(),
-            'total_item_count'    => $pager->getTotalItemCount(),
-
-            'first_item_number'   => $pager->getFirstItemNumber(),
-            'last_item_number'    => $pager->getLastItemNumber(),
-            'current_item_count'  => $pager->getCurrentItemCount(),
-
-            'items'               => $visitor->getNavigator()->accept($pager->getItems(), array('name' => 'array'), $context)
+        if ($context->attributes->containsKey('gloomy_compatibility') && (true === $context->attributes->get('gloomy_compatibility')->get())) {
+            $result = array(
+                'page' => $pager->getCurrentPageNumber(),
+                'per_page' => $pager->getItemCountPerPage(),
             );
+        } else {
+            $result = array(
+                'current_page_number' => $pager->getCurrentPageNumber(),
+                'item_count_per_page' => $pager->getItemCountPerPage(),
+            );
+        }
+
+        $result = array_merge($result, array(
+            'page_count'         => $pager->getPageCount(),
+            'total_item_count'   => $pager->getTotalItemCount(),
+            'first_item_number'  => $pager->getFirstItemNumber(),
+            'last_item_number'   => $pager->getLastItemNumber(),
+            'current_item_count' => $pager->getCurrentItemCount(),
+            'items'              => $visitor->getNavigator()->accept($pager->getItems(), array('name' => 'array'), $context)
+        ));
 
         if ($isRoot) {
             $visitor->setRoot($result);
