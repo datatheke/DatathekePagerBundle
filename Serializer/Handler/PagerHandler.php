@@ -10,7 +10,7 @@ use JMS\Serializer\GenericSerializationVisitor;
 use JMS\Serializer\GraphNavigator;
 use JMS\Serializer\Context;
 
-use Datatheke\Bundle\PagerBundle\Pager\Pager;
+use Datatheke\Bundle\PagerBundle\Pager\StaticPagerInterface;
 
 class PagerHandler implements SubscribingHandlerInterface
 {
@@ -33,27 +33,32 @@ class PagerHandler implements SubscribingHandlerInterface
                 'type'      => 'Datatheke\Bundle\PagerBundle\Pager\ConsolePager',
                 'format'    => $format,
             );
+            $methods[] = array(
+                'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
+                'type'      => 'Datatheke\Bundle\PagerBundle\Pager\PagerView',
+                'format'    => $format,
+            );
         }
 
         return $methods;
     }
 
-    public function serializePagerToJson(JsonSerializationVisitor $visitor, Pager $pager, array $type, Context $context)
+    public function serializePagerToJson(JsonSerializationVisitor $visitor, StaticPagerInterface $pager, array $type, Context $context)
     {
         return $this->convertPagerToArray($visitor, $pager, $type, $context);
     }
 
-    public function serializeHttpPagerToJson(JsonSerializationVisitor $visitor, Pager $pager, array $type, Context $context)
+    public function serializeHttpPagerToJson(JsonSerializationVisitor $visitor, StaticPagerInterface $pager, array $type, Context $context)
     {
         return $this->convertPagerToArray($visitor, $pager, $type, $context);
     }
 
-    public function serializeConsolePagerToJson(JsonSerializationVisitor $visitor, Pager $pager, array $type, Context $context)
+    public function serializeConsolePagerToJson(JsonSerializationVisitor $visitor, StaticPagerInterface $pager, array $type, Context $context)
     {
         return $this->convertPagerToArray($visitor, $pager, $type, $context);
     }
 
-    private function convertPagerToArray(GenericSerializationVisitor $visitor, Pager $pager, array $type, Context $context)
+    private function convertPagerToArray(GenericSerializationVisitor $visitor, StaticPagerInterface $pager, array $type, Context $context)
     {
         $isRoot = null === $visitor->getRoot();
 
