@@ -26,13 +26,14 @@
     },
     "require-dev": {
         "ext-pdo_sqlite": "*",
-        "doctrine/orm": "~2.3"
+        "doctrine/orm": "~2.3",
+        "jms/serializer": "~0.16"
     },
     "suggest": {
         "doctrine/doctrine-bundle": "To use ORMQueryBuilderAdapter and ORMEntityAdapter",
         "doctrine/orm": "To use ORMQueryBuilderAdapter and ORMEntityAdapter",
         "doctrine/mongodb-odm-bundle": "To use MongoDBQueryBuilderAdapter and MongoDBDocumentAdapter",
-        "jms/serializer": "To serialize Pager and DataGrid"
+        "jms/serializer-bundle": "To serialize Pager and DataGrid"
     },
     "autoload": {
         "psr-0": {
