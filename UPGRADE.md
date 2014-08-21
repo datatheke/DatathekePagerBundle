@@ -1,3 +1,8 @@
+v0.3.11 -> v0.3.12
+------------------
+### Pager & Datagrid
+- (CSS) Filter operator box now appears on input:focus, not :hover anymore
+
 v0.3.4 -> v0.3.5
 ----------------
 ### Datagrid
