@@ -6,6 +6,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
+use Datatheke\Bundle\PagerBundle\Pager\Field;
+use Datatheke\Bundle\PagerBundle\Pager\Filter;
 
 class JqGridHandler extends AbstractHandler
 {
@@ -23,6 +25,49 @@ class JqGridHandler extends AbstractHandler
         if ($this->has($request, 'sidx') && isset($fields[$field = $this->get($request, 'sidx')])) {
             $order = $this->get($request, 'sord', 'asc') === 'asc' ? OrderBy::ASC : OrderBy::DESC;
             $pager->setOrderBy(new OrderBy(array($field => $order)));
+        }
+
+        $filters = array();
+        if( $this->has($request, 'filters')) {
+            $filters = $this->get($request, 'filters');
+            $rules = array();
+            if( isset( $filters['rules']) && isset($filters['groupOp']) )
+            {
+                $rules = $filters['rules'];
+                $groupOp = (($filters['groupOp'] == 'OR') ? Filter::LOGICAL_OR : Filter::LOGICAL_AND);
+
+                // map filter operators to jqGrid sOpts
+                $opMap = array(
+                        'eq' => Filter::OPERATOR_EQUALS,
+                        'ne' => Filter::OPERATOR_NOT_EQUALS,
+                        'lt' => Filter::OPERATOR_LESS,
+                        'le' => Filter::OPERATOR_LESS_EQUALS,
+                        'gt' => Filter::OPERATOR_GREATER,
+                        'ge' => Filter::OPERATOR_GREATER_EQUALS,
+                        'bw' => null,
+                        'bn' => null,
+                        'in' => Filter::OPERATOR_IN,
+                        'ni' => Filter::OPERATOR_NOT_IN,
+                        'ew' => null,
+                        'en' => null,
+                        'cn' => Filter::OPERATOR_CONTAINS,
+                        'nc' => Filter::OPERATOR_NOT_CONTAINS,
+                        'nu' => Filter::OPERATOR_NULL,
+                        'nn' => Filter::OPERATOR_NOT_NULL
+                    );
+
+
+                $searchFields = array();
+                $searchData = array();
+                $searchOperators = array();
+                foreach( $rules as $r ) {
+                    array_push($searchFields, $r['field']);
+                    array_push($searchData, $r['data']);
+                    array_push($searchOperators, $opMap[ $r['op'] ]);
+                }
+
+                $pager->setFilter(new Filter($searchFields, $searchData, array($searchOperators), array(array(array($groupOp, null))) ));
+            }
         }
     }
 }
