@@ -27,9 +27,15 @@ class JqGridHandler extends AbstractHandler
             $pager->setOrderBy(new OrderBy(array($field => $order)));
         }
 
-        if($this->has($request, 'filters')) {
+        if ($this->has($request, 'filters')) {
             $filters = $this->get($request, 'filters');
-            if(isset($filters['rules']) && isset($filters['groupOp'])) {
+            if (!is_array($filters)) {
+                if (null === ($filters = json_decode($filters, true))) {
+                    $filters = array();
+                }
+            }
+
+            if (isset($filters['rules']) && isset($filters['groupOp'])) {
                 $rules = $filters['rules'];
                 $groupOp = (($filters['groupOp'] == 'OR') ? Filter::LOGICAL_OR : Filter::LOGICAL_AND);
 
@@ -53,11 +59,10 @@ class JqGridHandler extends AbstractHandler
                         'nn' => Filter::OPERATOR_NOT_NULL
                     );
 
-
                 $searchFields = array();
                 $searchData = array();
                 $searchOperators = array();
-                foreach( $rules as $r ) {
+                foreach ($rules as $r) {
                     $searchFields[] = $r['field'];
                     $searchData[] = $r['data'];
                     $searchOperators[] = $opMap[ $r['op'] ];
