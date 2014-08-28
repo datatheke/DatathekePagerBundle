@@ -2,8 +2,6 @@
 
 namespace Datatheke\Bundle\PagerBundle\Tests\Serializer\Handler;
 
-use Symfony\Component\HttpFoundation\Request;
-
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\Handler\HandlerRegistry;
 use JMS\Serializer\SerializationContext;
@@ -25,7 +23,7 @@ class PagerHandlerTest extends \PHPUnit_Framework_TestCase
         $pager = PagerHelper::createPager();
 
         $serializer = SerializerBuilder::create()
-            ->configureHandlers(function(HandlerRegistry $registry) {
+            ->configureHandlers(function (HandlerRegistry $registry) {
                 $registry->registerSubscribingHandler(new PagerHandler());
             })
             ->build()
