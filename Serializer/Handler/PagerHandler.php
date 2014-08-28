@@ -67,7 +67,6 @@ class PagerHandler implements SubscribingHandlerInterface
     {
         $isRoot = null === $visitor->getRoot();
 
-
         if ($context->attributes->containsKey('gloomy_compatibility') && (true === $context->attributes->get('gloomy_compatibility')->get())) {
             $result = array(
                 'page' => $pager->getCurrentPageNumber(),
