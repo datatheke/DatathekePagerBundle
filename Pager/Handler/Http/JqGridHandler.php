@@ -27,10 +27,9 @@ class JqGridHandler extends AbstractHandler
             $pager->setOrderBy(new OrderBy(array($field => $order)));
         }
 
-        if( $this->has($request, 'filters')) {
+        if($this->has($request, 'filters')) {
             $filters = $this->get($request, 'filters');
-            if( isset( $filters['rules']) && isset($filters['groupOp']) )
-            {
+            if(isset($filters['rules']) && isset($filters['groupOp'])) {
                 $rules = $filters['rules'];
                 $groupOp = (($filters['groupOp'] == 'OR') ? Filter::LOGICAL_OR : Filter::LOGICAL_AND);
 
