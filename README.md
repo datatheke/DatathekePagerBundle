@@ -17,8 +17,9 @@ Main features are :
     - Flexigrid
     - Dynatable
     - DataTables
-    - Jquery Autocomplete
+    - jQuery Autocomplete
     - Bootstrap Typeahead
+    - jQuery Bootgrid
  - Themable:
     - Bootstrap 2
     - Bootstrap 3
