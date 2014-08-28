@@ -14,6 +14,7 @@
         <parameter key="datatheke.datagrid.http_handler.datatables.class">Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\DataTablesHandler</parameter>
         <parameter key="datatheke.datagrid.http_handler.autocomplete.class">Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\AutocompleteHandler</parameter>
         <parameter key="datatheke.datagrid.http_handler.bootstrap_typeahead.class">Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\BootstrapTypeaheadHandler</parameter>
+        <parameter key="datatheke.datagrid.http_handler.jquery_bootgrid.class">Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\JQueryBootgrid</parameter>
         <parameter key="datatheke.datagrid.console_handler.default.class">Datatheke\Bundle\PagerBundle\DataGrid\Handler\Console\DefaultHandler</parameter>
         <parameter key="datatheke.datagrid.column.guesser_chain.class">Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser\GuesserChain</parameter>
         <parameter key="datatheke.datagrid.column.guesser.string.class">Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser\StringGuesser</parameter>
@@ -89,6 +90,10 @@
 
         <service id="datatheke.datagrid.http_handler.bootstrap_typeahead" class="%datatheke.datagrid.http_handler.bootstrap_typeahead.class%">
             <tag name="datatheke_pager.datagrid_http_handler" alias="bootstrap_typeahead"/>
+        </service>
+
+        <service id="datatheke.datagrid.http_handler.jquery_bootgrid" class="%datatheke.datagrid.http_handler.jquery_bootgrid.class%">
+            <tag name="datatheke_pager.datagrid_http_handler" alias="jquery_bootgrid"/>
         </service>
 
         <service id="datatheke.datagrid.console_handler.default" class="%datatheke.datagrid.console_handler.default.class%">

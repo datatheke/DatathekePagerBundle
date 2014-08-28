@@ -65,6 +65,10 @@ abstract class AbstractHandler implements HttpHandlerInterface
                 continue;
             }
 
+            if (in_array($field->getType(), array(Field::TYPE_BOOLEAN, Field::TYPE_OBJECT, Field::TYPE_NUMBER)) && !is_numeric($query)) {
+                continue;
+            }
+
             $operator = Field::TYPE_STRING === $field->getType() ? Filter::OPERATOR_CONTAINS : Filter::OPERATOR_EQUALS;
 
             $filter['criteria'][] = array(

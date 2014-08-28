@@ -2,7 +2,7 @@
     "name": "datatheke/pager-bundle",
     "description": "Pager & DataGrid bundle for Symfony2",
     "type": "symfony-bundle",
-    "keywords": ["pager", "paginator", "datagrid", "jqGrid", "Flexigrid", "Dynatable", "Autocomplete", "Typeahead", "DataTables"],
+    "keywords": ["pager", "paginator", "datagrid", "jqGrid", "Flexigrid", "Dynatable", "Autocomplete", "Typeahead", "DataTables", "bootgrid"],
     "homepage": "https://github.com/datatheke/DatathekePagerBundle",
     "license": "MIT",
     "authors": [
