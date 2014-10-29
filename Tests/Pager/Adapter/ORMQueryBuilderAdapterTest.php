@@ -162,4 +162,21 @@ class ORMQueryBuilderAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $adapter->count());
         $this->assertEquals('jean', $items[0]->firstname);
     }
+
+    public function testFilterWithCallableQualifier()
+    {
+        $qb = $this->em
+            ->getRepository('Datatheke\Bundle\PagerBundle\Tests\Entity\Person')
+            ->createQueryBuilder('e')
+        ;
+        $adapter = new ORMQueryBuilderAdapter($qb);
+
+        $adapter->addField(new Field('id', Field::TYPE_NUMBER, function ($value, $operator, $builder) {
+            return $builder->expr()->eq('(e.id * '.$value.')', '10');
+        }), 'id');
+
+        $this->assertEquals(2, $adapter->count());
+        $adapter->setFilter(new Filter(array('id'), array(5)));
+        $this->assertEquals(1, $adapter->count());
+    }
 }

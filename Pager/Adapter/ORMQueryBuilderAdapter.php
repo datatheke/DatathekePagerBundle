@@ -187,7 +187,6 @@ class ORMQueryBuilderAdapter implements AdapterInterface
     protected function doApplyFilter(QueryBuilder $builder, Filter $filter)
     {
         $criteria = array();
-        $expr     = $builder->expr();
         $paramNum = 0;
         foreach ($filter->getFields() as $key => $alias) {
 
@@ -213,87 +212,10 @@ class ORMQueryBuilderAdapter implements AdapterInterface
                 && !in_array($operator, array(Filter::OPERATOR_NULL, Filter::OPERATOR_NOT_NULL))
                 ) {
                 $criteria[] = null;
-                continue;
-            }
-
-            switch ($operator) {
-
-                default:
-                case Filter::OPERATOR_CONTAINS:
-                    // if (isset($this->_config['force_case_insensitive'])) { // Force case insensitive (ie. for Oracle)
-                    //     $criteria[] = $expr->like('UPPER('.$qualifier.')', ':'.$paramName);
-                    //     $builder->setParameter($paramName, strtoupper('%'.$value.'%'));
-                    // }
-                    // else {
-                        $criteria[] = $expr->like($qualifier, ':'.$paramName);
-                        $builder->setParameter($paramName, '%'.$value.'%');
-                    // }
-                    break;
-
-                case Filter::OPERATOR_NOT_CONTAINS:
-                    // if (isset($this->_config['force_case_insensitive'])) { // Force case insensitive (ie. for Oracle)
-                    //     $criteria[] = $expr->not($expr->like('UPPER('.$qualifier.')', ':'.$paramName));
-                    //     $builder->setParameter($paramName, strtoupper('%'.$value.'%'));
-                    // }
-                    // else {
-                        $criteria[] = $expr->not($expr->like($qualifier, ':'.$paramName));
-                        $builder->setParameter($paramName, '%'.$value.'%');
-                    // }
-                    break;
-
-                case Filter::OPERATOR_EQUALS:
-                    $criteria[] = $expr->eq($qualifier, ':'.$paramName);
-                    $builder->setParameter($paramName, $value);
-                    break;
-
-                case Filter::OPERATOR_NOT_EQUALS:
-                    $criteria[] = $expr->neq($qualifier, ':'.$paramName);
-                    $builder->setParameter($paramName, $value);
-                    break;
-
-                case Filter::OPERATOR_GREATER:
-                    $criteria[] = $expr->gt($qualifier, ':'.$paramName);
-                    $builder->setParameter($paramName, $value);
-                    break;
-
-                case Filter::OPERATOR_GREATER_EQUALS:
-                    $criteria[] = $expr->gte($qualifier, ':'.$paramName);
-                    $builder->setParameter($paramName, $value);
-                    break;
-
-                case Filter::OPERATOR_LESS:
-                    $criteria[] = $expr->lt($qualifier, ':'.$paramName);
-                    $builder->setParameter($paramName, $value);
-                    break;
-
-                case Filter::OPERATOR_LESS_EQUALS:
-                    $criteria[] = $expr->lte($qualifier, ':'.$paramName);
-                    $builder->setParameter($paramName, $value);
-                    break;
-
-                case Filter::OPERATOR_NULL:
-                    $criteria[] = $expr->isNull($qualifier);
-                    break;
-
-                case Filter::OPERATOR_NOT_NULL:
-                    $criteria[] = $expr->isNotNull($qualifier);
-                    break;
-
-                case Filter::OPERATOR_IN:
-                    if (!is_array($value)) {
-                        $value = preg_split("/((\r(?!\n))|((?<!\r)\n)|(\r\n))/", $value, -1, PREG_SPLIT_NO_EMPTY);
-                    }
-                    $criteria[] = $expr->in($qualifier, ':'.$paramName);
-                    $builder->setParameter($paramName, $value);
-                    break;
-
-                case Filter::OPERATOR_NOT_IN:
-                    if (!is_array($value)) {
-                        $value = preg_split("/((\r(?!\n))|((?<!\r)\n)|(\r\n))/", $value, -1, PREG_SPLIT_NO_EMPTY);
-                    }
-                    $criteria[] = $expr->not($expr->in($qualifier, ':'.$paramName));
-                    $builder->setParameter($paramName, $value);
-                    break;
+            } elseif (is_callable($qualifier)) {
+                $criteria[] = call_user_func($qualifier, $value, $operator, $builder);
+            } else {
+                $criteria[] = $this->buildCriteria($builder, $qualifier, $operator, $value, $paramName);
             }
         }
 
@@ -338,6 +260,93 @@ class ORMQueryBuilderAdapter implements AdapterInterface
         }
 
         return $this;
+    }
+
+    protected function buildCriteria(QueryBuilder $builder, $qualifier, $operator, $value, $paramName)
+    {
+        $expr     = $builder->expr();
+
+        switch ($operator) {
+
+            default:
+            case Filter::OPERATOR_CONTAINS:
+                // if (isset($this->_config['force_case_insensitive'])) { // Force case insensitive (ie. for Oracle)
+                //     $criteria[] = $expr->like('UPPER('.$qualifier.')', ':'.$paramName);
+                //     $builder->setParameter($paramName, strtoupper('%'.$value.'%'));
+                // }
+                // else {
+                $criteria = $expr->like($qualifier, ':' . $paramName);
+                $builder->setParameter($paramName, '%' . $value . '%');
+                // }
+                break;
+
+            case Filter::OPERATOR_NOT_CONTAINS:
+                // if (isset($this->_config['force_case_insensitive'])) { // Force case insensitive (ie. for Oracle)
+                //     $criteria[] = $expr->not($expr->like('UPPER('.$qualifier.')', ':'.$paramName));
+                //     $builder->setParameter($paramName, strtoupper('%'.$value.'%'));
+                // }
+                // else {
+                $criteria = $expr->not($expr->like($qualifier, ':' . $paramName));
+                $builder->setParameter($paramName, '%' . $value . '%');
+                // }
+                break;
+
+            case Filter::OPERATOR_EQUALS:
+                $criteria = $expr->eq($qualifier, ':' . $paramName);
+                $builder->setParameter($paramName, $value);
+                break;
+
+            case Filter::OPERATOR_NOT_EQUALS:
+                $criteria = $expr->neq($qualifier, ':' . $paramName);
+                $builder->setParameter($paramName, $value);
+                break;
+
+            case Filter::OPERATOR_GREATER:
+                $criteria = $expr->gt($qualifier, ':' . $paramName);
+                $builder->setParameter($paramName, $value);
+                break;
+
+            case Filter::OPERATOR_GREATER_EQUALS:
+                $criteria = $expr->gte($qualifier, ':' . $paramName);
+                $builder->setParameter($paramName, $value);
+                break;
+
+            case Filter::OPERATOR_LESS:
+                $criteria = $expr->lt($qualifier, ':' . $paramName);
+                $builder->setParameter($paramName, $value);
+                break;
+
+            case Filter::OPERATOR_LESS_EQUALS:
+                $criteria = $expr->lte($qualifier, ':' . $paramName);
+                $builder->setParameter($paramName, $value);
+                break;
+
+            case Filter::OPERATOR_NULL:
+                $criteria = $expr->isNull($qualifier);
+                break;
+
+            case Filter::OPERATOR_NOT_NULL:
+                $criteria = $expr->isNotNull($qualifier);
+                break;
+
+            case Filter::OPERATOR_IN:
+                if (!is_array($value)) {
+                    $value = preg_split("/((\r(?!\n))|((?<!\r)\n)|(\r\n))/", $value, -1, PREG_SPLIT_NO_EMPTY);
+                }
+                $criteria = $expr->in($qualifier, ':' . $paramName);
+                $builder->setParameter($paramName, $value);
+                break;
+
+            case Filter::OPERATOR_NOT_IN:
+                if (!is_array($value)) {
+                    $value = preg_split("/((\r(?!\n))|((?<!\r)\n)|(\r\n))/", $value, -1, PREG_SPLIT_NO_EMPTY);
+                }
+                $criteria = $expr->not($expr->in($qualifier, ':' . $paramName));
+                $builder->setParameter($paramName, $value);
+                break;
+        }
+
+        return $criteria;
     }
 
     protected function getField($alias)
