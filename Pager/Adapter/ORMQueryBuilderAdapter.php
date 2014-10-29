@@ -193,10 +193,21 @@ class ORMQueryBuilderAdapter implements AdapterInterface
 
             $paramName  = 'param_'.$paramNum++;
             $field      = $this->getField($alias);
-
             $qualifier  = $field->getQualifier();
             $operator   = $filter->getOperator($key);
             $value      = $field->formatInput($filter->getValue($key));
+
+            if (!in_array($field->getType(), array(Field::TYPE_STRING, Field::TYPE_NUMBER), true)) {
+                switch ($operator) {
+                    case Filter::OPERATOR_CONTAINS:
+                        $operator = Filter::OPERATOR_EQUALS;
+                        break;
+
+                    case Filter::OPERATOR_NOT_CONTAINS:
+                        $operator = Filter::OPERATOR_NOT_EQUALS;
+                        break;
+                }
+            }
 
             if (((is_string($value) && !strlen($value)) || null === $value)
                 && !in_array($operator, array(Filter::OPERATOR_NULL, Filter::OPERATOR_NOT_NULL))
