@@ -16,11 +16,11 @@ class Field
     protected $propertyPath;
     protected $type;
     protected $qualifier;
-    protected $metadatas;
+    protected $metadata;
 
     protected $dataTransformers = array();
 
-    public function __construct($propertyPath, $type = self::TYPE_STRING, $qualifier = null, array $metadatas = array())
+    public function __construct($propertyPath, $type = self::TYPE_STRING, $qualifier = null, array $metadata = array())
     {
         if (null === $qualifier) {
             $qualifier = $propertyPath;
@@ -29,7 +29,7 @@ class Field
         $this->propertyPath = $propertyPath;
         $this->type         = $type;
         $this->qualifier    = $qualifier;
-        $this->metadatas    = $metadatas;
+        $this->metadata     = $metadata;
     }
 
     public function getPropertyPath()
@@ -47,9 +47,17 @@ class Field
         return $this->qualifier;
     }
 
+    public function getMetadata()
+    {
+        return $this->metadata;
+    }
+
+    /**
+     * Deprecated, use getMetadata() instead
+     */
     public function getMetadatas()
     {
-        return $this->metadatas;
+        return $this->metadata;
     }
 
     public function addDataTransformer(DataTransformerInterface $dataTransformer)

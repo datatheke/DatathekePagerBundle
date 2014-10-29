@@ -1,3 +1,7 @@
+v0.3.12 -> v0.3.13
+------------------
+- Datatheke\Bundle\PagerBundle\Pager::getMetadatas() is deprecated. Use Datatheke\Bundle\PagerBundle\Pager::getMetadata() instead
+
 v0.3.11 -> v0.3.12
 ------------------
 ### Pager & Datagrid

@@ -13,9 +13,9 @@ class ObjectGuesser implements GuesserInterface
         if (Field::TYPE_OBJECT === $field->getType()) {
             $column = new ObjectColumn($field);
 
-            $metadatas = $field->getMetadatas();
-            if (isset($metadatas['repository'])) {
-                $column->setObjectRepository($metadatas['repository']);
+            $metadata = $field->getMetadata();
+            if (isset($metadata['repository'])) {
+                $column->setObjectRepository($metadata['repository']);
             }
 
             return $column;

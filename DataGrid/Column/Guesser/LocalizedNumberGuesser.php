@@ -13,9 +13,9 @@ class LocalizedNumberGuesser implements GuesserInterface
         if (Field::TYPE_NUMBER === $field->getType()) {
             $column = new LocalizedNumberColumn($field);
 
-            $metadatas = $field->getMetadatas();
-            if (isset($metadatas['precision'])) {
-                $column->setPrecision($metadatas['precision']);
+            $metadata = $field->getMetadata();
+            if (isset($metadata['precision'])) {
+                $column->setPrecision($metadata['precision']);
             }
 
             return $column;
