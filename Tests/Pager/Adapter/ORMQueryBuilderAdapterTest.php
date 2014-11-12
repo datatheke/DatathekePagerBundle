@@ -34,8 +34,8 @@ class ORMQueryBuilderAdapterTest extends \PHPUnit_Framework_TestCase
     protected function getEntityManager()
     {
         $config = new Configuration();
-        $config->setMetadataCacheImpl(new ArrayCache);
-        $config->setQueryCacheImpl(new ArrayCache);
+        $config->setMetadataCacheImpl(new ArrayCache());
+        $config->setQueryCacheImpl(new ArrayCache());
         $config->setProxyDir(__DIR__ . '/cache');
         $config->setProxyNamespace('Cache\Proxies');
 

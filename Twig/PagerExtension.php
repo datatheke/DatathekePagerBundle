@@ -46,7 +46,7 @@ class PagerExtension extends \Twig_Extension
      */
     public function pagerPageRange(PagerViewInterface $pager, $pageRange = null)
     {
-        if (null == $pageRange) {
+        if (null === $pageRange) {
             $pageRange = $this->config->getPageRange();
         }
 
