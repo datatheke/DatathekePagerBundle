@@ -15,7 +15,7 @@
         </service>
 
         <service id="datatheke.pager.adapter.guesser.orm_entity" class="%datatheke.pager.adapter.guesser.orm_entity.class%">
-            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="doctrine"/>
             <tag name="datatheke_pager.adapter_guesser" priority="800"/>
         </service>
     </services>

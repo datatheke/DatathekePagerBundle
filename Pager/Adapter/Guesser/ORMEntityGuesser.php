@@ -2,7 +2,7 @@
 
 namespace Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityRepository;
 
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\ORMEntityAdapter;
@@ -10,23 +10,26 @@ use Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser\Exception\UnableToGuessEx
 
 class ORMEntityGuesser implements GuesserInterface
 {
-    protected $em;
+    protected $registry;
 
-    public function __construct(EntityManager $em)
+    public function __construct(ManagerRegistry $registry)
     {
-        $this->em = $em;
+        $this->registry = $registry;
     }
 
     public function guess($input)
     {
-        if (is_object($input) && $input instanceof EntityRepository) {
+        if ($input instanceof EntityRepository) {
             return new ORMEntityAdapter($input);
         } elseif (is_string($input)) {
             try {
                 // Check repository
-                $repository = $this->em->getRepository($input);
+                $manager = $this->registry->getManagerForClass($input);
+                if (null !== $manager) {
+                    $repository = $manager->getRepository($input);
 
-                return new ORMEntityAdapter($repository);
+                    return new ORMEntityAdapter($repository);
+                }
             } catch (\Exception $e) {
             }
         }

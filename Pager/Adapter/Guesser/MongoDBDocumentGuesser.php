@@ -2,7 +2,7 @@
 
 namespace Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser;
 
-use Doctrine\ODM\MongoDB\DocumentManager;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ODM\MongoDB\DocumentRepository;
 
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\MongoDBDocumentAdapter;
@@ -10,23 +10,26 @@ use Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser\Exception\UnableToGuessEx
 
 class MongoDBDocumentGuesser implements GuesserInterface
 {
-    protected $dm;
+    protected $registry;
 
-    public function __construct(DocumentManager $dm)
+    public function __construct(ManagerRegistry $registry)
     {
-        $this->dm = $dm;
+        $this->registry = $registry;
     }
 
     public function guess($input)
     {
-        if (is_object($input) && $input instanceof DocumentRepository) {
+        if ($input instanceof DocumentRepository) {
             return new MongoDBDocumentAdapter($input);
         } elseif (is_string($input)) {
             try {
                 // Check repository
-                $repository = $this->dm->getRepository($input);
+                $manager = $this->registry->getManagerForClass($input);
+                if (null !== $manager) {
+                    $repository = $manager->getRepository($input);
 
-                return new MongoDBDocumentAdapter($repository);
+                    return new MongoDBDocumentAdapter($repository);
+                }
             } catch (\Exception $e) {
             }
         }

@@ -15,7 +15,7 @@
         </service>
 
         <service id="datatheke.pager.adapter.guesser.mongodb_document" class="%datatheke.pager.adapter.guesser.mongodb_document.class%">
-            <argument type="service" id="doctrine_mongodb.odm.document_manager"/>
+            <argument type="service" id="doctrine_mongodb"/>
             <tag name="datatheke_pager.adapter_guesser" priority="850"/>
         </service>
     </services>
