@@ -7,7 +7,6 @@ use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
 use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
 use Datatheke\Bundle\PagerBundle\Pager\Filter;
@@ -124,7 +123,7 @@ class DefaultHandler implements ConsoleHandlerInterface
         $output->writeln($formatter->formatBlock(
             array(
                 'Page:     '.$pager->getCurrentPageNumber().' / '.$pager->getPageCount(),
-                'Items:    '.$pager->getFirstItemNumber().'-'.$pager->getLastItemNumber().' / '.$pager->getTotalItemCount()
+                'Items:    '.$pager->getFirstItemNumber().'-'.$pager->getLastItemNumber().' / '.$pager->getTotalItemCount(),
             ),
             'bg=blue;fg=white'
         ));

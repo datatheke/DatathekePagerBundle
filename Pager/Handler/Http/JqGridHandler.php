@@ -3,7 +3,6 @@
 namespace Datatheke\Bundle\PagerBundle\Pager\Handler\Http;
 
 use Symfony\Component\HttpFoundation\Request;
-
 use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
 use Datatheke\Bundle\PagerBundle\Pager\Filter;
@@ -55,7 +54,7 @@ class JqGridHandler extends AbstractHandler
                         'cn' => Filter::OPERATOR_CONTAINS,
                         'nc' => Filter::OPERATOR_NOT_CONTAINS,
                         'nu' => Filter::OPERATOR_NULL,
-                        'nn' => Filter::OPERATOR_NOT_NULL
+                        'nn' => Filter::OPERATOR_NOT_NULL,
                     );
 
                 $searchFields = array();
@@ -67,7 +66,7 @@ class JqGridHandler extends AbstractHandler
                     $searchOperators[] = $opMap[ $r['op'] ];
                 }
 
-                $pager->setFilter(new Filter($searchFields, $searchData, array($searchOperators), array(array(array($groupOp, null))) ));
+                $pager->setFilter(new Filter($searchFields, $searchData, array($searchOperators), array(array(array($groupOp, null)))));
             }
         }
     }

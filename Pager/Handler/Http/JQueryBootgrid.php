@@ -4,7 +4,6 @@ namespace Datatheke\Bundle\PagerBundle\Pager\Handler\Http;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
 use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
 
@@ -17,7 +16,7 @@ class JQueryBootgrid extends AbstractHandler
         $resolver->setDefaults(array(
             'method' => 'request',
             'search_fields' => null,
-            'item_count_limit' => 1000
+            'item_count_limit' => 1000,
             )
         );
     }

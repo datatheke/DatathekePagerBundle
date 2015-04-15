@@ -9,12 +9,10 @@ use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Doctrine\Common\Cache\ArrayCache;
-
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\ORMQueryBuilderAdapter;
 use Datatheke\Bundle\PagerBundle\Pager\Field;
 use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
 use Datatheke\Bundle\PagerBundle\Pager\Filter;
-
 use Datatheke\Bundle\PagerBundle\Tests\Entity\Person;
 
 class ORMQueryBuilderAdapterTest extends \PHPUnit_Framework_TestCase
@@ -36,10 +34,10 @@ class ORMQueryBuilderAdapterTest extends \PHPUnit_Framework_TestCase
         $config = new Configuration();
         $config->setMetadataCacheImpl(new ArrayCache());
         $config->setQueryCacheImpl(new ArrayCache());
-        $config->setProxyDir(__DIR__ . '/cache');
+        $config->setProxyDir(__DIR__.'/cache');
         $config->setProxyNamespace('Cache\Proxies');
 
-        $driver = new AnnotationDriver(new AnnotationReader(), array(__DIR__ . '../../Entity'));
+        $driver = new AnnotationDriver(new AnnotationReader(), array(__DIR__.'../../Entity'));
         AnnotationRegistry::registerLoader('class_exists');
         $config->setMetadataDriverImpl($driver);
 
@@ -55,7 +53,7 @@ class ORMQueryBuilderAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $schemaTool = new SchemaTool($this->em);
         $schemaTool->createSchema(array(
-            $this->em->getClassMetadata('Datatheke\Bundle\PagerBundle\Tests\Entity\Person')
+            $this->em->getClassMetadata('Datatheke\Bundle\PagerBundle\Tests\Entity\Person'),
         ));
 
         $person1 = new Person();
@@ -140,19 +138,19 @@ class ORMQueryBuilderAdapterTest extends \PHPUnit_Framework_TestCase
                 array(
                     'field'    => 'lastname',
                     'operator' => Filter::OPERATOR_CONTAINS,
-                    'value'    => 'bon'
+                    'value'    => 'bon',
                 ),
                 array(
                     'field'    => 'firstname',
                     'operator' => Filter::OPERATOR_CONTAINS,
-                    'value'    => ''
+                    'value'    => '',
                 ),
                 array(
                     'field'    => 'birthday',
                     'operator' => Filter::OPERATOR_CONTAINS,
-                    'value'    => null
+                    'value'    => null,
                 ),
-            )
+            ),
         );
 
         $adapter->setFilter(Filter::createFromArray($filter));

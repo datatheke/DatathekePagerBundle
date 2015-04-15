@@ -3,7 +3,6 @@
 namespace Datatheke\Bundle\PagerBundle\Twig;
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-
 use Datatheke\Bundle\PagerBundle\Pager\Configuration;
 use Datatheke\Bundle\PagerBundle\Pager\PagerViewInterface;
 
@@ -57,7 +56,7 @@ class PagerExtension extends \Twig_Extension
             $pageRange = $pageCount;
         }
 
-        $delta = ceil($pageRange / 2 );
+        $delta = ceil($pageRange / 2);
 
         if ($pageNumber - $delta > $pageCount - $pageRange) {
             $lowerBound = $pageCount - $pageRange + 1;

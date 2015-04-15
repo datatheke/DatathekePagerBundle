@@ -3,7 +3,6 @@
 namespace Datatheke\Bundle\PagerBundle\Twig;
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-
 use Datatheke\Bundle\PagerBundle\Twig\TokenParser\DataGridThemeTokenParser;
 use Datatheke\Bundle\PagerBundle\DataGrid\DataGridViewInterface;
 use Datatheke\Bundle\PagerBundle\DataGrid\Column\Action\ActionInterface;
@@ -172,7 +171,7 @@ class DataGridExtension extends \Twig_Extension
         $blocks = array(
             'datagrid_column_order_by__'.$this->sanitizeAlias($alias),
             'datagrid_column_order_by_'.$column->getType(),
-            'datagrid_column_order_by'
+            'datagrid_column_order_by',
         );
 
         return $this->render($datagrid, $blocks, array_merge($params, array('column' => $column, 'alias' => $alias)));
@@ -183,7 +182,7 @@ class DataGridExtension extends \Twig_Extension
         $blocks = array(
             'datagrid_column_filter__'.$this->sanitizeAlias($alias),
             'datagrid_column_filter_'.$column->getType(),
-            'datagrid_column_filter'
+            'datagrid_column_filter',
         );
 
         return $this->render($datagrid, $blocks, array_merge($params, array('column' => $column, 'alias' => $alias)));
@@ -194,7 +193,7 @@ class DataGridExtension extends \Twig_Extension
         $blocks = array(
             'datagrid_column_item__'.$this->sanitizeAlias($alias),
             'datagrid_column_item_'.$column->getType(),
-            'datagrid_column_item'
+            'datagrid_column_item',
         );
 
         return $this->render($datagrid, $blocks, array_merge($params, array('item' => $item, 'column' => $column, 'alias' => $alias)));
@@ -214,7 +213,7 @@ class DataGridExtension extends \Twig_Extension
         $blocks = array(
             'datagrid_action__'.$this->sanitizeAlias($alias),
             'datagrid_action_'.$action->getType(),
-            'datagrid_action'
+            'datagrid_action',
         );
 
         return $this->render($datagrid, $blocks, array_merge($params, array('action' => $action, 'alias' => $alias, 'item' => $item)));

@@ -4,7 +4,6 @@ namespace Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ODM\MongoDB\DocumentRepository;
-
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\MongoDBDocumentAdapter;
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser\Exception\UnableToGuessException;
 

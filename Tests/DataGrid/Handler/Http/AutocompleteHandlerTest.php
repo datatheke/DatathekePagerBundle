@@ -3,7 +3,6 @@
 namespace Datatheke\Bundle\PagerBundle\Tests\DataGrid\Handler\Http;
 
 use Symfony\Component\HttpFoundation\Request;
-
 use Datatheke\Bundle\PagerBundle\Tests\PagerHelper;
 use Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\AutocompleteHandler;
 
@@ -15,7 +14,7 @@ class AutocompleteHandlerTest extends \PHPUnit_Framework_TestCase
 
         $datagrid = PagerHelper::createDatagrid();
         $request = new Request(array(
-            'term' => 'jean'
+            'term' => 'jean',
         ));
 
         $response = $handler->handleRequest($datagrid, $request);
@@ -34,7 +33,7 @@ class AutocompleteHandlerTest extends \PHPUnit_Framework_TestCase
         $datagrid = PagerHelper::createDatagrid();
         $request = new Request(array(
             'callback' => 'cb_test',
-            'term' => 'marc'
+            'term' => 'marc',
         ));
 
         $response = $handler->handleRequest($datagrid, $request);

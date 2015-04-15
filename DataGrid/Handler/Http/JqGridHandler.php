@@ -3,7 +3,6 @@
 namespace Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http;
 
 use Symfony\Component\HttpFoundation\Request;
-
 use Datatheke\Bundle\PagerBundle\DataGrid\HttpDatagridInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\JqGridHandler as jqGridPagerHandler;
 
@@ -34,7 +33,7 @@ class JqGridHandler extends AbstractHandler
             'page' => $pager->getCurrentPageNumber(),
             'total' => $pager->getPageCount(),
             'records' => $pager->getTotalItemCount(),
-            'rows' => $this->getItems($datagrid)
+            'rows' => $this->getItems($datagrid),
         );
 
         return $this->createJsonResponse($request, $response);

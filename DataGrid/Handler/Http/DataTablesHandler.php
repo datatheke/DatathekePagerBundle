@@ -3,7 +3,6 @@
 namespace Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http;
 
 use Symfony\Component\HttpFoundation\Request;
-
 use Datatheke\Bundle\PagerBundle\DataGrid\HttpDatagridInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\DataTablesHandler as DataTablesPagerHandler;
 use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
@@ -50,7 +49,7 @@ class DataTablesHandler extends AbstractHandler
             'iTotalDisplayRecords' => $pager->getTotalItemCount(),
             'iTotalRecords' => $pager->getTotalItemCount(),
             'columns' => $columns,
-            'aaData' => $this->getItems($datagrid, true)
+            'aaData' => $this->getItems($datagrid, true),
         );
 
         return $this->createJsonResponse($request, $response);

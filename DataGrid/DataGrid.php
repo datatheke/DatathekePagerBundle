@@ -7,7 +7,6 @@ use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
 use Datatheke\Bundle\PagerBundle\Datagrid\Column\ColumnInterface;
 use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
 

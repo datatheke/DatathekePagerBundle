@@ -3,7 +3,6 @@
 namespace Datatheke\Bundle\PagerBundle\Tests\Pager\Handler\Http;
 
 use Symfony\Component\HttpFoundation\Request;
-
 use Datatheke\Bundle\PagerBundle\Tests\PagerHelper;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\JqGridHandler;
 
@@ -16,7 +15,7 @@ class JqGridHandlerTest extends \PHPUnit_Framework_TestCase
         $pager   = PagerHelper::createPager();
         $request = new Request(array(
             'page' => 3,
-            'rows' => 5
+            'rows' => 5,
         ));
 
         $handler->handleRequest($pager, $request);

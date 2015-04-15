@@ -4,7 +4,6 @@ namespace Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityRepository;
-
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\ORMEntityAdapter;
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser\Exception\UnableToGuessException;
 

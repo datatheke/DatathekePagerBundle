@@ -104,7 +104,6 @@ class Filter
         }
 
         foreach ($layer['criteria'] as $criterium) {
-
             if (in_array($criterium['operator'], array(self::LOGICAL_OR, self::LOGICAL_AND))) {
                 // next layer
                 $criteriumIndex += self::readLayer($criterium, $layerNum + 1, $fields, $values, $operators, $logical);
@@ -112,7 +111,6 @@ class Filter
                 // condition
                 $logical[$layerNum][] = array($criterium['operator'], $criteriumIndex - $last);
             } else {
-
                 if ($hasSubLayer) {
                     // next layer
                     $criteriumIndex += self::readLayer(array('operator' => self::LOGICAL_OR, 'criteria' => array($criterium)), $layerNum + 1, $fields, $values, $operators, $logical);

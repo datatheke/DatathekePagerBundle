@@ -11,7 +11,7 @@ class BootstrapTypeaheadHandler extends AutocompleteHandler
         parent::setDefaultOptions($resolver);
 
         $resolver->setDefaults(array(
-            'search_param'  => 'query'
+            'search_param'  => 'query',
             )
         );
     }

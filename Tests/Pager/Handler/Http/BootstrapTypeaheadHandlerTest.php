@@ -3,7 +3,6 @@
 namespace Datatheke\Bundle\PagerBundle\Tests\Pager\Handler\Http;
 
 use Symfony\Component\HttpFoundation\Request;
-
 use Datatheke\Bundle\PagerBundle\Tests\PagerHelper;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\BootstrapTypeaheadHandler;
 
@@ -15,7 +14,7 @@ class BootstrapTypeaheadHandlerTest extends \PHPUnit_Framework_TestCase
 
         $pager   = PagerHelper::createPager();
         $request = new Request(array(
-            'query' => 'jean'
+            'query' => 'jean',
         ));
 
         $handler->handleRequest($pager, $request);

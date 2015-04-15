@@ -16,7 +16,7 @@ class PagerHelper
         array('firstname' => 'marc', 'lastname' => 'jean', 'age' => 26),
         array('firstname' => 'steve', 'lastname' => 'bon', 'age' => 27),
         array('firstname' => 'verycoolfirstname', 'lastname' => 'verycoollastname', 'age' => 8),
-        array('firstname' => 'jean', 'lastname' => 'doublon', 'age' => 99)
+        array('firstname' => 'jean', 'lastname' => 'doublon', 'age' => 99),
         );
 
     public static function createPagerFactory()

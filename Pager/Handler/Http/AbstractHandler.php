@@ -6,7 +6,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
 use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Filter;
 use Datatheke\Bundle\PagerBundle\Pager\Field;
@@ -25,7 +24,7 @@ abstract class AbstractHandler implements HttpHandlerInterface
     protected function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'method' => 'query'
+            'method' => 'query',
             )
         );
     }
@@ -74,7 +73,7 @@ abstract class AbstractHandler implements HttpHandlerInterface
             $filter['criteria'][] = array(
                 'field'    => $alias,
                 'operator' => $operator,
-                'value'    => $query
+                'value'    => $query,
                 );
         }
 

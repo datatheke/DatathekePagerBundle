@@ -11,7 +11,7 @@ class ArrayAdapterTest extends \PHPUnit_Framework_TestCase
 {
     protected static $source = array(
         array('firstname' => 'john', 'lastname' => 'doe', 'age' => 32, 'friend' => true),
-        array('firstname' => 'jean', 'lastname' => 'bon', 'age' => 25, 'friend' => false)
+        array('firstname' => 'jean', 'lastname' => 'bon', 'age' => 25, 'friend' => false),
     );
 
     public function testGuessFields()

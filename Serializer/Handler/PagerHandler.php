@@ -9,7 +9,6 @@ use JMS\Serializer\JsonSerializationVisitor;
 use JMS\Serializer\GenericSerializationVisitor;
 use JMS\Serializer\GraphNavigator;
 use JMS\Serializer\Context;
-
 use Datatheke\Bundle\PagerBundle\Pager\StaticPagerInterface;
 
 class PagerHandler implements SubscribingHandlerInterface
@@ -85,7 +84,7 @@ class PagerHandler implements SubscribingHandlerInterface
             'first_item_number'  => $pager->getFirstItemNumber(),
             'last_item_number'   => $pager->getLastItemNumber(),
             'current_item_count' => $pager->getCurrentItemCount(),
-            'items'              => $visitor->getNavigator()->accept($pager->getItems(), array('name' => 'array'), $context)
+            'items'              => $visitor->getNavigator()->accept($pager->getItems(), array('name' => 'array'), $context),
         ));
 
         if ($isRoot) {

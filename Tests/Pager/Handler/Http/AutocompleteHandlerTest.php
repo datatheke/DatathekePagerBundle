@@ -3,7 +3,6 @@
 namespace Datatheke\Bundle\PagerBundle\Tests\Pager\Handler\Http;
 
 use Symfony\Component\HttpFoundation\Request;
-
 use Datatheke\Bundle\PagerBundle\Tests\PagerHelper;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\AutocompleteHandler;
 
@@ -15,7 +14,7 @@ class AutocompleteHandlerTest extends \PHPUnit_Framework_TestCase
 
         $pager   = PagerHelper::createPager();
         $request = new Request(array(
-            'term' => 'jean'
+            'term' => 'jean',
         ));
 
         $handler->handleRequest($pager, $request);

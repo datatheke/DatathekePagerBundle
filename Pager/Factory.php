@@ -31,7 +31,7 @@ class Factory
 
         $defaults = array(
             'item_count_per_page'         => $this->config->getItemCountPerPage(),
-            'item_count_per_page_choices' => $this->config->getItemCountPerPageChoices()
+            'item_count_per_page_choices' => $this->config->getItemCountPerPageChoices(),
         );
 
         return new Pager($adapter, array_merge($defaults, $options));
@@ -62,7 +62,7 @@ class Factory
 
         $defaults = array(
             'item_count_per_page'         => $this->config->getItemCountPerPage(),
-            'item_count_per_page_choices' => $this->config->getItemCountPerPageChoices()
+            'item_count_per_page_choices' => $this->config->getItemCountPerPageChoices(),
         );
 
         return new HttpPager($adapter, $handler, array_merge($defaults, $options));
@@ -80,7 +80,7 @@ class Factory
 
         $defaults = array(
             'item_count_per_page'         => $this->config->getItemCountPerPage(),
-            'item_count_per_page_choices' => $this->config->getItemCountPerPageChoices()
+            'item_count_per_page_choices' => $this->config->getItemCountPerPageChoices(),
         );
 
         return new ConsolePager($adapter, $handler, array_merge($defaults, $options));

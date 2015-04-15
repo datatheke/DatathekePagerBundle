@@ -3,7 +3,6 @@
 namespace Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http;
 
 use Symfony\Component\HttpFoundation\Request;
-
 use Datatheke\Bundle\PagerBundle\DataGrid\HttpDatagridInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\FlexigridHandler as FlexigridPagerHandler;
 
@@ -33,7 +32,7 @@ class FlexigridHandler extends AbstractHandler
         $response = array(
             'page' => $pager->getCurrentPageNumber(),
             'total' => $pager->getTotalItemCount(),
-            'rows' => $this->getItems($datagrid)
+            'rows' => $this->getItems($datagrid),
         );
 
         return $this->createJsonResponse($request, $response);

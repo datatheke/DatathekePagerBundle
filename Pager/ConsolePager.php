@@ -5,7 +5,6 @@ namespace Datatheke\Bundle\PagerBundle\Pager;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\AdapterInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Console\ConsoleHandlerInterface;
 

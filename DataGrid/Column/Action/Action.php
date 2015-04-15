@@ -5,7 +5,6 @@ namespace Datatheke\Bundle\PagerBundle\DataGrid\Column\Action;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
 use Datatheke\Bundle\PagerBundle\DataGrid\DatagridView;
 
 class Action implements ActionInterface
@@ -33,7 +32,7 @@ class Action implements ActionInterface
             'ask_confirmation'     => false,
             'confirmation_message' => null,
             'icon'                 => null,
-            'evaluate_callback'    => null
+            'evaluate_callback'    => null,
             )
         );
     }

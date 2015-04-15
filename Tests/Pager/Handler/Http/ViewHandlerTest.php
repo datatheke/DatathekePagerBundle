@@ -3,7 +3,6 @@
 namespace Datatheke\Bundle\PagerBundle\Tests\Pager\Handler\Http;
 
 use Symfony\Component\HttpFoundation\Request;
-
 use Datatheke\Bundle\PagerBundle\Tests\PagerHelper;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\ViewHandler;
 
@@ -23,8 +22,8 @@ class ViewHandlerTest extends \PHPUnit_Framework_TestCase
         $pager   = PagerHelper::createPager();
         $request = new Request(array('_p' => array(
             'p'  => 3,
-            'pp' => 5
-            )
+            'pp' => 5,
+            ),
         ));
 
         $view = $handler->handleRequest($pager, $request);

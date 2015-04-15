@@ -3,7 +3,6 @@
 namespace Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http;
 
 use Symfony\Component\HttpFoundation\Request;
-
 use Datatheke\Bundle\PagerBundle\DataGrid\HttpDatagridInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\DynatableHandler as DynatablePagerHandler;
 
@@ -33,7 +32,7 @@ class DynatableHandler extends AbstractHandler
         $response = array(
             'queryRecordCount' => $pager->getTotalItemCount(),
             'totalRecordCount' => $pager->getCurrentItemCount(),
-            'records'          => $this->getItems($datagrid)
+            'records'          => $this->getItems($datagrid),
         );
 
         return $this->createJsonResponse($request, $response);

@@ -9,7 +9,6 @@ use JMS\Serializer\JsonSerializationVisitor;
 use JMS\Serializer\GenericSerializationVisitor;
 use JMS\Serializer\GraphNavigator;
 use JMS\Serializer\Context;
-
 use Datatheke\Bundle\PagerBundle\DataGrid\DataGrid;
 
 class DataGridHandler implements SubscribingHandlerInterface
@@ -74,7 +73,7 @@ class DataGridHandler implements SubscribingHandlerInterface
             'items'               => $visitor->getNavigator()->accept($pager->getItems(), array('name' => 'array'), $context),
 
             // TODO: add columns
-            'columns'             => array()
+            'columns'             => array(),
             );
 
         if ($isRoot) {

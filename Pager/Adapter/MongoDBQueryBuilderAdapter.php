@@ -5,7 +5,6 @@ namespace Datatheke\Bundle\PagerBundle\Pager\Adapter;
 use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
 use Datatheke\Bundle\PagerBundle\Pager\Filter;
 use Datatheke\Bundle\PagerBundle\Pager\Field;
-
 use Doctrine\MongoDB\Query\Builder;
 
 class MongoDBQueryBuilderAdapter implements AdapterInterface

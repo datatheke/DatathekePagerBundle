@@ -3,7 +3,6 @@
 namespace Datatheke\Bundle\PagerBundle\DataGrid;
 
 use Symfony\Component\HttpFoundation\Request;
-
 use Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\HttpHandlerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
 

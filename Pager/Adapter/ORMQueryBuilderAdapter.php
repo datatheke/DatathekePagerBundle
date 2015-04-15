@@ -4,7 +4,6 @@ namespace Datatheke\Bundle\PagerBundle\Pager\Adapter;
 
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
-
 use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
 use Datatheke\Bundle\PagerBundle\Pager\Filter;
 use Datatheke\Bundle\PagerBundle\Pager\Field;
@@ -99,13 +98,12 @@ class ORMQueryBuilderAdapter implements AdapterInterface
             }
 
             foreach ($meta->associationMappings as $property => $infos) {
-
                 switch ($infos['type']) {
                     case ClassMetadataInfo::ONE_TO_ONE:
                     case ClassMetadataInfo::MANY_TO_ONE:
                         $metadata = array(
                             'repository' => $em->getRepository($infos['targetEntity']),
-                            'mapping'    => $infos
+                            'mapping'    => $infos,
                         );
                         $this->fields[$property] = new Field($property, Field::TYPE_OBJECT, $alias.'.'.$property, $metadata);
                         break;
@@ -212,7 +210,6 @@ class ORMQueryBuilderAdapter implements AdapterInterface
         $criteria = array();
         $paramNum = 0;
         foreach ($filter->getFields() as $key => $alias) {
-
             $paramName  = 'param_'.$paramNum++;
             $field      = $this->getField($alias);
             $qualifier  = $field->getQualifier();
@@ -298,8 +295,8 @@ class ORMQueryBuilderAdapter implements AdapterInterface
                 //     $builder->setParameter($paramName, strtoupper('%'.$value.'%'));
                 // }
                 // else {
-                $criteria = $expr->like($qualifier, ':' . $paramName);
-                $builder->setParameter($paramName, '%' . $value . '%');
+                $criteria = $expr->like($qualifier, ':'.$paramName);
+                $builder->setParameter($paramName, '%'.$value.'%');
                 // }
                 break;
 
@@ -309,38 +306,38 @@ class ORMQueryBuilderAdapter implements AdapterInterface
                 //     $builder->setParameter($paramName, strtoupper('%'.$value.'%'));
                 // }
                 // else {
-                $criteria = $expr->not($expr->like($qualifier, ':' . $paramName));
-                $builder->setParameter($paramName, '%' . $value . '%');
+                $criteria = $expr->not($expr->like($qualifier, ':'.$paramName));
+                $builder->setParameter($paramName, '%'.$value.'%');
                 // }
                 break;
 
             case Filter::OPERATOR_EQUALS:
-                $criteria = $expr->eq($qualifier, ':' . $paramName);
+                $criteria = $expr->eq($qualifier, ':'.$paramName);
                 $builder->setParameter($paramName, $value);
                 break;
 
             case Filter::OPERATOR_NOT_EQUALS:
-                $criteria = $expr->neq($qualifier, ':' . $paramName);
+                $criteria = $expr->neq($qualifier, ':'.$paramName);
                 $builder->setParameter($paramName, $value);
                 break;
 
             case Filter::OPERATOR_GREATER:
-                $criteria = $expr->gt($qualifier, ':' . $paramName);
+                $criteria = $expr->gt($qualifier, ':'.$paramName);
                 $builder->setParameter($paramName, $value);
                 break;
 
             case Filter::OPERATOR_GREATER_EQUALS:
-                $criteria = $expr->gte($qualifier, ':' . $paramName);
+                $criteria = $expr->gte($qualifier, ':'.$paramName);
                 $builder->setParameter($paramName, $value);
                 break;
 
             case Filter::OPERATOR_LESS:
-                $criteria = $expr->lt($qualifier, ':' . $paramName);
+                $criteria = $expr->lt($qualifier, ':'.$paramName);
                 $builder->setParameter($paramName, $value);
                 break;
 
             case Filter::OPERATOR_LESS_EQUALS:
-                $criteria = $expr->lte($qualifier, ':' . $paramName);
+                $criteria = $expr->lte($qualifier, ':'.$paramName);
                 $builder->setParameter($paramName, $value);
                 break;
 
@@ -356,7 +353,7 @@ class ORMQueryBuilderAdapter implements AdapterInterface
                 if (!is_array($value)) {
                     $value = preg_split("/((\r(?!\n))|((?<!\r)\n)|(\r\n))/", $value, -1, PREG_SPLIT_NO_EMPTY);
                 }
-                $criteria = $expr->in($qualifier, ':' . $paramName);
+                $criteria = $expr->in($qualifier, ':'.$paramName);
                 $builder->setParameter($paramName, $value);
                 break;
 
@@ -364,7 +361,7 @@ class ORMQueryBuilderAdapter implements AdapterInterface
                 if (!is_array($value)) {
                     $value = preg_split("/((\r(?!\n))|((?<!\r)\n)|(\r\n))/", $value, -1, PREG_SPLIT_NO_EMPTY);
                 }
-                $criteria = $expr->not($expr->in($qualifier, ':' . $paramName));
+                $criteria = $expr->not($expr->in($qualifier, ':'.$paramName));
                 $builder->setParameter($paramName, $value);
                 break;
         }

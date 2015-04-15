@@ -3,7 +3,6 @@
 namespace Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser;
 
 use Datatheke\Bundle\PagerBundle\Pager\Field;
-
 use Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser\Exception\UnableToGuessException;
 
 class GuesserChain implements GuesserInterface

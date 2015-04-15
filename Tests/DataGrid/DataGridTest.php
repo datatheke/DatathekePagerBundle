@@ -3,7 +3,6 @@
 namespace Datatheke\Bundle\PagerBundle\Tests\DataGrid;
 
 use Symfony\Component\HttpFoundation\Request;
-
 use Datatheke\Bundle\PagerBundle\Tests\PagerHelper;
 use Datatheke\Bundle\PagerBundle\DataGrid\Column\StaticColumn;
 use Datatheke\Bundle\PagerBundle\DataGrid\Column\Action\Action;
@@ -24,11 +23,11 @@ class DataGridTest extends \PHPUnit_Framework_TestCase
 
         $actions = new StaticColumn('Actions');
         $actions->addAction(new Action('View', 'item_view', array(
-            'icon' => '.glyphicon-eye-open'
+            'icon' => '.glyphicon-eye-open',
             )
         ));
         $actions->addAction(new Action('Delete', 'item_delete', array(
-            'item_mapping' => array('id' => 'lastname')
+            'item_mapping' => array('id' => 'lastname'),
             )
         ));
 

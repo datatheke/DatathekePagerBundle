@@ -3,7 +3,6 @@
 namespace Datatheke\Bundle\PagerBundle\DataGrid\Column;
 
 use Symfony\Component\Form\Extension\Core\DataTransformer\DateTimeToLocalizedStringTransformer;
-
 use Datatheke\Bundle\PagerBundle\Pager\DataTransformer\DateTimeToStringFallbackTransformer;
 
 class LocalizedDateTimeColumn extends AbstractColumn

@@ -4,7 +4,6 @@ namespace Datatheke\Bundle\PagerBundle\DataGrid\Handler\Console;
 
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\HelperSet;
-
 use Datatheke\Bundle\PagerBundle\DataGrid\ConsoleDataGridInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Console\DefaultHandler as PagerDefaultHandler;
 
@@ -44,7 +43,7 @@ class DefaultHandler implements ConsoleHandlerInterface
         $output->writeln($formatter->formatBlock(
             array(
                 'Page:     '.$pager->getCurrentPageNumber().' / '.$pager->getPageCount(),
-                'Items:    '.$pager->getFirstItemNumber().'-'.$pager->getLastItemNumber().' / '.$pager->getTotalItemCount()
+                'Items:    '.$pager->getFirstItemNumber().'-'.$pager->getLastItemNumber().' / '.$pager->getTotalItemCount(),
             ),
             'bg=blue;fg=white'
         ));

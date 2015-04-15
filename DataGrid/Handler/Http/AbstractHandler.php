@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
 use Datatheke\Bundle\PagerBundle\DataGrid\HttpDatagridInterface;
 
 abstract class AbstractHandler implements HttpHandlerInterface
@@ -25,7 +24,7 @@ abstract class AbstractHandler implements HttpHandlerInterface
     {
         $resolver->setDefaults(array(
             'method'        => 'query',
-            'jsonp_padding' => 'callback'
+            'jsonp_padding' => 'callback',
             )
         );
     }
