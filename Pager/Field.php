@@ -12,6 +12,7 @@ class Field
     const TYPE_BOOLEAN  = 'boolean';
     const TYPE_DATETIME = 'datetime';
     const TYPE_OBJECT   = 'object';
+    const TYPE_ARRAY    = 'array';
 
     protected $propertyPath;
     protected $type;

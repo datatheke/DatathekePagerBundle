@@ -49,42 +49,65 @@ class ORMQueryBuilderAdapter implements AdapterInterface
         }
 
         foreach ($entities as $alias => $entity) {
-            $metas = $em->getClassMetadata($entity);
-            foreach ($metas->fieldMappings as $property => $infos) {
-                $metadatas = array('mapping' => $infos);
+            $meta = $em->getClassMetadata($entity);
+            foreach ($meta->fieldMappings as $property => $infos) {
+                $metadata = array('mapping' => $infos);
 
+                $type = null;
                 switch ($infos['type']) {
+                    case 'array':
+                    case 'json_array':
+                    case 'simple_array':
+                        $type = Field::TYPE_ARRAY;
+                        break;
+
                     case 'datetime':
+                    case 'datetimetz':
+                    case 'date':
+                    case 'time':
                         $type = Field::TYPE_DATETIME;
                         break;
 
                     case 'integer':
+                    case 'smallint':
+                    case 'bigint':
                         $type = Field::TYPE_NUMBER;
-                        $metadatas['precision'] = 0;
+                        $metadata['precision'] = 0;
+                        break;
+
+                    case 'decimal':
+                    case 'float':
+                        $type = Field::TYPE_NUMBER;
                         break;
 
                     case 'boolean':
                         $type = Field::TYPE_BOOLEAN;
                         break;
 
-                    default:
+                    case 'string':
+                    case 'text':
+                    case 'guid':
                         $type = Field::TYPE_STRING;
                         break;
                 }
 
-                $this->fields[$property] = new Field($property, $type, $alias.'.'.$property, $metadatas);
+                if (null === $type) {
+                    continue;
+                }
+
+                $this->fields[$property] = new Field($property, $type, $alias.'.'.$property, $metadata);
             }
 
-            foreach ($metas->associationMappings as $property => $infos) {
+            foreach ($meta->associationMappings as $property => $infos) {
 
                 switch ($infos['type']) {
                     case ClassMetadataInfo::ONE_TO_ONE:
                     case ClassMetadataInfo::MANY_TO_ONE:
-                        $metadatas = array(
+                        $metadata = array(
                             'repository' => $em->getRepository($infos['targetEntity']),
                             'mapping'    => $infos
                         );
-                        $this->fields[$property] = new Field($property, Field::TYPE_OBJECT, $alias.'.'.$property, $metadatas);
+                        $this->fields[$property] = new Field($property, Field::TYPE_OBJECT, $alias.'.'.$property, $metadata);
                         break;
                 }
             }
