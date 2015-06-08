@@ -2,16 +2,16 @@
 
 namespace Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser;
 
-use Datatheke\Bundle\PagerBundle\Pager\Adapter\MongoDBQueryBuilderAdapter;
+use Datatheke\Bundle\PagerBundle\Pager\Adapter\ElasticaAdapter;
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser\Exception\UnableToGuessException;
-use Doctrine\MongoDB\Query\Builder;
+use Elastica\SearchableInterface;
 
-class MongoDBQueryBuilderGuesser implements GuesserInterface
+class ElasticaGuesser implements GuesserInterface
 {
     public function guess($input)
     {
-        if ($input instanceof Builder) {
-            return new MongoDBQueryBuilderAdapter($input);
+        if ($input instanceof SearchableInterface) {
+            return new ElasticaAdapter($input);
         }
 
         throw new UnableToGuessException($input, __CLASS__);
