@@ -28,7 +28,8 @@
         "ext-pdo_sqlite": "*",
         "doctrine/orm": "~2.3",
         "jms/serializer": "~0.16",
-        "pagerfanta/pagerfanta": "~1.0"
+        "pagerfanta/pagerfanta": "~1.0",
+        "phpunit/phpunit": "^4.0"
     },
     "suggest": {
         "doctrine/doctrine-bundle": "To use ORMQueryBuilderAdapter and ORMEntityAdapter",
