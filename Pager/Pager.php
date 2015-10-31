@@ -109,10 +109,10 @@ class Pager implements PagerInterface
         return $this->orderBy;
     }
 
-    public function setFilter(Filter $filter = null)
+    public function setFilter(Filter $filter = null, $name = 'pager')
     {
         $this->filter = $filter;
-        $this->adapter->setFilter($filter, 'pager');
+        $this->adapter->setFilter($filter, $name);
 
         return $this;
     }

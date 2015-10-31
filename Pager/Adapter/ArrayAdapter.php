@@ -87,9 +87,9 @@ class ArrayAdapter implements AdapterInterface
         return $this->fields[$alias];
     }
 
-    public function setFilter(Filter $filter = null, $group = 'default')
+    public function setFilter(Filter $filter = null, $name = 'default')
     {
-        $this->filter[$group] = $filter;
+        $this->filter[$name]  = $filter;
         $this->copy           = null;
         $this->isOrdered      = false;
 

@@ -66,7 +66,7 @@ class JqGridHandler extends AbstractHandler
                     $searchOperators[] = $opMap[ $r['op'] ];
                 }
 
-                $pager->setFilter(new Filter($searchFields, $searchData, array($searchOperators), array(array(array($groupOp, null)))));
+                $pager->setFilter(new Filter($searchFields, $searchData, array($searchOperators), array(array(array($groupOp, null)))), 'handler');
             }
         }
     }

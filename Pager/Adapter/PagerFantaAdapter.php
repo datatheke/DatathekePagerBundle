@@ -39,7 +39,7 @@ class PagerFantaAdapter implements AdapterInterface
         return $this;
     }
 
-    public function setFilter(Filter $filter = null, $group = 'default')
+    public function setFilter(Filter $filter = null, $name = 'default')
     {
         // Not implemented
 

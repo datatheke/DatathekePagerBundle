@@ -161,9 +161,9 @@ class ORMQueryBuilderAdapter implements AdapterInterface
         ;
     }
 
-    public function setFilter(Filter $filter = null, $group = 'default')
+    public function setFilter(Filter $filter = null, $name = 'default')
     {
-        $this->filter[$group] = $filter;
+        $this->filter[$name]  = $filter;
         $this->count          = null;
 
         return $this;

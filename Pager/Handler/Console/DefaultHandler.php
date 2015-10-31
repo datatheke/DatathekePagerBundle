@@ -97,13 +97,13 @@ class DefaultHandler implements ConsoleHandlerInterface
             case 'f':
                 $filter = $dialog->ask($output, 'Filter: ');
                 if (null === $filter) {
-                    $pager->setFilter(null);
+                    $pager->setFilter(null, 'handler');
                 } else {
                     $filter = explode(' ', $filter);
                     if (!isset($filter[2])) {
                         $filter[2] = null;
                     }
-                    $pager->setFilter(new Filter(array($filter[0]), array($filter[2]), array($filter[1])));
+                    $pager->setFilter(new Filter(array($filter[0]), array($filter[2]), array($filter[1])), 'handler');
                 }
                 break;
 

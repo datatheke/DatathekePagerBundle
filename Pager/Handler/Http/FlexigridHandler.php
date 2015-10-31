@@ -39,7 +39,7 @@ class FlexigridHandler extends AbstractHandler
 
         if ($this->has($request, 'qtype') && isset($fields[$field = $this->get($request, 'qtype')]) && $this->has($request, 'query')) {
             $operator = Field::TYPE_STRING === $fields[$field]->getType() ? Filter::OPERATOR_CONTAINS : Filter::OPERATOR_EQUALS;
-            $pager->setFilter(new Filter(array($field), array($this->get($request, 'query')), array($operator)));
+            $pager->setFilter(new Filter(array($field), array($this->get($request, 'query')), array($operator)), 'handler');
         }
     }
 }

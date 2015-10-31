@@ -77,6 +77,6 @@ abstract class AbstractHandler implements HttpHandlerInterface
                 );
         }
 
-        $pager->setFilter(Filter::createFromArray($filter));
+        $pager->setFilter(Filter::createFromArray($filter), 'handler');
     }
 }

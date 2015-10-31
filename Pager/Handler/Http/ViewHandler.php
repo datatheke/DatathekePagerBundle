@@ -108,14 +108,14 @@ class ViewHandler implements HttpHandlerInterface
         }
 
         if (self::FILTER_MODE_SIMPLIFIED === $this->getOption('filter_mode')) {
-            $pager->setFilter(new Filter(array_keys($filter), array_values($filter)));
+            $pager->setFilter(new Filter(array_keys($filter), array_values($filter)), 'handler');
         } else {
             $fields    = (isset($filter['f']) && is_array($filter['f'])) ? $filter['f'] : array();
             $values    = (isset($filter['v']) && is_array($filter['v'])) ? $filter['v'] : array();
             $operators = (isset($filter['o']) && is_array($filter['o'])) ? $filter['o'] : array();
             $logical   = (isset($filter['l']) && is_array($filter['l'])) ? $filter['l'] : array();
 
-            $pager->setFilter(new Filter($fields, $values, $operators, $logical));
+            $pager->setFilter(new Filter($fields, $values, $operators, $logical), 'handler');
         }
     }
 }

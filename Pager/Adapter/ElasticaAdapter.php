@@ -65,7 +65,7 @@ class ElasticaAdapter implements AdapterInterface
         return $this->searchable->search($this->query);
     }
 
-    public function setFilter(Filter $filter = null, $group = 'default')
+    public function setFilter(Filter $filter = null, $name = 'default')
     {
         $this->count = null;
         $query = new Query\Bool();
