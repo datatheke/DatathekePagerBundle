@@ -32,6 +32,24 @@ LICENSE
 
 MIT (see LICENSE file)
 
+INSTALL
+-------
+
+### Install with composer
+
+    composer.phar require "datatheke/pager-bundle"
+
+### Update your app/AppKernel.php
+
+``` php
+<?php
+    //...
+    $bundles = array(
+        //...
+        new Datatheke\Bundle\PagerBundle\DatathekePagerBundle(),
+    );
+```
+
 USAGE
 -----
 
@@ -151,22 +169,4 @@ TWIG
             </form>
         </div>
     {% endblock %}
-```
-
-INSTALL
--------
-
-### Install with composer
-
-    composer.phar require "datatheke/pager-bundle" "0.3.*"
-
-### Update your app/AppKernel.php
-
-``` php
-<?php
-    //...
-    $bundles = array(
-        //...
-        new Datatheke\Bundle\PagerBundle\DatathekePagerBundle(),
-    );
 ```

@@ -1,6 +1,6 @@
 {
     "name": "datatheke/pager-bundle",
-    "description": "Pager & DataGrid bundle for Symfony2",
+    "description": "Pager & DataGrid bundle for Symfony",
     "type": "symfony-bundle",
     "keywords": ["pager", "paginator", "datagrid", "jqGrid", "Flexigrid", "Dynatable", "Autocomplete", "Typeahead", "DataTables", "bootgrid"],
     "homepage": "https://github.com/datatheke/DatathekePagerBundle",
@@ -13,20 +13,20 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "symfony/framework-bundle": "~2.3",
-        "symfony/options-resolver": "~2.3",
-        "symfony/property-access": "~2.3",
-        "symfony/form": "~2.3",
-        "symfony/console": "~2.3",
-        "symfony/http-foundation": "~2.3",
-        "symfony/dependency-injection": "~2.3",
-        "symfony/http-kernel": "~2.3",
-        "symfony/config": "~2.3",
-        "symfony/routing": "~2.3"
+        "symfony/framework-bundle": "~2.3|~3.0",
+        "symfony/options-resolver": "~2.3|~3.0",
+        "symfony/property-access": "~2.3|~3.0",
+        "symfony/form": "~2.3|~3.0",
+        "symfony/console": "~2.3|~3.0",
+        "symfony/http-foundation": "~2.3|~3.0",
+        "symfony/dependency-injection": "~2.3|~3.0",
+        "symfony/http-kernel": "~2.3|~3.0",
+        "symfony/config": "~2.3|~3.0",
+        "symfony/routing": "~2.3|~3.0"
     },
     "require-dev": {
         "ext-pdo_sqlite": "*",
-        "doctrine/orm": "~2.3",
+        "doctrine/orm": "~2.3|~3.0",
         "jms/serializer": "~0.16",
         "pagerfanta/pagerfanta": "~1.0",
         "phpunit/phpunit": "^4.0"
@@ -38,9 +38,11 @@
         "jms/serializer-bundle": "To serialize Pager and DataGrid"
     },
     "autoload": {
-        "psr-0": {
-            "Datatheke\\Bundle\\PagerBundle": ""
-        }
-    },
-    "target-dir": "Datatheke/Bundle/PagerBundle"
+        "psr-4": {
+            "Datatheke\\Bundle\\PagerBundle\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    }
 }

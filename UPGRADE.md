@@ -1,3 +1,8 @@
+-> v0.4.0
+---------
+Change Pager/PagerInterface.php
+- Add 'name' argument to 'setFilter' method
+
 v0.3.12 -> v0.3.13
 ------------------
 - Datatheke\Bundle\PagerBundle\Pager::getMetadatas() is deprecated. Use Datatheke\Bundle\PagerBundle\Pager::getMetadata() instead
