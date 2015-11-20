@@ -26,7 +26,7 @@
     },
     "require-dev": {
         "ext-pdo_sqlite": "*",
-        "doctrine/orm": "~2.3|~3.0",
+        "doctrine/orm": "~2.3",
         "jms/serializer": "~0.16",
         "pagerfanta/pagerfanta": "~1.0",
         "phpunit/phpunit": "^4.0"
