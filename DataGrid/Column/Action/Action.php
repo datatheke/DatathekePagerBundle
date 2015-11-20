@@ -4,7 +4,6 @@ namespace Datatheke\Bundle\PagerBundle\DataGrid\Column\Action;
 
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Datatheke\Bundle\PagerBundle\DataGrid\DatagridView;
 
 class Action implements ActionInterface
@@ -23,7 +22,7 @@ class Action implements ActionInterface
         $this->route      = $route;
     }
 
-    protected function setDefaultOptions(OptionsResolverInterface $resolver)
+    protected function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'parameters'           => array(),

@@ -3,15 +3,15 @@
 namespace Datatheke\Bundle\PagerBundle\Pager\Handler\Http;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Field;
 use Datatheke\Bundle\PagerBundle\Pager\Filter;
 use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class FlexigridHandler extends AbstractHandler
 {
-    protected function setDefaultOptions(OptionsResolverInterface $resolver)
+    protected function setDefaultOptions(OptionsResolver $resolver)
     {
         parent::setDefaultOptions($resolver);
 

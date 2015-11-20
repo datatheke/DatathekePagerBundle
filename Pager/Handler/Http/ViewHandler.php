@@ -5,7 +5,6 @@ namespace Datatheke\Bundle\PagerBundle\Pager\Handler\Http;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
 use Datatheke\Bundle\PagerBundle\Pager\Filter;
@@ -25,7 +24,7 @@ class ViewHandler implements HttpHandlerInterface
         $this->options = $resolver->resolve($options);
     }
 
-    protected function setDefaultOptions(OptionsResolverInterface $resolver)
+    protected function setDefaultOptions(OptionsResolver $resolver)
     {
         static $pagerNum;
         $pagerParam = '_p'.$pagerNum++;

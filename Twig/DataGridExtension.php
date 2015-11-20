@@ -11,7 +11,6 @@ use Datatheke\Bundle\PagerBundle\DataGrid\Configuration;
 
 class DataGridExtension extends \Twig_Extension
 {
-    protected $environment;
     protected $urlGenerator;
     protected $config;
 
@@ -23,11 +22,6 @@ class DataGridExtension extends \Twig_Extension
         $this->config       = $config;
 
         $this->themes       = new \SplObjectStorage();
-    }
-
-    public function initRuntime(\Twig_Environment $environment)
-    {
-        $this->environment = $environment;
     }
 
     public function getName()
@@ -45,27 +39,27 @@ class DataGridExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'datagrid'                 => new \Twig_Function_Method($this, 'renderDataGrid', array('is_safe' => array('html'))),
-            'datagrid_javascripts'     => new \Twig_Function_Method($this, 'renderJavascripts', array('is_safe' => array('html'))),
-            'datagrid_stylesheets'     => new \Twig_Function_Method($this, 'renderStyleSheets', array('is_safe' => array('html'))),
-            'datagrid_content'         => new \Twig_Function_Method($this, 'renderContent', array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('datagrid', array($this, 'renderDataGrid'), array('is_safe' => array('html'), 'needs_environment' => true)),
+            new \Twig_SimpleFunction('datagrid_javascripts', array($this, 'renderJavascripts'), array('is_safe' => array('html'), 'needs_environment' => true)),
+            new \Twig_SimpleFunction('datagrid_stylesheets', array($this, 'renderStyleSheets'), array('is_safe' => array('html'), 'needs_environment' => true)),
+            new \Twig_SimpleFunction('datagrid_content', array($this, 'renderContent'), array('is_safe' => array('html'), 'needs_environment' => true)),
 
-            'datagrid_header'          => new \Twig_Function_Method($this, 'renderHeader', array('is_safe' => array('html'))),
-            'datagrid_body'            => new \Twig_Function_Method($this, 'renderBody', array('is_safe' => array('html'))),
-            'datagrid_footer'          => new \Twig_Function_Method($this, 'renderFooter', array('is_safe' => array('html'))),
-            'datagrid_paginate'        => new \Twig_Function_Method($this, 'renderPaginate', array('is_safe' => array('html'))),
-            'datagrid_items_per_page'  => new \Twig_Function_Method($this, 'renderItemsPerPage', array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('datagrid_header', array($this, 'renderHeader'), array('is_safe' => array('html'), 'needs_environment' => true)),
+            new \Twig_SimpleFunction('datagrid_body', array($this, 'renderBody'), array('is_safe' => array('html'), 'needs_environment' => true)),
+            new \Twig_SimpleFunction('datagrid_footer', array($this, 'renderFooter'), array('is_safe' => array('html'), 'needs_environment' => true)),
+            new \Twig_SimpleFunction('datagrid_paginate', array($this, 'renderPaginate'), array('is_safe' => array('html'), 'needs_environment' => true)),
+            new \Twig_SimpleFunction('datagrid_items_per_page', array($this, 'renderItemsPerPage'), array('is_safe' => array('html'), 'needs_environment' => true)),
 
-            'datagrid_row_order_by'    => new \Twig_Function_Method($this, 'renderRowOrderBy', array('is_safe' => array('html'))),
-            'datagrid_row_filters'     => new \Twig_Function_Method($this, 'renderRowFilters', array('is_safe' => array('html'))),
-            'datagrid_row_items'       => new \Twig_Function_Method($this, 'renderRowItems', array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('datagrid_row_order_by', array($this, 'renderRowOrderBy'), array('is_safe' => array('html'), 'needs_environment' => true)),
+            new \Twig_SimpleFunction('datagrid_row_filters', array($this, 'renderRowFilters'), array('is_safe' => array('html'), 'needs_environment' => true)),
+            new \Twig_SimpleFunction('datagrid_row_items', array($this, 'renderRowItems'), array('is_safe' => array('html'), 'needs_environment' => true)),
 
-            'datagrid_column_order_by' => new \Twig_Function_Method($this, 'renderColumnOrderBy', array('is_safe' => array('html'))),
-            'datagrid_column_filter'   => new \Twig_Function_Method($this, 'renderColumnFilter', array('is_safe' => array('html'))),
-            'datagrid_column_item'     => new \Twig_Function_Method($this, 'renderColumnItem', array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('datagrid_column_order_by', array($this, 'renderColumnOrderBy'), array('is_safe' => array('html'), 'needs_environment' => true)),
+            new \Twig_SimpleFunction('datagrid_column_filter', array($this, 'renderColumnFilter'), array('is_safe' => array('html'), 'needs_environment' => true)),
+            new \Twig_SimpleFunction('datagrid_column_item', array($this, 'renderColumnItem'), array('is_safe' => array('html'), 'needs_environment' => true)),
 
-            'datagrid_item'            => new \Twig_Function_Method($this, 'renderItem', array('is_safe' => array('html'))),
-            'datagrid_action'          => new \Twig_Function_Method($this, 'renderAction', array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('datagrid_item', array($this, 'renderItem'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('datagrid_action', array($this, 'renderAction'), array('is_safe' => array('html'), 'needs_environment' => true)),
         );
     }
 
@@ -74,7 +68,7 @@ class DataGridExtension extends \Twig_Extension
         $this->themes->attach($datagrid, $resources);
     }
 
-    protected function render($datagrid, $blocks, $params = array())
+    protected function render(\Twig_Environment $env, $datagrid, $blocks, $params = array())
     {
         if (!is_array($blocks)) {
             $blocks = array($blocks);
@@ -85,10 +79,10 @@ class DataGridExtension extends \Twig_Extension
             $templates = array_merge($this->themes[$datagrid], $templates);
         }
 
-        $context = $this->environment->mergeGlobals(array_merge($params, array('datagrid' => $datagrid)));
+        $context = $env->mergeGlobals(array_merge($params, array('datagrid' => $datagrid)));
         foreach ($templates as $template) {
             if (!$template instanceof \Twig_Template) {
-                $template = $this->environment->loadTemplate($template);
+                $template = $env->loadTemplate($template);
             }
 
             foreach ($blocks as $block) {
@@ -106,67 +100,67 @@ class DataGridExtension extends \Twig_Extension
         throw new \Exception('Block '.$block.' not found');
     }
 
-    public function renderDataGrid(DataGridViewInterface $datagrid, array $params = array())
+    public function renderDataGrid(\Twig_Environment $env, DataGridViewInterface $datagrid, array $params = array())
     {
-        return $this->render($datagrid, 'datagrid', $params);
+        return $this->render($env, $datagrid, 'datagrid', $params);
     }
 
-    public function renderJavascripts(DataGridViewInterface $datagrid, array $params = array())
+    public function renderJavascripts(\Twig_Environment $env, DataGridViewInterface $datagrid, array $params = array())
     {
-        return $this->render($datagrid, 'datagrid_javascripts', $params);
+        return $this->render($env, $datagrid, 'datagrid_javascripts', $params);
     }
 
-    public function renderStyleSheets(DataGridViewInterface $datagrid, array $params = array())
+    public function renderStyleSheets(\Twig_Environment $env, DataGridViewInterface $datagrid, array $params = array())
     {
-        return $this->render($datagrid, 'datagrid_stylesheets', $params);
+        return $this->render($env, $datagrid, 'datagrid_stylesheets', $params);
     }
 
-    public function renderContent(DataGridViewInterface $datagrid, array $params = array())
+    public function renderContent(\Twig_Environment $env, DataGridViewInterface $datagrid, array $params = array())
     {
-        return $this->render($datagrid, 'datagrid_content', $params);
+        return $this->render($env, $datagrid, 'datagrid_content', $params);
     }
 
-    public function renderHeader(DataGridViewInterface $datagrid, array $params = array())
+    public function renderHeader(\Twig_Environment $env, DataGridViewInterface $datagrid, array $params = array())
     {
-        return $this->render($datagrid, 'datagrid_header', $params);
+        return $this->render($env, $datagrid, 'datagrid_header', $params);
     }
 
-    public function renderBody(DataGridViewInterface $datagrid, array $params = array())
+    public function renderBody(\Twig_Environment $env, DataGridViewInterface $datagrid, array $params = array())
     {
-        return $this->render($datagrid, 'datagrid_body', $params);
+        return $this->render($env, $datagrid, 'datagrid_body', $params);
     }
 
-    public function renderFooter(DataGridViewInterface $datagrid, array $params = array())
+    public function renderFooter(\Twig_Environment $env, DataGridViewInterface $datagrid, array $params = array())
     {
-        return $this->render($datagrid, 'datagrid_footer', $params);
+        return $this->render($env, $datagrid, 'datagrid_footer', $params);
     }
 
-    public function renderPaginate(DataGridViewInterface $datagrid, array $params = array())
+    public function renderPaginate(\Twig_Environment $env, DataGridViewInterface $datagrid, array $params = array())
     {
-        return $this->render($datagrid, 'datagrid_paginate', $params);
+        return $this->render($env, $datagrid, 'datagrid_paginate', $params);
     }
 
-    public function renderItemsPerPage(DataGridViewInterface $datagrid, array $params = array())
+    public function renderItemsPerPage(\Twig_Environment $env, DataGridViewInterface $datagrid, array $params = array())
     {
-        return $this->render($datagrid, 'datagrid_items_per_page', $params);
+        return $this->render($env, $datagrid, 'datagrid_items_per_page', $params);
     }
 
-    public function renderRowOrderBy(DataGridViewInterface $datagrid, array $params = array())
+    public function renderRowOrderBy(\Twig_Environment $env, DataGridViewInterface $datagrid, array $params = array())
     {
-        return $this->render($datagrid, 'datagrid_row_order_by', $params);
+        return $this->render($env, $datagrid, 'datagrid_row_order_by', $params);
     }
 
-    public function renderRowFilters(DataGridViewInterface $datagrid, array $params = array())
+    public function renderRowFilters(\Twig_Environment $env, DataGridViewInterface $datagrid, array $params = array())
     {
-        return $this->render($datagrid, 'datagrid_row_filters', $params);
+        return $this->render($env, $datagrid, 'datagrid_row_filters', $params);
     }
 
-    public function renderRowItems(DataGridViewInterface $datagrid, $item, array $params = array())
+    public function renderRowItems(\Twig_Environment $env, DataGridViewInterface $datagrid, $item, array $params = array())
     {
-        return $this->render($datagrid, 'datagrid_row_items', array_merge($params, array('item' => $item)));
+        return $this->render($env, $datagrid, 'datagrid_row_items', array_merge($params, array('item' => $item)));
     }
 
-    public function renderColumnOrderBy(DataGridViewInterface $datagrid, ColumnInterface $column, $alias, array $params = array())
+    public function renderColumnOrderBy(\Twig_Environment $env, DataGridViewInterface $datagrid, ColumnInterface $column, $alias, array $params = array())
     {
         $blocks = array(
             'datagrid_column_order_by__'.$this->sanitizeAlias($alias),
@@ -174,10 +168,10 @@ class DataGridExtension extends \Twig_Extension
             'datagrid_column_order_by',
         );
 
-        return $this->render($datagrid, $blocks, array_merge($params, array('column' => $column, 'alias' => $alias)));
+        return $this->render($env, $datagrid, $blocks, array_merge($params, array('column' => $column, 'alias' => $alias)));
     }
 
-    public function renderColumnFilter(DataGridViewInterface $datagrid, ColumnInterface $column, $alias, array $params = array())
+    public function renderColumnFilter(\Twig_Environment $env, DataGridViewInterface $datagrid, ColumnInterface $column, $alias, array $params = array())
     {
         $blocks = array(
             'datagrid_column_filter__'.$this->sanitizeAlias($alias),
@@ -185,10 +179,10 @@ class DataGridExtension extends \Twig_Extension
             'datagrid_column_filter',
         );
 
-        return $this->render($datagrid, $blocks, array_merge($params, array('column' => $column, 'alias' => $alias)));
+        return $this->render($env, $datagrid, $blocks, array_merge($params, array('column' => $column, 'alias' => $alias)));
     }
 
-    public function renderColumnItem(DataGridViewInterface $datagrid, ColumnInterface $column, $item, $alias, array $params = array())
+    public function renderColumnItem(\Twig_Environment $env, DataGridViewInterface $datagrid, ColumnInterface $column, $item, $alias, array $params = array())
     {
         $blocks = array(
             'datagrid_column_item__'.$this->sanitizeAlias($alias),
@@ -196,7 +190,7 @@ class DataGridExtension extends \Twig_Extension
             'datagrid_column_item',
         );
 
-        return $this->render($datagrid, $blocks, array_merge($params, array('item' => $item, 'column' => $column, 'alias' => $alias)));
+        return $this->render($env, $datagrid, $blocks, array_merge($params, array('item' => $item, 'column' => $column, 'alias' => $alias)));
     }
 
     public function renderItem(DataGridViewInterface $datagrid, ColumnInterface $column, $item)
@@ -204,7 +198,7 @@ class DataGridExtension extends \Twig_Extension
         return $datagrid->getColumnValue($column, $item);
     }
 
-    public function renderAction(DataGridViewInterface $datagrid, ActionInterface $action, $alias, $item = null, array $params = array())
+    public function renderAction(\Twig_Environment $env, DataGridViewInterface $datagrid, ActionInterface $action, $alias, $item = null, array $params = array())
     {
         if (!$action->evaluateDisplay($datagrid, $item)) {
             return '';
@@ -216,7 +210,7 @@ class DataGridExtension extends \Twig_Extension
             'datagrid_action',
         );
 
-        return $this->render($datagrid, $blocks, array_merge($params, array('action' => $action, 'alias' => $alias, 'item' => $item)));
+        return $this->render($env, $datagrid, $blocks, array_merge($params, array('action' => $action, 'alias' => $alias, 'item' => $item)));
     }
 
     protected function sanitizeAlias($alias)

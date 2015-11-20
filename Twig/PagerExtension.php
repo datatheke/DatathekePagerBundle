@@ -8,7 +8,6 @@ use Datatheke\Bundle\PagerBundle\Pager\PagerViewInterface;
 
 class PagerExtension extends \Twig_Extension
 {
-    protected $environment;
     protected $urlGenerator;
     protected $config;
 
@@ -16,11 +15,6 @@ class PagerExtension extends \Twig_Extension
     {
         $this->urlGenerator = $urlGenerator;
         $this->config       = $config;
-    }
-
-    public function initRuntime(\Twig_Environment $environment)
-    {
-        $this->environment = $environment;
     }
 
     public function getName()
@@ -31,12 +25,11 @@ class PagerExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'pager_path'          => new \Twig_Function_Method($this, 'pagerPath'),
-            'pager_form_path'     => new \Twig_Function_Method($this, 'pagerFormPath'),
-            'pager_order_path'    => new \Twig_Function_Method($this, 'pagerOrderPath'),
-            'pager_per_page_Path' => new \Twig_Function_Method($this, 'pagerPerPagePath'),
-
-            'pager_page_range'    => new \Twig_Function_Method($this, 'pagerPageRange'),
+            new \Twig_SimpleFunction('pager_path', array($this, 'pagerPath')),
+            new \Twig_SimpleFunction('pager_form_path', array($this, 'pagerFormPath')),
+            new \Twig_SimpleFunction('pager_order_path', array($this, 'pagerOrderPath')),
+            new \Twig_SimpleFunction('pager_per_page_Path', array($this, 'pagerPerPagePath')),
+            new \Twig_SimpleFunction('pager_page_range', array($this, 'pagerPageRange')),
         );
     }
 

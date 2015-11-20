@@ -3,12 +3,12 @@
 namespace Datatheke\Bundle\PagerBundle\Pager\Handler\Http;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AutocompleteHandler extends AbstractHandler
 {
-    protected function setDefaultOptions(OptionsResolverInterface $resolver)
+    protected function setDefaultOptions(OptionsResolver $resolver)
     {
         parent::setDefaultOptions($resolver);
 

@@ -6,7 +6,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
 use Datatheke\Bundle\PagerBundle\Pager\Filter;
@@ -22,7 +21,7 @@ class DefaultHandler implements ConsoleHandlerInterface
         $this->options = $resolver->resolve($options);
     }
 
-    protected function setDefaultOptions(OptionsResolverInterface $resolver)
+    protected function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'interactive' => true,

@@ -2,11 +2,11 @@
 
 namespace Datatheke\Bundle\PagerBundle\Pager\Handler\Http;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BootstrapTypeaheadHandler extends AutocompleteHandler
 {
-    protected function setDefaultOptions(OptionsResolverInterface $resolver)
+    protected function setDefaultOptions(OptionsResolver $resolver)
     {
         parent::setDefaultOptions($resolver);
 

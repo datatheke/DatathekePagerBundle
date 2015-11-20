@@ -4,7 +4,6 @@ namespace Datatheke\Bundle\PagerBundle\Pager;
 
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\AdapterInterface;
 
 class Pager implements PagerInterface
@@ -29,7 +28,7 @@ class Pager implements PagerInterface
         $this->paginator = new Paginator($this->options['item_count_per_page'], $this->options['current_page_number']);
     }
 
-    protected function setDefaultOptions(OptionsResolverInterface $resolver)
+    protected function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired(array(
             'item_count_per_page',

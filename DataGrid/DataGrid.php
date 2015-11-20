@@ -6,7 +6,6 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Datatheke\Bundle\PagerBundle\Datagrid\Column\ColumnInterface;
 use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
 
@@ -32,7 +31,7 @@ class DataGrid implements DataGridInterface
         $this->initialized = false;
     }
 
-    protected function setDefaultOptions(OptionsResolverInterface $resolver)
+    protected function setDefaultOptions(OptionsResolver $resolver)
     {
     }
 

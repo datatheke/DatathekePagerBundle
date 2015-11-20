@@ -4,9 +4,9 @@ namespace Datatheke\Bundle\PagerBundle\Pager;
 
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\HelperSet;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\AdapterInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Console\ConsoleHandlerInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ConsolePager extends Pager implements ConsolePagerInterface
 {
@@ -19,7 +19,7 @@ class ConsolePager extends Pager implements ConsolePagerInterface
         parent::__construct($adapter, $options);
     }
 
-    protected function setDefaultOptions(OptionsResolverInterface $resolver)
+    protected function setDefaultOptions(OptionsResolver $resolver)
     {
         parent::setDefaultOptions($resolver);
 
