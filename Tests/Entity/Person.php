@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Person
 {
     /**
-     * @var integer $id
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -20,35 +20,35 @@ class Person
     public $id;
 
     /**
-     * @var string $name
+     * @var string
      *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     public $firstname;
 
     /**
-     * @var string $name
+     * @var string
      *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     public $lastname;
 
     /**
-     * @var integer $age
+     * @var int
      *
      * @ORM\Column(type="integer", nullable=true)
      */
     public $age;
 
     /**
-     * @var integer $friend
+     * @var int
      *
      * @ORM\Column(type="boolean", nullable=true)
      */
     public $friend;
 
     /**
-     * @var DateTime $birthday
+     * @var DateTime
      *
      * @ORM\Column(type="datetime", nullable=true)
      */

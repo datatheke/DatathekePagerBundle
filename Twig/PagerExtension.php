@@ -14,7 +14,7 @@ class PagerExtension extends \Twig_Extension
     public function __construct(UrlGeneratorInterface $urlGenerator, Configuration $config)
     {
         $this->urlGenerator = $urlGenerator;
-        $this->config       = $config;
+        $this->config = $config;
     }
 
     public function getName()
@@ -34,7 +34,7 @@ class PagerExtension extends \Twig_Extension
     }
 
     /**
-     * From Zend\Paginator\Paginator
+     * From Zend\Paginator\Paginator.
      */
     public function pagerPageRange(PagerViewInterface $pager, $pageRange = null)
     {
@@ -43,7 +43,7 @@ class PagerExtension extends \Twig_Extension
         }
 
         $pageNumber = $pager->getCurrentPageNumber();
-        $pageCount  = $pager->getPageCount();
+        $pageCount = $pager->getPageCount();
 
         if ($pageRange > $pageCount) {
             $pageRange = $pageCount;
@@ -59,13 +59,13 @@ class PagerExtension extends \Twig_Extension
                 $delta = $pageNumber;
             }
 
-            $offset     = $pageNumber - $delta;
+            $offset = $pageNumber - $delta;
             $lowerBound = $offset + 1;
             $upperBound = $offset + $pageRange;
         }
 
         $pages = array();
-        for ($pageNumber = $lowerBound; $pageNumber <= $upperBound; $pageNumber++) {
+        for ($pageNumber = $lowerBound; $pageNumber <= $upperBound; ++$pageNumber) {
             $pages[$pageNumber] = $pageNumber;
         }
 
@@ -89,7 +89,7 @@ class PagerExtension extends \Twig_Extension
     public function pagerOrderPath(PagerViewInterface $pager, $field, $order = 'desc', $page = null, array $parameters = array(), $route = null)
     {
         $defaults = array(
-            $pager->getFilterParam()  => $this->serializeFilter($pager),
+            $pager->getFilterParam() => $this->serializeFilter($pager),
             $pager->getOrderByParam() => array($field => $order),
         );
 
@@ -100,7 +100,7 @@ class PagerExtension extends \Twig_Extension
     {
         $defaults = array(
             $pager->getItemCountPerPageParam() => (int) $itemCountPerPage,
-            $pager->getFilterParam()           => $this->serializeFilter($pager),
+            $pager->getFilterParam() => $this->serializeFilter($pager),
         );
 
         return $this->renderPath($pager, $page, array_merge($defaults, $parameters), $route);
@@ -117,9 +117,9 @@ class PagerExtension extends \Twig_Extension
         }
 
         $defaults = array(
-            $pager->getItemCountPerPageParam()  => (int) $pager->getItemCountPerPage(),
+            $pager->getItemCountPerPageParam() => (int) $pager->getItemCountPerPage(),
             $pager->getCurrentPageNumberParam() => (int) $page,
-            $pager->getOrderByParam()           => $pager->getOrderBy(),
+            $pager->getOrderByParam() => $pager->getOrderBy(),
         );
 
         $globals = $pager->getParameters();

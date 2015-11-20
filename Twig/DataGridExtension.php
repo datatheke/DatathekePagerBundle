@@ -19,9 +19,9 @@ class DataGridExtension extends \Twig_Extension
     public function __construct(UrlGeneratorInterface $urlGenerator, Configuration $config)
     {
         $this->urlGenerator = $urlGenerator;
-        $this->config       = $config;
+        $this->config = $config;
 
-        $this->themes       = new \SplObjectStorage();
+        $this->themes = new \SplObjectStorage();
     }
 
     public function getName()

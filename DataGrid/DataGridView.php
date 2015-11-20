@@ -12,7 +12,7 @@ class DataGridView implements DataGridViewInterface
 
     public function __construct(DataGridInterface $datagrid, PagerViewInterface $pagerView)
     {
-        $this->datagrid  = $datagrid;
+        $this->datagrid = $datagrid;
         $this->pagerView = $pagerView;
     }
 

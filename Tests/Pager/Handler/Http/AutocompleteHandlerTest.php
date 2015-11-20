@@ -12,7 +12,7 @@ class AutocompleteHandlerTest extends \PHPUnit_Framework_TestCase
     {
         $handler = new AutocompleteHandler();
 
-        $pager   = PagerHelper::createPager();
+        $pager = PagerHelper::createPager();
         $request = new Request(array(
             'term' => 'jean',
         ));

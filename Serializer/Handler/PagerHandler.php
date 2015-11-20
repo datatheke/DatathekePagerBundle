@@ -19,23 +19,23 @@ class PagerHandler implements SubscribingHandlerInterface
         foreach (array('json') as $format) { // TODO: xml, yml
             $methods[] = array(
                 'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
-                'type'      => 'Datatheke\Bundle\PagerBundle\Pager\Pager',
-                'format'    => $format,
+                'type' => 'Datatheke\Bundle\PagerBundle\Pager\Pager',
+                'format' => $format,
             );
             $methods[] = array(
                 'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
-                'type'      => 'Datatheke\Bundle\PagerBundle\Pager\HttpPager',
-                'format'    => $format,
+                'type' => 'Datatheke\Bundle\PagerBundle\Pager\HttpPager',
+                'format' => $format,
             );
             $methods[] = array(
                 'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
-                'type'      => 'Datatheke\Bundle\PagerBundle\Pager\ConsolePager',
-                'format'    => $format,
+                'type' => 'Datatheke\Bundle\PagerBundle\Pager\ConsolePager',
+                'format' => $format,
             );
             $methods[] = array(
                 'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
-                'type'      => 'Datatheke\Bundle\PagerBundle\Pager\PagerView',
-                'format'    => $format,
+                'type' => 'Datatheke\Bundle\PagerBundle\Pager\PagerView',
+                'format' => $format,
             );
         }
 
@@ -79,12 +79,12 @@ class PagerHandler implements SubscribingHandlerInterface
         }
 
         $result = array_merge($result, array(
-            'page_count'         => $pager->getPageCount(),
-            'total_item_count'   => $pager->getTotalItemCount(),
-            'first_item_number'  => $pager->getFirstItemNumber(),
-            'last_item_number'   => $pager->getLastItemNumber(),
+            'page_count' => $pager->getPageCount(),
+            'total_item_count' => $pager->getTotalItemCount(),
+            'first_item_number' => $pager->getFirstItemNumber(),
+            'last_item_number' => $pager->getLastItemNumber(),
             'current_item_count' => $pager->getCurrentItemCount(),
-            'items'              => $visitor->getNavigator()->accept($pager->getItems(), array('name' => 'array'), $context),
+            'items' => $visitor->getNavigator()->accept($pager->getItems(), array('name' => 'array'), $context),
         ));
 
         if ($isRoot) {

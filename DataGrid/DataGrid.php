@@ -21,8 +21,8 @@ class DataGrid implements DataGridInterface
     public function __construct(PagerInterface $pager, array $columns, array $options = array())
     {
         $this->accessor = PropertyAccess::createPropertyAccessor();
-        $this->pager    = $pager;
-        $this->columns  = $columns;
+        $this->pager = $pager;
+        $this->columns = $columns;
 
         $resolver = new OptionsResolver();
         $this->setDefaultOptions($resolver);
@@ -119,13 +119,13 @@ class DataGrid implements DataGridInterface
     public function getColumnValue(ColumnInterface $column, $item)
     {
         if (null === $column->getField()) {
-            return null;
+            return;
         }
 
         try {
             $value = $this->accessor->getValue($item, $column->getField()->getPropertyPath());
         } catch (NoSuchPropertyException $e) {
-            return null;
+            return;
         }
 
         return $column->format($value);

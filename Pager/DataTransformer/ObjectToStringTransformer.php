@@ -16,8 +16,8 @@ class ObjectToStringTransformer implements DataTransformerInterface
 
     public function __construct($property, ObjectRepository $objectRepository = null)
     {
-        $this->accessor         = PropertyAccess::createPropertyAccessor();
-        $this->property         = $property;
+        $this->accessor = PropertyAccess::createPropertyAccessor();
+        $this->property = $property;
         $this->objectRepository = $objectRepository;
     }
 

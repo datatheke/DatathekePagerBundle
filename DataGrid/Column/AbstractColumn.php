@@ -11,9 +11,9 @@ abstract class AbstractColumn implements ColumnInterface
     protected $field;
 
     protected $filterable = true;
-    protected $sortable   = true;
-    protected $visible    = true;
-    protected $actions    = array();
+    protected $sortable = true;
+    protected $visible = true;
+    protected $actions = array();
 
     public function __construct(Field $field = null, $label = null)
     {

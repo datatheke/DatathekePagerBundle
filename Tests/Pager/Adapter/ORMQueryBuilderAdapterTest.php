@@ -58,17 +58,17 @@ class ORMQueryBuilderAdapterTest extends \PHPUnit_Framework_TestCase
 
         $person1 = new Person();
         $person1->firstname = 'john';
-        $person1->lastname  = 'doe';
-        $person1->age       = 32;
-        $person1->friend    = true;
-        $person1->birthday  = \DateTime::createFromFormat('Y-m-d H:i:s', '1982-12-03 22:10:09');
+        $person1->lastname = 'doe';
+        $person1->age = 32;
+        $person1->friend = true;
+        $person1->birthday = \DateTime::createFromFormat('Y-m-d H:i:s', '1982-12-03 22:10:09');
 
         $person2 = new Person();
         $person2->firstname = 'jean';
-        $person2->lastname  = 'bon';
-        $person2->age       = 25;
-        $person1->friend    = false;
-        $person2->birthday  = \DateTime::createFromFormat('Y-m-d H:i:s', '1983-09-27 10:43:32');
+        $person2->lastname = 'bon';
+        $person2->age = 25;
+        $person1->friend = false;
+        $person2->birthday = \DateTime::createFromFormat('Y-m-d H:i:s', '1983-09-27 10:43:32');
 
         $this->em->persist($person1);
         $this->em->persist($person2);
@@ -82,7 +82,7 @@ class ORMQueryBuilderAdapterTest extends \PHPUnit_Framework_TestCase
             ->createQueryBuilder('e')
         ;
         $adapter = new ORMQueryBuilderAdapter($qb);
-        $fields  = $adapter->getFields();
+        $fields = $adapter->getFields();
 
         $this->assertEquals('e.firstname', $fields['firstname']->getQualifier());
         $this->assertEquals(Field::TYPE_NUMBER, $fields['age']->getType());
@@ -120,7 +120,7 @@ class ORMQueryBuilderAdapterTest extends \PHPUnit_Framework_TestCase
         $adapter->setFilter(new Filter(array('lastname'), array('bon'), array(Filter::OPERATOR_EQUALS)));
         $this->assertEquals(1, $adapter->count());
 
-        $items   = $adapter->getItems();
+        $items = $adapter->getItems();
         $this->assertEquals(25, $items[0]->age);
     }
 
@@ -136,19 +136,19 @@ class ORMQueryBuilderAdapterTest extends \PHPUnit_Framework_TestCase
             'operator' => Filter::LOGICAL_AND,
             'criteria' => array(
                 array(
-                    'field'    => 'lastname',
+                    'field' => 'lastname',
                     'operator' => Filter::OPERATOR_CONTAINS,
-                    'value'    => 'bon',
+                    'value' => 'bon',
                 ),
                 array(
-                    'field'    => 'firstname',
+                    'field' => 'firstname',
                     'operator' => Filter::OPERATOR_CONTAINS,
-                    'value'    => '',
+                    'value' => '',
                 ),
                 array(
-                    'field'    => 'birthday',
+                    'field' => 'birthday',
                     'operator' => Filter::OPERATOR_CONTAINS,
-                    'value'    => null,
+                    'value' => null,
                 ),
             ),
         );

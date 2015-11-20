@@ -10,9 +10,9 @@ class Configuration
 
     public function __construct($itemCountPerPage, array $itemCountPerPageChoices, $pageRange)
     {
-        $this->itemCountPerPage        = (int) $itemCountPerPage;
+        $this->itemCountPerPage = (int) $itemCountPerPage;
         $this->itemCountPerPageChoices = $itemCountPerPageChoices;
-        $this->pageRange               = (int) $pageRange;
+        $this->pageRange = (int) $pageRange;
     }
 
     public function getItemCountPerPage()

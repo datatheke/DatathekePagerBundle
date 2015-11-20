@@ -19,7 +19,7 @@ class DataGridTest extends \PHPUnit_Framework_TestCase
     public function testCustomizedHttpDataGrid()
     {
         $datagrid = $this->factory->createHttpDataGrid(PagerHelper::getPersons());
-        $request  = new Request();
+        $request = new Request();
 
         $actions = new StaticColumn('Actions');
         $actions->addAction(new Action('View', 'item_view', array(

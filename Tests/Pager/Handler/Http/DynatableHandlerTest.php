@@ -12,9 +12,9 @@ class DynatableHandlerTest extends \PHPUnit_Framework_TestCase
     {
         $handler = new DynatableHandler();
 
-        $pager   = PagerHelper::createPager();
+        $pager = PagerHelper::createPager();
         $request = new Request(array(
-            'page'    => 3,
+            'page' => 3,
             'perPage' => 5,
         ));
 

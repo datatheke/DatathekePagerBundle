@@ -19,7 +19,7 @@ class Pager implements PagerInterface
     {
         $this->adapter = $adapter;
         $this->orderBy = new OrderBy();
-        $this->filter  = new Filter();
+        $this->filter = new Filter();
 
         $resolver = new OptionsResolver();
         $this->setDefaultOptions($resolver);
@@ -36,7 +36,7 @@ class Pager implements PagerInterface
         );
 
         $resolver->setDefaults(array(
-            'current_page_number'         => 1,
+            'current_page_number' => 1,
             'item_count_per_page_choices' => array(),
             )
         );

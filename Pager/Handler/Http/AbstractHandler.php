@@ -70,9 +70,9 @@ abstract class AbstractHandler implements HttpHandlerInterface
             $operator = Field::TYPE_STRING === $field->getType() ? Filter::OPERATOR_CONTAINS : Filter::OPERATOR_EQUALS;
 
             $filter['criteria'][] = array(
-                'field'    => $alias,
+                'field' => $alias,
                 'operator' => $operator,
-                'value'    => $query,
+                'value' => $query,
                 );
         }
 

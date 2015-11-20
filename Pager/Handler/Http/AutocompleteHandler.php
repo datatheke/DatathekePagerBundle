@@ -13,7 +13,7 @@ class AutocompleteHandler extends AbstractHandler
         parent::setDefaultOptions($resolver);
 
         $resolver->setDefaults(array(
-            'search_param'  => 'term',
+            'search_param' => 'term',
             'search_fields' => null,
             )
         );

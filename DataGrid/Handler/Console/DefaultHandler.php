@@ -35,9 +35,9 @@ class DefaultHandler implements ConsoleHandlerInterface
 
     protected function createView(ConsoleDataGridInterface $datagrid, OutputInterface $output, HelperSet $helperSet)
     {
-        $pager     = $datagrid->getPager();
+        $pager = $datagrid->getPager();
 
-        $table     = $helperSet->get('table');
+        $table = $helperSet->get('table');
         $formatter = $helperSet->get('formatter');
 
         $output->writeln($formatter->formatBlock(

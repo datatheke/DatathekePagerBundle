@@ -22,10 +22,10 @@ class Factory
 
     public function __construct(Configuration $config, PagerFactory $pagerFactory, GuesserInterface $guesser, array $httpHandlers, array $consoleHandlers)
     {
-        $this->config          = $config;
-        $this->pagerFactory    = $pagerFactory;
-        $this->guesser         = $guesser;
-        $this->httpHandlers    = $httpHandlers;
+        $this->config = $config;
+        $this->pagerFactory = $pagerFactory;
+        $this->guesser = $guesser;
+        $this->httpHandlers = $httpHandlers;
         $this->consoleHandlers = $consoleHandlers;
     }
 

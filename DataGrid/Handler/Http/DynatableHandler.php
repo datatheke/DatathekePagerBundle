@@ -32,7 +32,7 @@ class DynatableHandler extends AbstractHandler
         $response = array(
             'queryRecordCount' => $pager->getTotalItemCount(),
             'totalRecordCount' => $pager->getCurrentItemCount(),
-            'records'          => $this->getItems($datagrid),
+            'records' => $this->getItems($datagrid),
         );
 
         return $this->createJsonResponse($request, $response);

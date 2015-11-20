@@ -12,7 +12,7 @@ class JqGridHandlerTest extends \PHPUnit_Framework_TestCase
     {
         $handler = new JqGridHandler();
 
-        $pager   = PagerHelper::createPager();
+        $pager = PagerHelper::createPager();
         $request = new Request(array(
             'page' => 3,
             'rows' => 5,

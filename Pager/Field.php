@@ -7,12 +7,12 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class Field
 {
-    const TYPE_STRING   = 'string';
-    const TYPE_NUMBER   = 'number';
-    const TYPE_BOOLEAN  = 'boolean';
+    const TYPE_STRING = 'string';
+    const TYPE_NUMBER = 'number';
+    const TYPE_BOOLEAN = 'boolean';
     const TYPE_DATETIME = 'datetime';
-    const TYPE_OBJECT   = 'object';
-    const TYPE_ARRAY    = 'array';
+    const TYPE_OBJECT = 'object';
+    const TYPE_ARRAY = 'array';
 
     protected $propertyPath;
     protected $type;
@@ -28,9 +28,9 @@ class Field
         }
 
         $this->propertyPath = $propertyPath;
-        $this->type         = $type;
-        $this->qualifier    = $qualifier;
-        $this->metadata     = $metadata;
+        $this->type = $type;
+        $this->qualifier = $qualifier;
+        $this->metadata = $metadata;
     }
 
     public function getPropertyPath()
@@ -54,7 +54,7 @@ class Field
     }
 
     /**
-     * Deprecated, use getMetadata() instead
+     * Deprecated, use getMetadata() instead.
      */
     public function getMetadatas()
     {

@@ -26,7 +26,7 @@ class DataTablesHandler extends AbstractHandler
         // Sort
         if ($this->has($request, 'iSortCol_0')) {
             $columns = array_keys($datagrid->getColumns());
-            $column  = $columns[$this->get($request, 'iSortCol_0')];
+            $column = $columns[$this->get($request, 'iSortCol_0')];
 
             $order = $this->get($request, 'sSortDir_0') === 'asc' ? OrderBy::ASC : OrderBy::DESC;
             $datagrid->getPager()->setOrderBy(new OrderBy(array($column => $order)));

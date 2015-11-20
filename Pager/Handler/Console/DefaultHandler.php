@@ -53,7 +53,7 @@ class DefaultHandler implements ConsoleHandlerInterface
 
     public function handleInput(PagerInterface $pager, OutputInterface $output, HelperSet $helperSet)
     {
-        $dialog    = $helperSet->get('dialog');
+        $dialog = $helperSet->get('dialog');
         $formatter = $helperSet->get('formatter');
 
         $input = $dialog->ask($output, 'Page: ');
@@ -116,7 +116,7 @@ class DefaultHandler implements ConsoleHandlerInterface
 
     protected function createView(PagerInterface $pager, OutputInterface $output, HelperSet $helperSet)
     {
-        $table     = $helperSet->get('table');
+        $table = $helperSet->get('table');
         $formatter = $helperSet->get('formatter');
 
         $output->writeln($formatter->formatBlock(

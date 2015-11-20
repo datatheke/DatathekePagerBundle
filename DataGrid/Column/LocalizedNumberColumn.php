@@ -7,7 +7,7 @@ use Symfony\Component\Form\Extension\Core\DataTransformer\NumberToLocalizedStrin
 class LocalizedNumberColumn extends AbstractColumn
 {
     protected $precision;
-    protected $grouping     = true;
+    protected $grouping = true;
     protected $roundingMode;
 
     public function setPrecision($precision)

@@ -31,7 +31,7 @@ class Paginator
     {
         if ($totalItemCount !== $this->totalItemCount) {
             $this->totalItemCount = (int) $totalItemCount;
-            $this->initialized    = false;
+            $this->initialized = false;
         }
 
         return $this;
@@ -41,7 +41,7 @@ class Paginator
     {
         if ($itemCountPerPage !== $this->itemCountPerPage) {
             $this->itemCountPerPage = (int) $itemCountPerPage;
-            $this->initialized      = false;
+            $this->initialized = false;
         }
 
         return $this;
@@ -51,7 +51,7 @@ class Paginator
     {
         if ($currentPageNumber !== $this->currentPageNumber) {
             $this->currentPageNumber = (int) $currentPageNumber;
-            $this->initialized       = false;
+            $this->initialized = false;
         }
 
         return $this;
@@ -80,9 +80,9 @@ class Paginator
             $this->currentItemCount = $this->totalItemCount - (($this->currentPageNumber - 1) * $this->itemCountPerPage);
         }
 
-        $this->itemOffset      = (($this->currentPageNumber - 1) * $this->itemCountPerPage);
+        $this->itemOffset = (($this->currentPageNumber - 1) * $this->itemCountPerPage);
         $this->firstItemNumber = (($this->currentPageNumber - 1) * $this->itemCountPerPage) + 1;
-        $this->lastItemNumber  = $this->firstItemNumber + $this->currentItemCount - 1;
+        $this->lastItemNumber = $this->firstItemNumber + $this->currentItemCount - 1;
 
         if (!$this->totalItemCount) {
             $this->firstItemNumber = 0;

@@ -103,7 +103,7 @@ class ORMQueryBuilderAdapter implements AdapterInterface
                     case ClassMetadataInfo::MANY_TO_ONE:
                         $metadata = array(
                             'repository' => $em->getRepository($infos['targetEntity']),
-                            'mapping'    => $infos,
+                            'mapping' => $infos,
                         );
                         $this->fields[$property] = new Field($property, Field::TYPE_OBJECT, $alias.'.'.$property, $metadata);
                         break;
@@ -163,15 +163,15 @@ class ORMQueryBuilderAdapter implements AdapterInterface
 
     public function setFilter(Filter $filter = null, $name = 'default')
     {
-        $this->filter[$name]  = $filter;
-        $this->count          = null;
+        $this->filter[$name] = $filter;
+        $this->count = null;
 
         return $this;
     }
 
     public function setOrderBy(OrderBy $orderBy = null)
     {
-        $this->orderBy   = $orderBy;
+        $this->orderBy = $orderBy;
 
         return $this;
     }
@@ -210,11 +210,11 @@ class ORMQueryBuilderAdapter implements AdapterInterface
         $criteria = array();
         $paramNum = 0;
         foreach ($filter->getFields() as $key => $alias) {
-            $paramName  = 'param_'.$paramNum++;
-            $field      = $this->getField($alias);
-            $qualifier  = $field->getQualifier();
-            $operator   = $filter->getOperator($key);
-            $value      = $field->formatInput($filter->getValue($key));
+            $paramName = 'param_'.$paramNum++;
+            $field = $this->getField($alias);
+            $qualifier = $field->getQualifier();
+            $operator = $filter->getOperator($key);
+            $value = $field->formatInput($filter->getValue($key));
 
             if (!in_array($field->getType(), array(Field::TYPE_STRING, Field::TYPE_NUMBER), true)) {
                 switch ($operator) {
@@ -240,8 +240,8 @@ class ORMQueryBuilderAdapter implements AdapterInterface
         }
 
         foreach ($filter->getLogical() as $layer) {
-            $criteriumIndex    = 0;
-            $concatCriteria    = array();
+            $criteriumIndex = 0;
+            $concatCriteria = array();
             foreach ($layer as $log) {
                 list($operator, $count) = $log;
                 if (null === $count) {
@@ -249,7 +249,7 @@ class ORMQueryBuilderAdapter implements AdapterInterface
                 }
 
                 // Criteria for the operator
-                $subCriteria   = array();
+                $subCriteria = array();
                 foreach (array_slice($criteria, $criteriumIndex, $count) as $criterium) {
                     if ($criterium) {
                         $subCriteria[] = $criterium;
@@ -259,7 +259,7 @@ class ORMQueryBuilderAdapter implements AdapterInterface
 
                 // Apply operator
                 if (count($subCriteria) > 1) {
-                    $method    = (Filter::LOGICAL_OR === $operator) ? 'orX' : 'andX';
+                    $method = (Filter::LOGICAL_OR === $operator) ? 'orX' : 'andX';
                     $concatCriteria[] = ($subCriteria) ? call_user_func_array(array($builder->expr(), $method), $subCriteria)
                                                        : null;
                 } else {
@@ -267,14 +267,14 @@ class ORMQueryBuilderAdapter implements AdapterInterface
                 }
 
                 // Complete array
-                for ($count--; $count; $count--) {
+                for ($count--; $count; --$count) {
                     $concatCriteria[] = null;
                 }
             }
-            $criteria    = $concatCriteria;
+            $criteria = $concatCriteria;
         }
 
-        $criterium    = current($criteria);
+        $criterium = current($criteria);
         if ($criterium) {
             $builder->andWhere($criterium);
         }
@@ -284,7 +284,7 @@ class ORMQueryBuilderAdapter implements AdapterInterface
 
     protected function buildCriteria(QueryBuilder $builder, $qualifier, $operator, $value, $paramName)
     {
-        $expr     = $builder->expr();
+        $expr = $builder->expr();
 
         switch ($operator) {
 

@@ -17,7 +17,7 @@ class ArrayAdapterTest extends \PHPUnit_Framework_TestCase
     public function testGuessFields()
     {
         $adapter = new ArrayAdapter(self::$source);
-        $fields  = $adapter->getFields();
+        $fields = $adapter->getFields();
 
         $this->assertEquals('firstname', $fields['firstname']->getQualifier());
         $this->assertEquals(Field::TYPE_NUMBER, $fields['age']->getType());
@@ -47,7 +47,7 @@ class ArrayAdapterTest extends \PHPUnit_Framework_TestCase
         $adapter->setFilter(new Filter(array('lastname'), array('bon'), array(Filter::OPERATOR_EQUALS)));
         $this->assertEquals(1, $adapter->count());
 
-        $items   = $adapter->getItems();
+        $items = $adapter->getItems();
         $this->assertEquals(25, $items[0]['age']);
     }
 }

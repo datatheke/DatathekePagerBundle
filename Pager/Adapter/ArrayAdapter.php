@@ -10,7 +10,7 @@ class ArrayAdapter implements AdapterInterface
 {
     protected $fields = array();
     protected $source = array();
-    protected $copy   = array();
+    protected $copy = array();
 
     protected $filter = array();
     protected $orderBy;
@@ -18,7 +18,7 @@ class ArrayAdapter implements AdapterInterface
 
     public function __construct(array $source, array $fields = null)
     {
-        $this->source    = $source;
+        $this->source = $source;
         $this->isOrdered = true;
 
         if (!is_array($fields)) {
@@ -35,7 +35,7 @@ class ArrayAdapter implements AdapterInterface
         }
 
         foreach (current($this->source) as $key => $val) {
-            $type      = Field::TYPE_STRING;
+            $type = Field::TYPE_STRING;
             $metadatas = array();
 
             if ($val instanceof \DateTime) {
@@ -44,7 +44,7 @@ class ArrayAdapter implements AdapterInterface
                 switch (gettype($val)) {
 
                     case 'integer':
-                        $type      = Field::TYPE_NUMBER;
+                        $type = Field::TYPE_NUMBER;
                         $metadatas = array('precision' => 0);
                         break;
 
@@ -89,16 +89,16 @@ class ArrayAdapter implements AdapterInterface
 
     public function setFilter(Filter $filter = null, $name = 'default')
     {
-        $this->filter[$name]  = $filter;
-        $this->copy           = null;
-        $this->isOrdered      = false;
+        $this->filter[$name] = $filter;
+        $this->copy = null;
+        $this->isOrdered = false;
 
         return $this;
     }
 
     public function setOrderBy(OrderBy $orderBy = null)
     {
-        $this->orderBy   = $orderBy;
+        $this->orderBy = $orderBy;
         $this->isOrdered = false;
 
         return $this;
@@ -165,11 +165,11 @@ class ArrayAdapter implements AdapterInterface
     {
         $criteria = array();
         foreach ($filter->getFields() as $key => $alias) {
-            $field          = $this->getField($alias);
+            $field = $this->getField($alias);
 
-            $itemValue      = isset($item[$field->getQualifier()]) ? $item[$field->getQualifier()] : null;
+            $itemValue = isset($item[$field->getQualifier()]) ? $item[$field->getQualifier()] : null;
             $filterOperator = $filter->getOperator($key);
-            $filterValue    = $filter->getValue($key);
+            $filterValue = $filter->getValue($key);
 
             if (Field::TYPE_DATETIME === $field->getType()) {
                 $criteria[] = $this->checkDateTimeCondition($field, $itemValue, $filterOperator, $filterValue);
@@ -189,7 +189,7 @@ class ArrayAdapter implements AdapterInterface
                 }
 
                 // Criteria for the operator
-                $subCriteria   = array();
+                $subCriteria = array();
                 foreach (array_slice($criteria, $criteriumIndex, $count, true) as $criterium) {
                     if (null !== $criterium) {
                         $subCriteria[] = $criterium;
@@ -205,7 +205,7 @@ class ArrayAdapter implements AdapterInterface
                 }
 
                 // Complete array
-                for ($count--; $count; $count--) {
+                for ($count--; $count; --$count) {
                     $concatCriteria[] = null;
                 }
             }
@@ -321,7 +321,7 @@ class ArrayAdapter implements AdapterInterface
     {
         // Because of rounded value, we transform item value in output format
         if (Field::TYPE_NUMBER === $field->getType()) {
-            $itemValue   = $field->formatOutput($itemValue);
+            $itemValue = $field->formatOutput($itemValue);
         } else {
             $filterValue = $field->formatInput($filterValue);
         }

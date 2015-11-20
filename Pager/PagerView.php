@@ -18,15 +18,15 @@ class PagerView implements PagerViewInterface
 
     public function __construct(PagerInterface $pager, ViewHandler $handler = null)
     {
-        $this->pager   = $pager;
+        $this->pager = $pager;
         $this->handler = $handler;
 
-        $this->filterParam            = $this->handler->getOption('filter_param');
-        $this->orderByParam           = $this->handler->getOption('order_by_param');
+        $this->filterParam = $this->handler->getOption('filter_param');
+        $this->orderByParam = $this->handler->getOption('order_by_param');
         $this->currentPageNumberParam = $this->handler->getOption('current_page_number_param');
-        $this->itemCountPerPage       = $this->handler->getOption('item_count_per_page_param');
-        $this->route                  = $this->handler->getOption('route');
-        $this->parameters             = $this->handler->getOption('parameters');
+        $this->itemCountPerPage = $this->handler->getOption('item_count_per_page_param');
+        $this->route = $this->handler->getOption('route');
+        $this->parameters = $this->handler->getOption('parameters');
     }
 
     public function getFilterParam()

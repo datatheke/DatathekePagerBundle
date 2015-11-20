@@ -18,20 +18,20 @@ class Action implements ActionInterface
         $this->setDefaultOptions($resolver);
         $this->options = $resolver->resolve($options);
 
-        $this->label      = $label;
-        $this->route      = $route;
+        $this->label = $label;
+        $this->route = $route;
     }
 
     protected function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'parameters'           => array(),
-            'map_item'             => true,
-            'item_mapping'         => array('id' => 'id'),
-            'ask_confirmation'     => false,
+            'parameters' => array(),
+            'map_item' => true,
+            'item_mapping' => array('id' => 'id'),
+            'ask_confirmation' => false,
             'confirmation_message' => null,
-            'icon'                 => null,
-            'evaluate_callback'    => null,
+            'icon' => null,
+            'evaluate_callback' => null,
             )
         );
     }

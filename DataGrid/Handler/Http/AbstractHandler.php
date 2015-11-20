@@ -22,7 +22,7 @@ abstract class AbstractHandler implements HttpHandlerInterface
     protected function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'method'        => 'query',
+            'method' => 'query',
             'jsonp_padding' => 'callback',
             )
         );

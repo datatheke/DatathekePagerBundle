@@ -12,7 +12,7 @@ class BootstrapTypeaheadHandlerTest extends \PHPUnit_Framework_TestCase
     {
         $handler = new BootstrapTypeaheadHandler();
 
-        $pager   = PagerHelper::createPager();
+        $pager = PagerHelper::createPager();
         $request = new Request(array(
             'query' => 'jean',
         ));

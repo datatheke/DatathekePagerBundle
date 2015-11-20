@@ -117,8 +117,8 @@ class MongoDBQueryBuilderAdapter implements AdapterInterface
 
     public function setFilter(Filter $filter = null, $name = 'default')
     {
-        $this->filter[$name]  = $filter;
-        $this->count          = null;
+        $this->filter[$name] = $filter;
+        $this->count = null;
 
         return $this;
     }
@@ -154,11 +154,11 @@ class MongoDBQueryBuilderAdapter implements AdapterInterface
     {
         $criteria = array();
         foreach ($filter->getFields() as $key => $alias) {
-            $field      = $this->getField($alias);
+            $field = $this->getField($alias);
 
-            $qualifier  = $field->getQualifier();
-            $operator   = $filter->getOperator($key);
-            $value      = $field->formatInput($filter->getValue($key));
+            $qualifier = $field->getQualifier();
+            $operator = $filter->getOperator($key);
+            $value = $field->formatInput($filter->getValue($key));
 
             if (!in_array($field->getType(), array(Field::TYPE_STRING, Field::TYPE_NUMBER), true)) {
                 switch ($operator) {
@@ -241,8 +241,8 @@ class MongoDBQueryBuilderAdapter implements AdapterInterface
         }
 
         foreach ($filter->getLogical() as $layer) {
-            $criteriumIndex    = 0;
-            $concatCriteria    = array();
+            $criteriumIndex = 0;
+            $concatCriteria = array();
 
             foreach ($layer as $log) {
                 list($operator, $count) = $log;
@@ -251,7 +251,7 @@ class MongoDBQueryBuilderAdapter implements AdapterInterface
                 }
 
                 // Criteria for the operator
-                $subCriteria   = array();
+                $subCriteria = array();
                 foreach (array_slice($criteria, $criteriumIndex, $count) as $criterium) {
                     if ($criterium) {
                         $subCriteria[] = $criterium;
@@ -275,14 +275,14 @@ class MongoDBQueryBuilderAdapter implements AdapterInterface
                 }
 
                 // Complete array
-                for ($count--; $count; $count--) {
+                for ($count--; $count; --$count) {
                     $concatCriteria[] = null;
                 }
             }
-            $criteria    = $concatCriteria;
+            $criteria = $concatCriteria;
         }
 
-        $criterium    = current($criteria);
+        $criterium = current($criteria);
         if ($criterium) {
             $builder->addAnd($criterium);
         }

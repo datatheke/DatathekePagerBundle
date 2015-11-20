@@ -12,10 +12,10 @@ class FlexigridHandlerTest extends \PHPUnit_Framework_TestCase
     {
         $handler = new FlexigridHandler();
 
-        $pager   = PagerHelper::createPager();
+        $pager = PagerHelper::createPager();
         $request = new Request(array(), array(
             'page' => 3,
-            'rp'   => 5,
+            'rp' => 5,
         ));
 
         $handler->handleRequest($pager, $request);

@@ -4,21 +4,21 @@ namespace Datatheke\Bundle\PagerBundle\Pager;
 
 class Filter
 {
-    const OPERATOR_EQUALS         = '=';
-    const OPERATOR_NOT_EQUALS     = '!=';
-    const OPERATOR_CONTAINS       = '~';
-    const OPERATOR_NOT_CONTAINS   = '!~';
-    const OPERATOR_NULL           = 'X';
-    const OPERATOR_NOT_NULL       = '!X';
-    const OPERATOR_GREATER        = '>';
+    const OPERATOR_EQUALS = '=';
+    const OPERATOR_NOT_EQUALS = '!=';
+    const OPERATOR_CONTAINS = '~';
+    const OPERATOR_NOT_CONTAINS = '!~';
+    const OPERATOR_NULL = 'X';
+    const OPERATOR_NOT_NULL = '!X';
+    const OPERATOR_GREATER = '>';
     const OPERATOR_GREATER_EQUALS = '>=';
-    const OPERATOR_LESS           = '<';
-    const OPERATOR_LESS_EQUALS    = '<=';
-    const OPERATOR_IN             = '[]';
-    const OPERATOR_NOT_IN         = '![]';
+    const OPERATOR_LESS = '<';
+    const OPERATOR_LESS_EQUALS = '<=';
+    const OPERATOR_IN = '[]';
+    const OPERATOR_NOT_IN = '![]';
 
-    const LOGICAL_AND             = '&';
-    const LOGICAL_OR              = '|';
+    const LOGICAL_AND = '&';
+    const LOGICAL_OR = '|';
 
     protected $fields;
     protected $values;
@@ -27,10 +27,10 @@ class Filter
 
     public function __construct(array $fields = array(), array $values = array(), array $operators = array(), array $logical = array())
     {
-        $this->fields    = $fields;
-        $this->values    = $values;
+        $this->fields = $fields;
+        $this->values = $values;
         $this->operators = $operators;
-        $this->logical   = $logical;
+        $this->logical = $logical;
     }
 
     public function toArray()
@@ -46,7 +46,7 @@ class Filter
     public function getField($key)
     {
         if (!isset($this->fields[$key])) {
-            return null;
+            return;
         }
 
         return $this->fields[$key];
@@ -55,7 +55,7 @@ class Filter
     public function getValue($key)
     {
         if (!isset($this->values[$key])) {
-            return null;
+            return;
         }
 
         return $this->values[$key];
@@ -81,22 +81,22 @@ class Filter
 
     public static function createFromArray($filters)
     {
-        $fields     = array();
-        $values     = array();
-        $operators  = array();
-        $logical    = array();
+        $fields = array();
+        $values = array();
+        $operators = array();
+        $logical = array();
 
         self::readLayer(array('criteria' => array($filters)), 0, $fields, $values, $operators, $logical);
 
-        return new Filter($fields, $values, $operators, $logical);
+        return new self($fields, $values, $operators, $logical);
     }
 
     protected static function readLayer($layer, $layerNum, &$fields, &$values, &$operators, &$logical)
     {
-        $last           = 0;
+        $last = 0;
         $criteriumIndex = 0;
 
-        $hasSubLayer    = false;
+        $hasSubLayer = false;
         foreach ($layer['criteria'] as $criterium) {
             if (in_array($criterium['operator'], array(self::LOGICAL_OR, self::LOGICAL_AND))) {
                 $hasSubLayer = true;
@@ -119,16 +119,16 @@ class Filter
                     $logical[$layerNum][] = array(self::LOGICAL_OR, $criteriumIndex - $last);
                 } else {
                     // field
-                    $fields[]    = $criterium['field'];
+                    $fields[] = $criterium['field'];
                     $operators[] = $criterium['operator'];
-                    $values[]    = $criterium['value'];
-                    $criteriumIndex++;
+                    $values[] = $criterium['value'];
+                    ++$criteriumIndex;
 
                     // condition
                     $logical[$layerNum][] = array(self::LOGICAL_OR, 1);
                 }
             }
-            $last    = $criteriumIndex;
+            $last = $criteriumIndex;
         }
 
         return $criteriumIndex;

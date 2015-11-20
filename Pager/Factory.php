@@ -17,9 +17,9 @@ class Factory
 
     public function __construct(Configuration $config, GuesserInterface $guesser, array $httpHandlers, array $consoleHandlers)
     {
-        $this->config          = $config;
-        $this->guesser         = $guesser;
-        $this->httpHandlers    = $httpHandlers;
+        $this->config = $config;
+        $this->guesser = $guesser;
+        $this->httpHandlers = $httpHandlers;
         $this->consoleHandlers = $consoleHandlers;
     }
 
@@ -30,7 +30,7 @@ class Factory
         }
 
         $defaults = array(
-            'item_count_per_page'         => $this->config->getItemCountPerPage(),
+            'item_count_per_page' => $this->config->getItemCountPerPage(),
             'item_count_per_page_choices' => $this->config->getItemCountPerPageChoices(),
         );
 
@@ -44,7 +44,7 @@ class Factory
     {
         trigger_error('createWebPager() is deprecated. Use createHttpPager() instead.', E_USER_DEPRECATED);
 
-        $pagerOptions   = array_intersect_key($options, array('item_count_per_page' => null, 'item_count_per_page_choices' => null));
+        $pagerOptions = array_intersect_key($options, array('item_count_per_page' => null, 'item_count_per_page_choices' => null));
         $handlerOptions = array_diff_key($options, array('item_count_per_page' => null, 'item_count_per_page_choices' => null));
 
         return $this->createHttpPager($adapter, $pagerOptions, new ViewHandler($handlerOptions));
@@ -61,7 +61,7 @@ class Factory
         }
 
         $defaults = array(
-            'item_count_per_page'         => $this->config->getItemCountPerPage(),
+            'item_count_per_page' => $this->config->getItemCountPerPage(),
             'item_count_per_page_choices' => $this->config->getItemCountPerPageChoices(),
         );
 
@@ -79,7 +79,7 @@ class Factory
         }
 
         $defaults = array(
-            'item_count_per_page'         => $this->config->getItemCountPerPage(),
+            'item_count_per_page' => $this->config->getItemCountPerPage(),
             'item_count_per_page_choices' => $this->config->getItemCountPerPageChoices(),
         );
 

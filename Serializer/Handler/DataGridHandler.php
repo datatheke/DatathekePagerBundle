@@ -19,18 +19,18 @@ class DataGridHandler implements SubscribingHandlerInterface
         foreach (array('json') as $format) { // TODO: xml, yml
             $methods[] = array(
                 'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
-                'type'      => 'Datatheke\Bundle\PagerBundle\DataGrid\DataGrid',
-                'format'    => $format,
+                'type' => 'Datatheke\Bundle\PagerBundle\DataGrid\DataGrid',
+                'format' => $format,
             );
             $methods[] = array(
                 'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
-                'type'      => 'Datatheke\Bundle\PagerBundle\DataGrid\HttpDataGrid',
-                'format'    => $format,
+                'type' => 'Datatheke\Bundle\PagerBundle\DataGrid\HttpDataGrid',
+                'format' => $format,
             );
             $methods[] = array(
                 'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
-                'type'      => 'Datatheke\Bundle\PagerBundle\DataGrid\ConsoleDataGrid',
-                'format'    => $format,
+                'type' => 'Datatheke\Bundle\PagerBundle\DataGrid\ConsoleDataGrid',
+                'format' => $format,
             );
         }
 
@@ -60,20 +60,20 @@ class DataGridHandler implements SubscribingHandlerInterface
 
         $result = array(
             'current_page_number' => $pager->getCurrentPageNumber(),
-            'page_count'          => $pager->getPageCount(),
+            'page_count' => $pager->getPageCount(),
 
             'item_count_per_page' => $pager->getItemCountPerPage(),
-            'total_item_count'    => $pager->getTotalItemCount(),
+            'total_item_count' => $pager->getTotalItemCount(),
 
-            'first_item_number'   => $pager->getFirstItemNumber(),
-            'last_item_number'    => $pager->getLastItemNumber(),
-            'current_item_count'  => $pager->getCurrentItemCount(),
+            'first_item_number' => $pager->getFirstItemNumber(),
+            'last_item_number' => $pager->getLastItemNumber(),
+            'current_item_count' => $pager->getCurrentItemCount(),
 
             // TODO: format items
-            'items'               => $visitor->getNavigator()->accept($pager->getItems(), array('name' => 'array'), $context),
+            'items' => $visitor->getNavigator()->accept($pager->getItems(), array('name' => 'array'), $context),
 
             // TODO: add columns
-            'columns'             => array(),
+            'columns' => array(),
             );
 
         if ($isRoot) {

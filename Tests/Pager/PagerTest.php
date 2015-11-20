@@ -13,7 +13,7 @@ class PagerTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->adapter = new ArrayAdapter(array(array('aa'), array('bb'), array('cc'), array('dd')));
-        $this->pager   = new Pager($this->adapter, array('item_count_per_page' => 2));
+        $this->pager = new Pager($this->adapter, array('item_count_per_page' => 2));
     }
 
     public function testGetAdapter()

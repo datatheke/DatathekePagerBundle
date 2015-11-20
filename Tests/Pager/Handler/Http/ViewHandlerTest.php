@@ -19,9 +19,9 @@ class ViewHandlerTest extends \PHPUnit_Framework_TestCase
     {
         $handler = new ViewHandler(array('pager_param' => '_p'));
 
-        $pager   = PagerHelper::createPager();
+        $pager = PagerHelper::createPager();
         $request = new Request(array('_p' => array(
-            'p'  => 3,
+            'p' => 3,
             'pp' => 5,
             ),
         ));

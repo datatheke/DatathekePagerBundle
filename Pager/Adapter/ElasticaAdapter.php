@@ -71,7 +71,7 @@ class ElasticaAdapter implements AdapterInterface
         $query = new Query\Bool();
 
         foreach ($filter->getFields() as $key => $alias) {
-            $field      = $this->fields[$alias];
+            $field = $this->fields[$alias];
             $operator = $filter->getOperator($key);
             $value = $filter->getValue($key);
 

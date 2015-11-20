@@ -6,7 +6,7 @@ use Datatheke\Bundle\PagerBundle\Pager\Exception\InvalidOrderByException;
 
 class OrderBy extends \ArrayObject
 {
-    const ASC  = 'asc';
+    const ASC = 'asc';
     const DESC = 'desc';
 
     public function __construct(array $orderBy = array())

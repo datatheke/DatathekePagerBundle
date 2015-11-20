@@ -15,7 +15,7 @@ class ObjectColumn extends AbstractColumn
     {
         parent::__construct($field, $label);
 
-        $this->property         = $property;
+        $this->property = $property;
         $this->objectRepository = $objectRepository;
     }
 
