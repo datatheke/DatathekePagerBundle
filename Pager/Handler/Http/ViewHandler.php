@@ -69,16 +69,16 @@ class ViewHandler implements HttpHandlerInterface
     {
         // Use current route as default
         if (null === $this->options['route']) {
-            $this->options['route'] = $request->get('_route');
+            $this->options['route'] = $request->attributes->get('_route');
         }
 
         // Set item count per page
-        if ($itemCountPerPage = $request->get($this->options['item_count_per_page_param'], null, true)) {
+        if ($itemCountPerPage = $this->glob($request, $this->options['item_count_per_page_param'])) {
             $pager->setItemCountPerPage($itemCountPerPage);
         }
 
         // Set current page number
-        if ($currentPageNumber = $request->get($this->options['current_page_number_param'], null, true)) {
+        if ($currentPageNumber = $this->glob($request, $this->options['current_page_number_param'])) {
             $pager->setCurrentPageNumber($currentPageNumber);
         }
 
@@ -91,7 +91,7 @@ class ViewHandler implements HttpHandlerInterface
 
     protected function setOrderByFromRequest(PagerInterface $pager, Request $request, $parameter)
     {
-        $orderBy = $request->get($parameter, null, true);
+        $orderBy = $this->glob($request, $parameter);
         if (!is_array($orderBy)) {
             return;
         }
@@ -101,11 +101,10 @@ class ViewHandler implements HttpHandlerInterface
 
     protected function setFilterFromRequest(PagerInterface $pager, Request $request, $parameter)
     {
-        $filter = $request->get($parameter, null, true);
+        $filter = $this->glob($request, $parameter);
         if (!is_array($filter)) {
             return;
         }
-
         if (self::FILTER_MODE_SIMPLIFIED === $this->getOption('filter_mode')) {
             $pager->setFilter(new Filter(array_keys($filter), array_values($filter)), 'handler');
         } else {
@@ -116,5 +115,62 @@ class ViewHandler implements HttpHandlerInterface
 
             $pager->setFilter(new Filter($fields, $values, $operators, $logical), 'handler');
         }
+    }
+
+    protected function glob(Request $request, $param, $default = null)
+    {
+        $deep = false !== $pos = strpos($param, '[');
+
+        if (false === $deep) {
+            return $request->get($param, $default);
+        }
+
+        $root = substr($param, 0, $pos);
+
+        if (null !== $value = $this->getDeep($request->query->get($root), $param)) {
+            return $value;
+        }
+
+        if (null !== $value = $this->getDeep($request->request->get($root), $param)) {
+            return $value;
+        }
+
+        return $default;
+    }
+
+    private function getDeep($value, $key)
+    {
+        $pos = strpos($key, '[');
+
+        $currentKey = null;
+        for ($i = $pos, $c = strlen($key); $i < $c; ++$i) {
+            $char = $key[$i];
+            if ('[' === $char) {
+                if (null !== $currentKey) {
+                    throw new \InvalidArgumentException(sprintf('Malformed path. Unexpected "[" at position %d.', $i));
+                }
+                $currentKey = '';
+            } elseif (']' === $char) {
+                if (null === $currentKey) {
+                    throw new \InvalidArgumentException(sprintf('Malformed path. Unexpected "]" at position %d.', $i));
+                }
+                if (!is_array($value) || !array_key_exists($currentKey, $value)) {
+                    return;
+                }
+                $value = $value[$currentKey];
+                $currentKey = null;
+            } else {
+                if (null === $currentKey) {
+                    throw new \InvalidArgumentException(sprintf('Malformed path. Unexpected "%s" at position %d.', $char, $i));
+                }
+                $currentKey .= $char;
+            }
+        }
+
+        if (null !== $currentKey) {
+            throw new \InvalidArgumentException(sprintf('Malformed path. Path must end with "]".'));
+        }
+
+        return $value;
     }
 }

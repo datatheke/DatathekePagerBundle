@@ -46,13 +46,13 @@ abstract class AbstractHandler implements HttpHandlerInterface
         return $request->query->has($param);
     }
 
-    protected function get(Request $request, $param, $default = null, $deep = false)
+    protected function get(Request $request, $param, $default = null)
     {
         if ('request' === $this->options['method']) {
-            return $request->request->get($param, $default, $deep);
+            return $request->request->get($param, $default);
         }
 
-        return $request->query->get($param, $default, $deep);
+        return $request->query->get($param, $default);
     }
 
     protected function search(PagerInterface $pager, $query, array $fields = null)
