@@ -2,9 +2,9 @@
 
 namespace Datatheke\Bundle\PagerBundle\Tests\Pager\Handler\Http;
 
-use Symfony\Component\HttpFoundation\Request;
-use Datatheke\Bundle\PagerBundle\Tests\PagerHelper;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\ViewHandler;
+use Datatheke\Bundle\PagerBundle\Tests\PagerHelper;
+use Symfony\Component\HttpFoundation\Request;
 
 class ViewHandlerTest extends \PHPUnit_Framework_TestCase
 {

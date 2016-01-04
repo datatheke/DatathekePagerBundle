@@ -2,8 +2,8 @@
 
 namespace Datatheke\Bundle\PagerBundle\Tests\Pager;
 
-use Datatheke\Bundle\PagerBundle\Pager\Pager;
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\ArrayAdapter;
+use Datatheke\Bundle\PagerBundle\Pager\Pager;
 
 class PagerTest extends \PHPUnit_Framework_TestCase
 {

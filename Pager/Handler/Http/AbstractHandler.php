@@ -2,12 +2,12 @@
 
 namespace Datatheke\Bundle\PagerBundle\Pager\Handler\Http;
 
+use Datatheke\Bundle\PagerBundle\Pager\Field;
+use Datatheke\Bundle\PagerBundle\Pager\Filter;
+use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
-use Datatheke\Bundle\PagerBundle\Pager\Filter;
-use Datatheke\Bundle\PagerBundle\Pager\Field;
 
 abstract class AbstractHandler implements HttpHandlerInterface
 {

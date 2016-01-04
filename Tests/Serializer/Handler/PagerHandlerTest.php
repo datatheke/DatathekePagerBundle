@@ -2,11 +2,11 @@
 
 namespace Datatheke\Bundle\PagerBundle\Tests\Serializer\Handler;
 
-use JMS\Serializer\SerializerBuilder;
-use JMS\Serializer\Handler\HandlerRegistry;
-use JMS\Serializer\SerializationContext;
 use Datatheke\Bundle\PagerBundle\Serializer\Handler\PagerHandler;
 use Datatheke\Bundle\PagerBundle\Tests\PagerHelper;
+use JMS\Serializer\Handler\HandlerRegistry;
+use JMS\Serializer\SerializationContext;
+use JMS\Serializer\SerializerBuilder;
 
 class PagerHandlerTest extends \PHPUnit_Framework_TestCase
 {

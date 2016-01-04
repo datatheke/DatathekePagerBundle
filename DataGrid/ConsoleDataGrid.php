@@ -2,10 +2,10 @@
 
 namespace Datatheke\Bundle\PagerBundle\DataGrid;
 
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Helper\HelperSet;
 use Datatheke\Bundle\PagerBundle\DataGrid\Handler\Console\ConsoleHandlerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
+use Symfony\Component\Console\Helper\HelperSet;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class ConsoleDataGrid extends DataGrid implements ConsoleDataGridInterface
 {

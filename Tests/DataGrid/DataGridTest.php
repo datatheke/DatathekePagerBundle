@@ -2,10 +2,10 @@
 
 namespace Datatheke\Bundle\PagerBundle\Tests\DataGrid;
 
-use Symfony\Component\HttpFoundation\Request;
-use Datatheke\Bundle\PagerBundle\Tests\PagerHelper;
-use Datatheke\Bundle\PagerBundle\DataGrid\Column\StaticColumn;
 use Datatheke\Bundle\PagerBundle\DataGrid\Column\Action\Action;
+use Datatheke\Bundle\PagerBundle\DataGrid\Column\StaticColumn;
+use Datatheke\Bundle\PagerBundle\Tests\PagerHelper;
+use Symfony\Component\HttpFoundation\Request;
 
 class DataGridTest extends \PHPUnit_Framework_TestCase
 {

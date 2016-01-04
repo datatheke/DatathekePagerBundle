@@ -2,10 +2,10 @@
 
 namespace Datatheke\Bundle\PagerBundle\Pager\Handler\Http;
 
-use Symfony\Component\HttpFoundation\Request;
-use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
-use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
 use Datatheke\Bundle\PagerBundle\Pager\Filter;
+use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
+use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class JqGridHandler extends AbstractHandler
 {

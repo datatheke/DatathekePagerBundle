@@ -2,9 +2,9 @@
 
 namespace Datatheke\Bundle\PagerBundle\DataGrid\Column;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use Datatheke\Bundle\PagerBundle\Pager\DataTransformer\ObjectToStringTransformer;
 use Datatheke\Bundle\PagerBundle\Pager\Field;
+use Doctrine\Common\Persistence\ObjectRepository;
 
 class ObjectColumn extends AbstractColumn
 {

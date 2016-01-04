@@ -2,9 +2,9 @@
 
 namespace Datatheke\Bundle\PagerBundle\Tests\DataGrid\Handler\Http;
 
-use Symfony\Component\HttpFoundation\Request;
-use Datatheke\Bundle\PagerBundle\Tests\PagerHelper;
 use Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\AutocompleteHandler;
+use Datatheke\Bundle\PagerBundle\Tests\PagerHelper;
+use Symfony\Component\HttpFoundation\Request;
 
 class AutocompleteHandlerTest extends \PHPUnit_Framework_TestCase
 {

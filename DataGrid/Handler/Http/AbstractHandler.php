@@ -2,11 +2,11 @@
 
 namespace Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http;
 
-use Symfony\Component\HttpFoundation\Request;
+use Datatheke\Bundle\PagerBundle\DataGrid\HttpDatagridInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Datatheke\Bundle\PagerBundle\DataGrid\HttpDatagridInterface;
 
 abstract class AbstractHandler implements HttpHandlerInterface
 {

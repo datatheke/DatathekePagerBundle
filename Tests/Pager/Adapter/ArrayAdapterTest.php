@@ -4,8 +4,8 @@ namespace Datatheke\Bundle\PagerBundle\Tests\Pager\Adapter;
 
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\ArrayAdapter;
 use Datatheke\Bundle\PagerBundle\Pager\Field;
-use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
 use Datatheke\Bundle\PagerBundle\Pager\Filter;
+use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
 
 class ArrayAdapterTest extends \PHPUnit_Framework_TestCase
 {

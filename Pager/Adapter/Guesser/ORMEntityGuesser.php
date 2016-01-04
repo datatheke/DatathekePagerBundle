@@ -2,10 +2,10 @@
 
 namespace Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser;
 
+use Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser\Exception\UnableToGuessException;
+use Datatheke\Bundle\PagerBundle\Pager\Adapter\ORMEntityAdapter;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityRepository;
-use Datatheke\Bundle\PagerBundle\Pager\Adapter\ORMEntityAdapter;
-use Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser\Exception\UnableToGuessException;
 
 class ORMEntityGuesser implements GuesserInterface
 {

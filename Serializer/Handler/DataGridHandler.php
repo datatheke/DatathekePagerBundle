@@ -2,14 +2,14 @@
 
 namespace Datatheke\Bundle\PagerBundle\Serializer\Handler;
 
-use JMS\Serializer\Handler\SubscribingHandlerInterface;
+use Datatheke\Bundle\PagerBundle\DataGrid\DataGrid;
 // use JMS\Serializer\XmlSerializationVisitor;
 // use JMS\Serializer\YamlSerializationVisitor;
-use JMS\Serializer\JsonSerializationVisitor;
+use JMS\Serializer\Context;
 use JMS\Serializer\GenericSerializationVisitor;
 use JMS\Serializer\GraphNavigator;
-use JMS\Serializer\Context;
-use Datatheke\Bundle\PagerBundle\DataGrid\DataGrid;
+use JMS\Serializer\Handler\SubscribingHandlerInterface;
+use JMS\Serializer\JsonSerializationVisitor;
 
 class DataGridHandler implements SubscribingHandlerInterface
 {

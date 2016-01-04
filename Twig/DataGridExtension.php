@@ -2,12 +2,12 @@
 
 namespace Datatheke\Bundle\PagerBundle\Twig;
 
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Datatheke\Bundle\PagerBundle\Twig\TokenParser\DataGridThemeTokenParser;
-use Datatheke\Bundle\PagerBundle\DataGrid\DataGridViewInterface;
 use Datatheke\Bundle\PagerBundle\DataGrid\Column\Action\ActionInterface;
 use Datatheke\Bundle\PagerBundle\DataGrid\Column\ColumnInterface;
 use Datatheke\Bundle\PagerBundle\DataGrid\Configuration;
+use Datatheke\Bundle\PagerBundle\DataGrid\DataGridViewInterface;
+use Datatheke\Bundle\PagerBundle\Twig\TokenParser\DataGridThemeTokenParser;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class DataGridExtension extends \Twig_Extension
 {

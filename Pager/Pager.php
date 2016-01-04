@@ -2,9 +2,9 @@
 
 namespace Datatheke\Bundle\PagerBundle\Pager;
 
+use Datatheke\Bundle\PagerBundle\Pager\Adapter\AdapterInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Datatheke\Bundle\PagerBundle\Pager\Adapter\AdapterInterface;
 
 class Pager implements PagerInterface
 {

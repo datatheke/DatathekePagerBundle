@@ -2,10 +2,10 @@
 
 namespace Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http;
 
-use Symfony\Component\HttpFoundation\Request;
 use Datatheke\Bundle\PagerBundle\DataGrid\HttpDatagridInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\DataTablesHandler as DataTablesPagerHandler;
 use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
+use Symfony\Component\HttpFoundation\Request;
 
 class DataTablesHandler extends AbstractHandler
 {

@@ -3,8 +3,8 @@
 namespace Datatheke\Bundle\PagerBundle\Pager\Adapter;
 
 use Countable;
-use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
 use Datatheke\Bundle\PagerBundle\Pager\Filter;
+use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
 
 interface AdapterInterface extends Countable
 {

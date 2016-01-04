@@ -2,8 +2,8 @@
 
 namespace Datatheke\Bundle\PagerBundle\DataGrid;
 
-use Datatheke\Bundle\PagerBundle\Pager\PagerViewInterface;
 use Datatheke\Bundle\PagerBundle\Datagrid\Column\ColumnInterface;
+use Datatheke\Bundle\PagerBundle\Pager\PagerViewInterface;
 
 class DataGridView implements DataGridViewInterface
 {

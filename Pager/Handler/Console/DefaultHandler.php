@@ -2,13 +2,13 @@
 
 namespace Datatheke\Bundle\PagerBundle\Pager\Handler\Console;
 
-use Symfony\Component\Console\Output\OutputInterface;
+use Datatheke\Bundle\PagerBundle\Pager\Filter;
+use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
+use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
 use Symfony\Component\Console\Helper\HelperSet;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
-use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
-use Datatheke\Bundle\PagerBundle\Pager\Filter;
 
 class DefaultHandler implements ConsoleHandlerInterface
 {

@@ -2,9 +2,9 @@
 
 namespace Datatheke\Bundle\PagerBundle\Pager\Adapter;
 
-use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
-use Datatheke\Bundle\PagerBundle\Pager\Filter;
 use Datatheke\Bundle\PagerBundle\Pager\Field;
+use Datatheke\Bundle\PagerBundle\Pager\Filter;
+use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
 use Elastica\Query;
 use Elastica\Query\AbstractQuery;
 use Elastica\SearchableInterface;

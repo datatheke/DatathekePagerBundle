@@ -2,8 +2,8 @@
 
 namespace Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser;
 
-use Datatheke\Bundle\PagerBundle\Pager\Adapter\MongoDBQueryBuilderAdapter;
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser\Exception\UnableToGuessException;
+use Datatheke\Bundle\PagerBundle\Pager\Adapter\MongoDBQueryBuilderAdapter;
 use Doctrine\MongoDB\Query\Builder;
 
 class MongoDBQueryBuilderGuesser implements GuesserInterface

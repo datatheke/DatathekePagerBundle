@@ -2,18 +2,18 @@
 
 namespace Datatheke\Bundle\PagerBundle\Tests\Pager\Adapter;
 
+use Datatheke\Bundle\PagerBundle\Pager\Adapter\ORMQueryBuilderAdapter;
+use Datatheke\Bundle\PagerBundle\Pager\Field;
+use Datatheke\Bundle\PagerBundle\Pager\Filter;
+use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
+use Datatheke\Bundle\PagerBundle\Tests\Entity\Person;
+use Doctrine\Common\Annotations\AnnotationReader;
+use Doctrine\Common\Annotations\AnnotationRegistry;
+use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Doctrine\ORM\Tools\SchemaTool;
-use Doctrine\Common\Annotations\AnnotationReader;
-use Doctrine\Common\Annotations\AnnotationRegistry;
-use Doctrine\Common\Cache\ArrayCache;
-use Datatheke\Bundle\PagerBundle\Pager\Adapter\ORMQueryBuilderAdapter;
-use Datatheke\Bundle\PagerBundle\Pager\Field;
-use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
-use Datatheke\Bundle\PagerBundle\Pager\Filter;
-use Datatheke\Bundle\PagerBundle\Tests\Entity\Person;
 
 class ORMQueryBuilderAdapterTest extends \PHPUnit_Framework_TestCase
 {

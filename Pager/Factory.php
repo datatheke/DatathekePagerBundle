@@ -4,8 +4,8 @@ namespace Datatheke\Bundle\PagerBundle\Pager;
 
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\AdapterInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser\GuesserInterface;
-use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\HttpHandlerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Console\ConsoleHandlerInterface;
+use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\HttpHandlerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\ViewHandler;
 
 class Factory

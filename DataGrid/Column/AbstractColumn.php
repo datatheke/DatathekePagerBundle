@@ -2,8 +2,8 @@
 
 namespace Datatheke\Bundle\PagerBundle\DataGrid\Column;
 
-use Datatheke\Bundle\PagerBundle\Pager\Field;
 use Datatheke\Bundle\PagerBundle\DataGrid\Column\Action\ActionInterface;
+use Datatheke\Bundle\PagerBundle\Pager\Field;
 
 abstract class AbstractColumn implements ColumnInterface
 {

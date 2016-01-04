@@ -2,8 +2,8 @@
 
 namespace Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http;
 
-use Symfony\Component\HttpFoundation\Request;
 use Datatheke\Bundle\PagerBundle\DataGrid\HttpDataGridInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 interface HttpHandlerInterface
 {

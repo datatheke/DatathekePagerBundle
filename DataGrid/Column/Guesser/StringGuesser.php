@@ -2,9 +2,9 @@
 
 namespace Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser;
 
-use Datatheke\Bundle\PagerBundle\Pager\Field;
-use Datatheke\Bundle\PagerBundle\DataGrid\Column\StringColumn;
 use Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser\Exception\UnableToGuessException;
+use Datatheke\Bundle\PagerBundle\DataGrid\Column\StringColumn;
+use Datatheke\Bundle\PagerBundle\Pager\Field;
 
 class StringGuesser implements GuesserInterface
 {

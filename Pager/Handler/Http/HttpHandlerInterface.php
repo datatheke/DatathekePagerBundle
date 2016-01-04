@@ -2,8 +2,8 @@
 
 namespace Datatheke\Bundle\PagerBundle\Pager\Handler\Http;
 
-use Symfony\Component\HttpFoundation\Request;
 use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 interface HttpHandlerInterface
 {

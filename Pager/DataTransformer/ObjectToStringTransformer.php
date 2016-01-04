@@ -2,9 +2,9 @@
 
 namespace Datatheke\Bundle\PagerBundle\Pager\DataTransformer;
 
+use Doctrine\Common\Persistence\ObjectRepository;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Doctrine\Common\Persistence\ObjectRepository;
 
 class ObjectToStringTransformer implements DataTransformerInterface
 {

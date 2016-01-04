@@ -2,9 +2,9 @@
 
 namespace Datatheke\Bundle\PagerBundle\Pager;
 
-use Symfony\Component\HttpFoundation\Request;
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\AdapterInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\HttpHandlerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class HttpPager extends Pager implements HttpPagerInterface
 {

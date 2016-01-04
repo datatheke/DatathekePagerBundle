@@ -2,11 +2,11 @@
 
 namespace Datatheke\Bundle\PagerBundle\Pager\Adapter;
 
-use Doctrine\ORM\QueryBuilder;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
-use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
-use Datatheke\Bundle\PagerBundle\Pager\Filter;
 use Datatheke\Bundle\PagerBundle\Pager\Field;
+use Datatheke\Bundle\PagerBundle\Pager\Filter;
+use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
+use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\QueryBuilder;
 
 class ORMQueryBuilderAdapter implements AdapterInterface
 {

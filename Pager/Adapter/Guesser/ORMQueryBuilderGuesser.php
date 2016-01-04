@@ -2,8 +2,8 @@
 
 namespace Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser;
 
-use Datatheke\Bundle\PagerBundle\Pager\Adapter\ORMQueryBuilderAdapter;
 use Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser\Exception\UnableToGuessException;
+use Datatheke\Bundle\PagerBundle\Pager\Adapter\ORMQueryBuilderAdapter;
 use Doctrine\ORM\QueryBuilder;
 
 class ORMQueryBuilderGuesser implements GuesserInterface

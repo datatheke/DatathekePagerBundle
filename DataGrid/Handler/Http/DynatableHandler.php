@@ -2,9 +2,9 @@
 
 namespace Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http;
 
-use Symfony\Component\HttpFoundation\Request;
 use Datatheke\Bundle\PagerBundle\DataGrid\HttpDatagridInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\DynatableHandler as DynatablePagerHandler;
+use Symfony\Component\HttpFoundation\Request;
 
 class DynatableHandler extends AbstractHandler
 {

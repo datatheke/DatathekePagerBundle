@@ -2,15 +2,15 @@
 
 namespace Datatheke\Bundle\PagerBundle\DataGrid;
 
-use Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser\GuesserInterface;
 use Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser\Exception\UnableToGuessException;
+use Datatheke\Bundle\PagerBundle\DataGrid\Column\Guesser\GuesserInterface;
+use Datatheke\Bundle\PagerBundle\DataGrid\Handler\Console\ConsoleHandlerInterface;
 use Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\HttpHandlerInterface;
 use Datatheke\Bundle\PagerBundle\DataGrid\Handler\Http\ViewHandler;
-use Datatheke\Bundle\PagerBundle\DataGrid\Handler\Console\ConsoleHandlerInterface;
-use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
-use Datatheke\Bundle\PagerBundle\Pager\HttpPagerInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Factory as PagerFactory;
 use Datatheke\Bundle\PagerBundle\Pager\Handler\Http\ViewHandler as PagerViewHandler;
+use Datatheke\Bundle\PagerBundle\Pager\HttpPagerInterface;
+use Datatheke\Bundle\PagerBundle\Pager\PagerInterface;
 
 class Factory
 {

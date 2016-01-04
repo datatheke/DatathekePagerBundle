@@ -2,9 +2,9 @@
 
 namespace Datatheke\Bundle\PagerBundle\Twig;
 
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Datatheke\Bundle\PagerBundle\Pager\Configuration;
 use Datatheke\Bundle\PagerBundle\Pager\PagerViewInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class PagerExtension extends \Twig_Extension
 {

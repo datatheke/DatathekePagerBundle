@@ -2,10 +2,10 @@
 
 namespace Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser;
 
+use Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser\Exception\UnableToGuessException;
+use Datatheke\Bundle\PagerBundle\Pager\Adapter\MongoDBDocumentAdapter;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ODM\MongoDB\DocumentRepository;
-use Datatheke\Bundle\PagerBundle\Pager\Adapter\MongoDBDocumentAdapter;
-use Datatheke\Bundle\PagerBundle\Pager\Adapter\Guesser\Exception\UnableToGuessException;
 
 class MongoDBDocumentGuesser implements GuesserInterface
 {

@@ -2,9 +2,9 @@
 
 namespace Datatheke\Bundle\PagerBundle\DataGrid\Column\Action;
 
+use Datatheke\Bundle\PagerBundle\DataGrid\DatagridView;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Datatheke\Bundle\PagerBundle\DataGrid\DatagridView;
 
 class Action implements ActionInterface
 {
