@@ -6,7 +6,6 @@ use Datatheke\Bundle\PagerBundle\Pager\Field;
 use Datatheke\Bundle\PagerBundle\Pager\Filter;
 use Datatheke\Bundle\PagerBundle\Pager\OrderBy;
 use Elastica\Query;
-use Elastica\Query\AbstractQuery;
 use Elastica\SearchableInterface;
 
 class ElasticaAdapter implements AdapterInterface
@@ -17,7 +16,7 @@ class ElasticaAdapter implements AdapterInterface
     protected $count;
     protected $query;
 
-    public function __construct(SearchableInterface $searchable, array $fields = null, AbstractQuery $query = null)
+    public function __construct(SearchableInterface $searchable, array $fields = null, Query $query = null)
     {
         $this->searchable = $searchable;
         $this->query = $query ?: new Query();
